@@ -2,8 +2,8 @@ package com.company.project.common.utils;
 
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.company.project.common.exception.BusinessException;
-import com.company.project.entity.ColumnEntity;
-import com.company.project.entity.TableEntity;
+import com.company.project.entity.sys.ColumnEntity;
+import com.company.project.entity.sys.TableEntity;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;

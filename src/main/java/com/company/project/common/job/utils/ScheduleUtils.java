@@ -2,7 +2,7 @@ package com.company.project.common.job.utils;
 
 import com.company.project.common.exception.BusinessException;
 import com.company.project.common.utils.Constant;
-import com.company.project.entity.SysJobEntity;
+import com.company.project.entity.sys.SysJobEntity;
 import org.quartz.*;
 
 /**

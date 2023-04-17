@@ -2,7 +2,7 @@ package com.company.project.common.filter;
 
 import com.alibaba.fastjson.JSON;
 import com.company.project.common.utils.DataResult;
-import com.company.project.service.HttpApiSessionService;
+import com.company.project.service.sys.HttpApiSessionService;
 import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
@@ -16,8 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Arrays;
 
-import static com.company.project.service.HttpApiSessionService.USER_ID_KEY;
-import static com.company.project.service.HttpApiSessionService.USER_USERNAME_KEY;
+import static com.company.project.service.sys.HttpApiSessionService.USER_ID_KEY;
+import static com.company.project.service.sys.HttpApiSessionService.USER_USERNAME_KEY;
 
 @Slf4j
 @WebFilter(filterName = "authFilter", urlPatterns = "/app/api/*")

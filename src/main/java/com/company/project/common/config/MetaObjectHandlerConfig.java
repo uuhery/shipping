@@ -2,7 +2,7 @@ package com.company.project.common.config;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.company.project.common.utils.Constant;
-import com.company.project.service.HttpSessionService;
+import com.company.project.service.sys.HttpSessionService;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;

@@ -1,6 +1,6 @@
 package com.company.project.vo.resp;
 
-import com.company.project.entity.SysRole;
+import com.company.project.entity.sys.SysRole;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
