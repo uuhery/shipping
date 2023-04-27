@@ -85,21 +85,17 @@ var CoreUtil = (function () {
         }
     }
 
-    //字典数据回显
-    coreUtil.selectDictLabel = function (datas, value) {
+    //数据类型回显
+    coreUtil.selectName = function (datas, id) {
         datas = JSON.parse(datas);
-        var label = "";
+        var name = "";
         $.each(datas, function(index, dict) {
-            if (dict.value == ('' + value)) {
-                label = dict.label;
+            if (dict.id === ('' + id)) {
+                name = dict.name;
                 return false;
             }
         });
-        //匹配不到，返回未知
-        if (CoreUtil.isEmpty(label)) {
-            return "未知";
-        }
-        return label;
+        return name;
     }
 
     //生成随机8位数

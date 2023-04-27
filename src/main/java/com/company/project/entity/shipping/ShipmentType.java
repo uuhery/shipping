@@ -8,21 +8,23 @@ import com.company.project.entity.sys.BaseEntity;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 @Data
-@TableName("shipment_types")
+@TableName("shipment_type")
 public class ShipmentType extends BaseEntity implements Serializable {
     @TableId(type = IdType.AUTO)
-    private Integer shipmentTypeId;
+    private Integer id;
     private String name;
     private String description;
+    private BigDecimal price;
 
-    public Integer getShipmentTypeId() {
-        return shipmentTypeId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setShipmentTypeId(Integer shipmentTypeId) {
-        this.shipmentTypeId = shipmentTypeId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -39,5 +41,13 @@ public class ShipmentType extends BaseEntity implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 }

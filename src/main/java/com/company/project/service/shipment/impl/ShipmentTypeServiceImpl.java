@@ -1,27 +1,25 @@
 package com.company.project.service.shipment.impl;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.company.project.entity.shipping.Goods;
+import com.alibaba.fastjson.JSON;
 import com.company.project.entity.shipping.ShipmentType;
-import com.company.project.mapper.shipping.GoodsMapper;
 import com.company.project.mapper.shipping.ShipmentTypeMapper;
-import com.company.project.service.shipment.GoodsService;
+import com.company.project.service.shipment.ShipmentTypeService;
 import org.springframework.stereotype.Service;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
 import javax.annotation.Resource;
 import java.util.List;
 
 
-@Service("goodsService")
-public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements GoodsService {
+@Service("shipmentTypeService")
+public class ShipmentTypeServiceImpl extends ServiceImpl<ShipmentTypeMapper, ShipmentType> implements ShipmentTypeService {
     @Resource
-    private GoodsMapper goodsMapper;
+    private ShipmentTypeMapper shipmentTypeMapper;
     public JSONArray getType() {
         //获取明细
-        List<Goods> list = goodsMapper.selectList(new QueryWrapper<>());
+        List<ShipmentType> list = shipmentTypeMapper.selectList(new QueryWrapper<>());
         return JSONArray.parseArray(JSON.toJSONString(list));
     }
 }

@@ -12,27 +12,17 @@ import java.math.BigDecimal;
 @TableName("goods")
 public class Goods extends BaseEntity implements Serializable {
     @TableId(type = IdType.AUTO)
-    private Integer id;
-    private Integer type;
+    private Long id;
     private String name;
-    private String info;
     private BigDecimal price;
     private BigDecimal weight;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
-    }
-
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
     }
 
     public String getName() {
@@ -41,14 +31,6 @@ public class Goods extends BaseEntity implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getInfo() {
-        return info;
-    }
-
-    public void setInfo(String info) {
-        this.info = info;
     }
 
     public BigDecimal getPrice() {

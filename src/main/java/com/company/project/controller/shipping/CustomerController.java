@@ -73,7 +73,7 @@ public class CustomerController {
         LambdaQueryWrapper<Customer> queryWrapper = Wrappers.lambdaQuery();
         //查询条件示例
 //        queryWrapper.eq(Customer::getCustomerId, customers.getCustomerId());
-        queryWrapper.orderByDesc(Customer::getCustomerId);
+        queryWrapper.orderByDesc(Customer::getId);
         IPage<Customer> iPage = customerService.page(customers.getQueryPage(), queryWrapper);
         return DataResult.success(iPage);
     }

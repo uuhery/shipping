@@ -8,12 +8,11 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Data
-@TableName("customers")
-public class Customer extends BaseEntity implements Serializable {
+@TableName("customer")
+public class Customer extends BaseEntity implements Serializable{
     @TableId(type = IdType.AUTO)
-    private Integer customerId;
-    private String firstName;
-    private String lastName;
+    private Integer id;
+    private String name;
     private String email;
     private String phone;
     private String companyName;
@@ -22,28 +21,20 @@ public class Customer extends BaseEntity implements Serializable {
     private String country;
     private String postalCode;
 
-    public Integer getCustomerId() {
-        return customerId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setCustomerId(Integer customerId) {
-        this.customerId = customerId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {

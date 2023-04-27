@@ -11,31 +11,31 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Data
-@TableName("shipment_events")
+@TableName("shipment_event")
 public class ShipmentEvent extends BaseEntity implements Serializable {
     @TableId(type = IdType.AUTO)
-    private Integer eventId;
-    private Integer orderId;
+    private Integer id;
+    private Shipment shipment;
     private String eventType;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT+8")
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     private Date eventDate;
     private String eventDescription;
     private String eventLocation;
 
-    public Integer getEventId() {
-        return eventId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setEventId(Integer eventId) {
-        this.eventId = eventId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public Integer getOrderId() {
-        return orderId;
+    public Shipment getShipment() {
+        return shipment;
     }
 
-    public void setOrderId(Integer orderId) {
-        this.orderId = orderId;
+    public void setShipment(Shipment shipment) {
+        this.shipment = shipment;
     }
 
     public String getEventType() {

@@ -12,25 +12,23 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
-@TableName("carriers_billing")
+@TableName("carrier_billing")
 public class CarrierBilling extends BaseEntity implements Serializable {
     @TableId(type = IdType.AUTO)
-    private Integer billingId;
+    private Integer id;
     private Integer carrierId;
     private Integer orderId;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date billingDate;
     private BigDecimal freightCharge;
-    private BigDecimal handlingCharge;
-    private BigDecimal otherCharge;
-    private BigDecimal totalCharge;
+    private Integer state;
 
-    public Integer getBillingId() {
-        return billingId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setBillingId(Integer billingId) {
-        this.billingId = billingId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Integer getCarrierId() {
@@ -65,27 +63,11 @@ public class CarrierBilling extends BaseEntity implements Serializable {
         this.freightCharge = freightCharge;
     }
 
-    public BigDecimal getHandlingCharge() {
-        return handlingCharge;
+    public Integer getState() {
+        return state;
     }
 
-    public void setHandlingCharge(BigDecimal handlingCharge) {
-        this.handlingCharge = handlingCharge;
-    }
-
-    public BigDecimal getOtherCharge() {
-        return otherCharge;
-    }
-
-    public void setOtherCharge(BigDecimal otherCharge) {
-        this.otherCharge = otherCharge;
-    }
-
-    public BigDecimal getTotalCharge() {
-        return totalCharge;
-    }
-
-    public void setTotalCharge(BigDecimal totalCharge) {
-        this.totalCharge = totalCharge;
+    public void setState(Integer state) {
+        this.state = state;
     }
 }

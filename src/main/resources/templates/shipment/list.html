@@ -13,122 +13,52 @@
   <div class="panel-heading title"></div>
 <div class="layui-card-body">
 <form class="layui-form " action="" lay-filter="info">
-  <input name="orderId" hidden/>
-    <div class="layui-form-item">
-      <label class="layui-form-label">客户所属公司或组织</label>
-      <div class="layui-input-inline">
-        <select name="interest" lay-filter="aihao">
-          <option value=""></option>
-          <option th:each="option : ${options}" th:value="${option}" th:text="${option}"></option>
-        </select>
-      </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">客户名</label>
+    <div class="layui-input-block">
+      <select id="customerId" name="customerId" placeholder="请选择客户" lay-filter="select-type"
+              th:with="type=${@customerService.getType()}">
+        <option th:each="dict : ${type}" th:text="${dict.name}" th:value="${dict.id}"></option>
+      </select>
     </div>
-      <div class="layui-form-item">
-      <label class="layui-form-label">承运方id</label>
-      <div class="layui-input-block">
-        <input type="carrierId" name="carrierId" placeholder="请输入承运方id" autocomplete="off" class="layui-input disabled">
-      </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">承运方</label>
+    <div class="layui-input-block">
+      <select id="carrierId" name="carrierId" placeholder="请选择承运方" lay-filter="select-type"
+              th:with="type=${@carrierService.getType()}">
+        <option th:each="dict : ${type}" th:text="${dict.name}" th:value="${dict.id}"></option>
+      </select>
     </div>
-      <div class="layui-form-item">
-      <label class="layui-form-label">物流类型</label>
-      <div class="layui-input-block">
-        <input type="shipmentTypeId" name="shipmentTypeId" placeholder="请输入物流类型" autocomplete="off" class="layui-input disabled">
-      </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">物流类型</label>
+    <div class="layui-input-block">
+      <select id="shipmentTypeId" name="shipmentTypeId" placeholder="请选择物流类型" lay-filter="select-type"
+              th:with="type=${@shipmentTypeService.getType()}">
+        <option th:each="dict : ${type}" th:text="${dict.name}" th:value="${dict.id}"></option>
+      </select>
     </div>
-      <div class="layui-form-item">
-      <label class="layui-form-label">邮费类型</label>
-      <div class="layui-input-block">
-        <input type="isFreeShipping" name="isFreeShipping" placeholder="请输入邮费类型" autocomplete="off" class="layui-input disabled">
-      </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">物资类型</label>
+    <div class="layui-input-block">
+      <select id="goodsId" name="goodsId" placeholder="请选择物资类型" lay-filter="select-type"
+              th:with="type=${@goodsService.getType()}">
+        <option th:each="dict : ${type}" th:text="${dict.name}" th:value="${dict.id}"></option>
+      </select>
     </div>
-      <div class="layui-form-item">
-      <label class="layui-form-label">发货详细地址</label>
-      <div class="layui-input-block">
-        <input type="originAddress" name="originAddress" placeholder="请输入发货详细地址" autocomplete="off" class="layui-input disabled">
-      </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">发货数量</label>
+    <div class="layui-input-block">
+      <input type="num" name="num" placeholder="请输入总数量" autocomplete="off" class="layui-input disabled">
     </div>
-      <div class="layui-form-item">
-      <label class="layui-form-label">发货地</label>
-      <div class="layui-input-block">
-        <input type="originCity" name="originCity" placeholder="请输入发货地" autocomplete="off" class="layui-input disabled">
-      </div>
-    </div>
-      <div class="layui-form-item">
-      <label class="layui-form-label">发货地国家</label>
-      <div class="layui-input-block">
-        <input type="originCountry" name="originCountry" placeholder="请输入发货地国家" autocomplete="off" class="layui-input disabled">
-      </div>
-    </div>
-      <div class="layui-form-item">
-      <label class="layui-form-label">发货地邮编</label>
-      <div class="layui-input-block">
-        <input type="originPostalCode" name="originPostalCode" placeholder="请输入发货地邮编" autocomplete="off" class="layui-input disabled">
-      </div>
-    </div>
-      <div class="layui-form-item">
-      <label class="layui-form-label">收货详细地址</label>
-      <div class="layui-input-block">
-        <input type="destinationAddress" name="destinationAddress" placeholder="请输入收货详细地址" autocomplete="off" class="layui-input disabled">
-      </div>
-    </div>
-      <div class="layui-form-item">
-      <label class="layui-form-label">收货地</label>
-      <div class="layui-input-block">
-        <input type="destinationCity" name="destinationCity" placeholder="请输入收货地" autocomplete="off" class="layui-input disabled">
-      </div>
-    </div>
-      <div class="layui-form-item">
-      <label class="layui-form-label">收货地国家</label>
-      <div class="layui-input-block">
-        <input type="destinationCountry" name="destinationCountry" placeholder="请输入收货地国家" autocomplete="off" class="layui-input disabled">
-      </div>
-    </div>
-      <div class="layui-form-item">
-      <label class="layui-form-label">收货地邮编</label>
-      <div class="layui-input-block">
-        <input type="destinationPostalCode" name="destinationPostalCode" placeholder="请输入收货地邮编" autocomplete="off" class="layui-input disabled">
-      </div>
-    </div>
+  </div>
       <div class="layui-form-item">
       <label class="layui-form-label">备注</label>
       <div class="layui-input-block">
         <input type="des" name="des" placeholder="请输入备注" autocomplete="off" class="layui-input disabled">
-      </div>
-    </div>
-      <div class="layui-form-item">
-      <label class="layui-form-label">总重量</label>
-      <div class="layui-input-block">
-        <input type="weight" name="weight" placeholder="请输入总重量" autocomplete="off" class="layui-input disabled">
-      </div>
-    </div>
-      <div class="layui-form-item">
-      <label class="layui-form-label">总价值</label>
-      <div class="layui-input-block">
-        <input type="value" name="value" placeholder="请输入总价值" autocomplete="off" class="layui-input disabled">
-      </div>
-    </div>
-      <div class="layui-form-item">
-      <label class="layui-form-label">运单状态</label>
-      <div class="layui-input-block">
-        <input type="orderStatus" name="orderStatus" placeholder="请输入运单状态" autocomplete="off" class="layui-input disabled">
-      </div>
-    </div>
-      <div class="layui-form-item">
-      <label class="layui-form-label">发货日期</label>
-      <div class="layui-input-block">
-        <input type="pickupDate" name="pickupDate" placeholder="请输入发货日期" autocomplete="off" class="layui-input disabled">
-      </div>
-    </div>
-      <div class="layui-form-item">
-      <label class="layui-form-label">预计收货日期</label>
-      <div class="layui-input-block">
-        <input type="estimatedDeliveryDate" name="estimatedDeliveryDate" placeholder="请输入预计收货日期" autocomplete="off" class="layui-input disabled">
-      </div>
-    </div>
-      <div class="layui-form-item">
-      <label class="layui-form-label">实际收货日期</label>
-      <div class="layui-input-block">
-        <input type="actualDeliveryDate" name="actualDeliveryDate" placeholder="请输入实际收货日期" autocomplete="off" class="layui-input disabled">
       </div>
     </div>
   <div class="layui-form-item">
@@ -180,6 +110,10 @@
 <script th:src="@{/layui/layui.all.js}"></script>
 <script th:src="@{/js/core.util.js}"></script>
 <script>
+  // //客户字典数据
+  // var datas1 = "[[${@customerService.getType()}]]".replace(/&quot;/g, "\"");
+  // //承运方字典数据
+  // var datas2 = "[[${@carrierService.getType()}]]".replace(/&quot;/g, "\"");
   //获取token
   var token = CoreUtil.getData("access_token");
   //地址栏转义token中的#号
@@ -191,8 +125,7 @@
   var $ = jQuery = layui.jquery;
   var laydate = layui.laydate;
 
-  layui.use(['table', 'layer', 'laydate'], function () {
-
+  layui.use(['table', 'layer', 'laydate', 'form'], function () {
     //加载table
     tableIns1 = table.render({
       elem: '#showTable'
@@ -213,19 +146,24 @@
         [
           {type: 'checkbox', fixed: 'left'},
           {field: 'orderId', title: '', sort: true},
-          {field: 'customerId', title: '客户id', sort: true},
-          {field: 'carrierId', title: '承运方id', sort: true},
-          {field: 'shipmentTypeId', title: '物流类型', sort: true},
-          {field: 'isFreeShipping', title: '邮费类型', sort: true},
+          // ??? 为什么报错CoreUtil.selectName不是函数？
+          // {field: 'customerId', title: '客户名', sort: true, templet: function (item) {
+          //   console.log(datas1)
+          //   return CoreUtil.selectName(datas1, item.customerId);
+          // }},
+          // {field: 'carrierId', title: '承运方', sort: true, templet: function (item) {
+          //   return CoreUtil.selectName(datas2, item.carrierId);
+          // }},
+          // {field: 'shipmentTypeId', title: '物流类型', sort: true},
           {field: 'originAddress', title: '发货详细地址', sort: true},
-          {field: 'originCity', title: '发货地', sort: true},
-          {field: 'originCountry', title: '发货地国家', sort: true},
-          {field: 'originPostalCode', title: '发货地邮编', sort: true},
+          // {field: 'originCity', title: '发货地', sort: true},
+          // {field: 'originCountry', title: '发货地国家', sort: true},
+          // {field: 'originPostalCode', title: '发货地邮编', sort: true},
           {field: 'destinationAddress', title: '收货详细地址', sort: true},
-          {field: 'destinationCity', title: '收货地', sort: true},
-          {field: 'destinationCountry', title: '收货地国家', sort: true},
-          {field: 'destinationPostalCode', title: '收货地邮编', sort: true},
-          {field: 'des', title: '备注', sort: true},
+          // {field: 'destinationCity', title: '收货地', sort: true},
+          // {field: 'destinationCountry', title: '收货地国家', sort: true},
+          // {field: 'destinationPostalCode', title: '收货地邮编', sort: true},
+          // {field: 'des', title: '备注', sort: true},
           {field: 'weight', title: '总重量', sort: true},
           {field: 'value', title: '总价值', sort: true},
           {field: 'orderStatus', title: '运单状态', sort: true},
@@ -260,30 +198,20 @@
           $(".table_div").hide();
           $(".operation").show();
           $(".title").html("新增");
+
           setTimeout(function () {
             form.val('info', {
               "test": "test"
-              , "orderId": ""
               , "customerId": ""
               , "carrierId": ""
               , "shipmentTypeId": ""
               , "isFreeShipping": ""
-              , "originAddress": ""
-              , "originCity": ""
-              , "originCountry": ""
-              , "originPostalCode": ""
-              , "destinationAddress": ""
-              , "destinationCity": ""
-              , "destinationCountry": ""
-              , "destinationPostalCode": ""
               , "des": ""
-              , "weight": ""
-              , "value": ""
-              , "orderStatus": ""
-              , "pickupDate": ""
-              , "estimatedDeliveryDate": ""
-              , "actualDeliveryDate": ""
+              , "goodsId": ""
+              , "num": ""
             });
+            // //获取下拉框数据
+            // loadCustomersOption()
           }, 200);
           break;
       };

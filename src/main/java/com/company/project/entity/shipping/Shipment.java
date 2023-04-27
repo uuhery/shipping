@@ -7,23 +7,19 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.company.project.entity.sys.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Data;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
-@Data
 @TableName("shipment")
 public class Shipment extends BaseEntity implements Serializable {
     @TableId(type = IdType.AUTO)
-    private Integer orderId;
+    private Integer id;
     private Integer customerId;
     private Integer carrierId;
     private Integer shipmentTypeId;
-    @TableField(value = "is_free_shipping")
-    private Boolean freeShipping;
-
     private String originAddress;
     private String originCity;
     private String originCountry;
@@ -32,24 +28,27 @@ public class Shipment extends BaseEntity implements Serializable {
     private String destinationCity;
     private String destinationCountry;
     private String destinationPostalCode;
-
     private String des;
     private BigDecimal weight;
     private BigDecimal value;
-    private String orderStatus;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT+8")
+    private Integer orderStatus;
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     private Date pickupDate;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT+8")
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     private Date estimatedDeliveryDate;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT+8")
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     private Date actualDeliveryDate;
+    private Integer goodsId;
+    private BigDecimal num;
+    @TableField(exist = false)
+    private List<ShipmentEvent> shipmentEventList;
 
-    public Integer getOrderId() {
-        return orderId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setOrderId(Integer orderId) {
-        this.orderId = orderId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Integer getCustomerId() {
@@ -74,14 +73,6 @@ public class Shipment extends BaseEntity implements Serializable {
 
     public void setShipmentTypeId(Integer shipmentTypeId) {
         this.shipmentTypeId = shipmentTypeId;
-    }
-
-    public Boolean getFreeShipping() {
-        return freeShipping;
-    }
-
-    public void setFreeShipping(Boolean freeShipping) {
-        this.freeShipping = freeShipping;
     }
 
     public String getOriginAddress() {
@@ -172,11 +163,11 @@ public class Shipment extends BaseEntity implements Serializable {
         this.value = value;
     }
 
-    public String getOrderStatus() {
+    public Integer getOrderStatus() {
         return orderStatus;
     }
 
-    public void setOrderStatus(String orderStatus) {
+    public void setOrderStatus(Integer orderStatus) {
         this.orderStatus = orderStatus;
     }
 
@@ -202,5 +193,29 @@ public class Shipment extends BaseEntity implements Serializable {
 
     public void setActualDeliveryDate(Date actualDeliveryDate) {
         this.actualDeliveryDate = actualDeliveryDate;
+    }
+
+    public Integer getGoodsId() {
+        return goodsId;
+    }
+
+    public void setGoodsId(Integer goodsId) {
+        this.goodsId = goodsId;
+    }
+
+    public BigDecimal getNum() {
+        return num;
+    }
+
+    public void setNum(BigDecimal num) {
+        this.num = num;
+    }
+
+    public List<ShipmentEvent> getShipmentEventList() {
+        return shipmentEventList;
+    }
+
+    public void setShipmentEventList(List<ShipmentEvent> shipmentEventList) {
+        this.shipmentEventList = shipmentEventList;
     }
 }

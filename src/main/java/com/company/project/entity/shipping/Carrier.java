@@ -9,10 +9,10 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Data
-@TableName("carriers")
+@TableName("carrier")
 public class Carrier extends BaseEntity implements Serializable {
     @TableId(type = IdType.AUTO)
-    private Integer carrierId;
+    private Integer id;
     private String name;
     private String contactName;
     private String email;
@@ -22,12 +22,12 @@ public class Carrier extends BaseEntity implements Serializable {
     private String country;
     private String postalCode;
 
-    public Integer getCarrierId() {
-        return carrierId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setCarrierId(Integer carrierId) {
-        this.carrierId = carrierId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {

@@ -11,29 +11,28 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Data
-@TableName("shipment_rates")
+@TableName("shipment_rate")
 public class ShipmentRate extends BaseEntity implements Serializable {
     @TableId(type = IdType.AUTO)
-    private Integer shipmentRateId;
-    private Integer carrierId;
+    private Integer id;
+    private Integer relatedId;
     private Integer shipmentTypeId;
     private BigDecimal pricePerKg;
-    private BigDecimal pricePerKm;
 
-    public Integer getShipmentRateId() {
-        return shipmentRateId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setShipmentRateId(Integer shipmentRateId) {
-        this.shipmentRateId = shipmentRateId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public Integer getCarrierId() {
-        return carrierId;
+    public Integer getRelatedId() {
+        return relatedId;
     }
 
-    public void setCarrierId(Integer carrierId) {
-        this.carrierId = carrierId;
+    public void setRelatedId(Integer relatedId) {
+        this.relatedId = relatedId;
     }
 
     public Integer getShipmentTypeId() {
@@ -50,13 +49,5 @@ public class ShipmentRate extends BaseEntity implements Serializable {
 
     public void setPricePerKg(BigDecimal pricePerKg) {
         this.pricePerKg = pricePerKg;
-    }
-
-    public BigDecimal getPricePerKm() {
-        return pricePerKm;
-    }
-
-    public void setPricePerKm(BigDecimal pricePerKm) {
-        this.pricePerKm = pricePerKm;
     }
 }

@@ -15,10 +15,10 @@ import java.net.InetAddress;
 @MapperScan("com.company.project.mapper")
 @Slf4j
 @ServletComponentScan(basePackages = {"com.company.project.common.filter"}) //这一句完成了配置，Springboot的”懒理念“真的厉害。
-public class CompanyProjectApplication {
+public class ShippingApplication {
 
     public static void main(String[] args) throws Exception {
-        ConfigurableApplicationContext application = SpringApplication.run(CompanyProjectApplication.class, args);
+        ConfigurableApplicationContext application = SpringApplication.run(ShippingApplication.class, args);
 
         Environment env = application.getEnvironment();
         log.info("\n----------------------------------------------------------\n\t" +

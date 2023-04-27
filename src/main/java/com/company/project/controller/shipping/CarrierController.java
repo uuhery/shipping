@@ -70,12 +70,12 @@ public class CarrierController {
     @PostMapping("carriers/listByPage")
     @RequiresPermissions("carriers:list")
     @ResponseBody
-    public DataResult findListByPage(@RequestBody Carrier carriers){
+    public DataResult findListByPage(@RequestBody Carrier carrier){
         LambdaQueryWrapper<Carrier> queryWrapper = Wrappers.lambdaQuery();
         //查询条件示例
-        if(carriers.getCarrierId()!=null) queryWrapper.eq(Carrier::getCarrierId, carriers.getCarrierId());
-        queryWrapper.orderByDesc(Carrier::getCarrierId);
-        IPage<Carrier> iPage = carrierService.page(carriers.getQueryPage(), queryWrapper);
+        if(carrier.getId()!=null) queryWrapper.eq(Carrier::getId, carrier.getId());
+        queryWrapper.orderByDesc(Carrier::getId);
+        IPage<Carrier> iPage = carrierService.page(carrier.getQueryPage(), queryWrapper);
         return DataResult.success(iPage);
     }
 
