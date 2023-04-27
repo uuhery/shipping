@@ -11,106 +11,103 @@
  Target Server Version : 80029
  File Encoding         : 65001
 
- Date: 17/04/2023 14:15:05
+ Date: 27/04/2023 17:00:56
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
--- Table structure for carriers
+-- Table structure for carrier
 -- ----------------------------
-DROP TABLE IF EXISTS `carriers`;
-CREATE TABLE `carriers`  (
-  `carrier_id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `contact_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `address` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `city` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `country` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `postal_code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  PRIMARY KEY (`carrier_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+DROP TABLE IF EXISTS `carrier`;
+CREATE TABLE `carrier`  (
+  `id` int NOT NULL AUTO_INCREMENT COMMENT '承运人id',
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '公司名',
+  `contact_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '联系人姓名',
+  `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '邮箱',
+  `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '电话',
+  `address` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '地址',
+  `city` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '城市',
+  `country` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '国家',
+  `postal_code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '邮编',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
--- Records of carriers
+-- Records of carrier
 -- ----------------------------
-INSERT INTO `carriers` VALUES (1, '顺丰速运', '李四', 'sf-express@qq.com', '400-811-1111', '广东省深圳市福田区新洲十一街华联工业园', '深圳市', '中国', '518000');
-INSERT INTO `carriers` VALUES (2, '圆通速递', '王五', 'yuantong-express@qq.com', '95554', '北京市朝阳区建国路乙19号院3号楼圆通速递股份有限公司', '北京市', '中国', '100022');
-INSERT INTO `carriers` VALUES (3, '中通快递', '张三', 'zhongtong-express@qq.com', '95311', '浙江省宁波市海曙区解放北路958号中通国际大厦', '宁波市', '中国', '315000');
+INSERT INTO `carrier` VALUES (1, '顺丰速运', '李四', 'sf-express@qq.com', '400-811-1111', '广东省深圳市福田区新洲十一街华联工业园', '深圳市', '中国', '518000');
+INSERT INTO `carrier` VALUES (2, '圆通速递', '王五', 'yuantong-express@qq.com', '95554', '北京市朝阳区建国路乙19号院3号楼圆通速递股份有限公司', '北京市', '中国', '100022');
+INSERT INTO `carrier` VALUES (3, '中通快递', '张三', 'zhongtong-express@qq.com', '95311', '浙江省宁波市海曙区解放北路958号中通国际大厦', '宁波市', '中国', '315000');
 
 -- ----------------------------
--- Table structure for carriers_billing
+-- Table structure for carrier_billing
 -- ----------------------------
-DROP TABLE IF EXISTS `carriers_billing`;
-CREATE TABLE `carriers_billing`  (
-  `billing_id` int NOT NULL,
-  `carrier_id` int NULL DEFAULT NULL,
-  `order_id` int NULL DEFAULT NULL,
-  `billing_date` date NULL DEFAULT NULL,
-  `freight_charge` decimal(10, 2) NULL DEFAULT NULL,
-  `handling_charge` decimal(10, 2) NULL DEFAULT NULL,
-  `other_charge` decimal(10, 2) NULL DEFAULT NULL,
-  `total_charge` decimal(10, 2) NULL DEFAULT NULL,
-  PRIMARY KEY (`billing_id`) USING BTREE,
+DROP TABLE IF EXISTS `carrier_billing`;
+CREATE TABLE `carrier_billing`  (
+  `id` int NOT NULL AUTO_INCREMENT COMMENT '账单id',
+  `carrier_id` int NULL DEFAULT NULL COMMENT '承运人',
+  `order_id` int NULL DEFAULT NULL COMMENT '运单',
+  `billing_date` date NULL DEFAULT NULL COMMENT '结算日期',
+  `freight_charge` decimal(10, 2) NULL DEFAULT NULL COMMENT '金额',
+  `state` int NULL DEFAULT 0 COMMENT '状态',
+  PRIMARY KEY (`id`) USING BTREE,
   INDEX `carrier_id`(`carrier_id`) USING BTREE,
   INDEX `carriers_billing_ibfk_2`(`order_id`) USING BTREE,
-  CONSTRAINT `carriers_billing_ibfk_1` FOREIGN KEY (`carrier_id`) REFERENCES `carriers` (`carrier_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `carriers_billing_ibfk_2` FOREIGN KEY (`order_id`) REFERENCES `shipment` (`order_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+  CONSTRAINT `carrier_billing_ibfk_1` FOREIGN KEY (`carrier_id`) REFERENCES `carrier` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `carrier_billing_ibfk_2` FOREIGN KEY (`order_id`) REFERENCES `shipment` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
--- Records of carriers_billing
+-- Records of carrier_billing
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for customer
+-- ----------------------------
+DROP TABLE IF EXISTS `customer`;
+CREATE TABLE `customer`  (
+  `id` int NOT NULL AUTO_INCREMENT COMMENT '客户id',
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '姓名',
+  `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '邮箱',
+  `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '手机号',
+  `company_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '公司名',
+  `address` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '地址',
+  `city` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '城市',
+  `country` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '国家',
+  `postal_code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '邮编',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of customer
+-- ----------------------------
+INSERT INTO `customer` VALUES (1, '陈小明', 'xiaomingchen@163.com', '13812345678', 'ABC 公司', '上海市徐汇区虹桥路1234号', '上海市', '中国', '200000');
+INSERT INTO `customer` VALUES (2, '王芳', 'fangwang@163.com', '13887654321', 'XYZ 有限公司', '北京市朝阳区建国路555号', '北京市', '中国', '100000');
+INSERT INTO `customer` VALUES (3, '李华', 'hualee@163.com', '13987654321', 'PQR 贸易公司', '广东省深圳市福田区深南大道8888号', '深圳市', '中国', '518000');
 
 -- ----------------------------
 -- Table structure for customer_billing
 -- ----------------------------
 DROP TABLE IF EXISTS `customer_billing`;
 CREATE TABLE `customer_billing`  (
-  `payment_id` int NOT NULL,
-  `customer_id` int NULL DEFAULT NULL,
-  `order_id` int NULL DEFAULT NULL,
-  `payment_date` date NULL DEFAULT NULL,
-  `payment_amount` decimal(10, 2) NULL DEFAULT NULL,
-  `payment_method` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`payment_id`) USING BTREE,
+  `id` int NOT NULL AUTO_INCREMENT COMMENT '账单id',
+  `customer_id` int NULL DEFAULT NULL COMMENT '客户',
+  `order_id` int NULL DEFAULT NULL COMMENT '运单',
+  `payment_date` date NULL DEFAULT NULL COMMENT '结算日期',
+  `payment_amount` decimal(10, 2) NULL DEFAULT NULL COMMENT '金额',
+  `payment_method` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '支付方式',
+  `state` int NULL DEFAULT 0 COMMENT '状态',
+  PRIMARY KEY (`id`) USING BTREE,
   INDEX `customer_id`(`customer_id`) USING BTREE,
   INDEX `order_id`(`order_id`) USING BTREE,
-  CONSTRAINT `customer_billing_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`customer_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `customer_billing_ibfk_2` FOREIGN KEY (`order_id`) REFERENCES `shipment` (`order_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+  CONSTRAINT `customer_billing_ibfk_2` FOREIGN KEY (`order_id`) REFERENCES `shipment` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of customer_billing
 -- ----------------------------
-
--- ----------------------------
--- Table structure for customers
--- ----------------------------
-DROP TABLE IF EXISTS `customers`;
-CREATE TABLE `customers`  (
-  `customer_id` int NOT NULL AUTO_INCREMENT,
-  `first_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `last_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `company_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `address` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `city` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `country` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `postal_code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  PRIMARY KEY (`customer_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of customers
--- ----------------------------
-INSERT INTO `customers` VALUES (1, '陈', '小明', 'xiaomingchen@163.com', '13812345678', 'ABC 公司', '上海市徐汇区虹桥路1234号', '上海市', '中国', '200000');
-INSERT INTO `customers` VALUES (2, '王', '芳', 'fangwang@163.com', '13887654321', 'XYZ 有限公司', '北京市朝阳区建国路555号', '北京市', '中国', '100000');
-INSERT INTO `customers` VALUES (3, '李', '华', 'hualee@163.com', '13987654321', 'PQR 贸易公司', '广东省深圳市福田区深南大道8888号', '深圳市', '中国', '518000');
 
 -- ----------------------------
 -- Table structure for goods
@@ -118,55 +115,30 @@ INSERT INTO `customers` VALUES (3, '李', '华', 'hualee@163.com', '13987654321'
 DROP TABLE IF EXISTS `goods`;
 CREATE TABLE `goods`  (
   `id` int NOT NULL AUTO_INCREMENT,
-  `type` tinyint NULL DEFAULT NULL,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  `info` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  `price` decimal(10, 2) NULL DEFAULT NULL,
-  `weight` decimal(10, 2) NULL DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '货物名',
+  `price` decimal(10, 2) NULL DEFAULT NULL COMMENT '单价',
+  `weight` decimal(10, 2) NULL DEFAULT NULL COMMENT '单位重量',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of goods
 -- ----------------------------
-INSERT INTO `goods` VALUES (1, 1, '服装', '运动T恤', 99.99, 0.30);
-INSERT INTO `goods` VALUES (2, 2, '家具', '单人沙发', 1999.99, 20.00);
-INSERT INTO `goods` VALUES (3, 3, '电子产品', '智能手环', 299.99, 0.10);
-INSERT INTO `goods` VALUES (4, 4, '食品', '麻辣小龙虾', 39.99, 1.00);
-INSERT INTO `goods` VALUES (5, 5, '化妆品', '口红', 49.99, 0.05);
-
--- ----------------------------
--- Table structure for goods_batch
--- ----------------------------
-DROP TABLE IF EXISTS `goods_batch`;
-CREATE TABLE `goods_batch`  (
-  `id` int NOT NULL,
-  `goods_id` int NULL DEFAULT NULL,
-  `order_id` int NULL DEFAULT NULL,
-  `num` float NULL DEFAULT NULL,
-  `total_price` double NULL DEFAULT NULL,
-  `total_weight` double NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  INDEX `fk_goods_batch_goods_id`(`goods_id`) USING BTREE,
-  INDEX `fk_goods_batch_order_id`(`order_id`) USING BTREE,
-  CONSTRAINT `fk_goods_batch_goods_id` FOREIGN KEY (`goods_id`) REFERENCES `goods` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `fk_goods_batch_order` FOREIGN KEY (`order_id`) REFERENCES `shipment` (`order_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of goods_batch
--- ----------------------------
+INSERT INTO `goods` VALUES (1, '运动T恤', 99.99, 0.30);
+INSERT INTO `goods` VALUES (2, '单人沙发', 1999.99, 20.00);
+INSERT INTO `goods` VALUES (3, '智能手环', 299.99, 0.10);
+INSERT INTO `goods` VALUES (4, '麻辣小龙虾', 39.99, 1.00);
+INSERT INTO `goods` VALUES (5, '口红', 49.99, 0.05);
 
 -- ----------------------------
 -- Table structure for shipment
 -- ----------------------------
 DROP TABLE IF EXISTS `shipment`;
 CREATE TABLE `shipment`  (
-  `order_id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `customer_id` int NULL DEFAULT NULL COMMENT '客户id',
   `carrier_id` int NULL DEFAULT NULL COMMENT '承运方id',
   `shipment_type_id` int NULL DEFAULT NULL COMMENT '物流类型',
-  `is_free_shipping` tinyint NULL DEFAULT 0 COMMENT '邮费类型',
   `origin_address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '发货详细地址',
   `origin_city` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '发货地',
   `origin_country` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '发货地国家',
@@ -176,92 +148,90 @@ CREATE TABLE `shipment`  (
   `destination_country` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '收货地国家',
   `destination_postal_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '收货地邮编',
   `des` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
+  `goods_id` int NULL DEFAULT NULL COMMENT '物资类型',
+  `num` int NULL DEFAULT NULL COMMENT '物资数量',
   `weight` decimal(10, 2) NULL DEFAULT NULL COMMENT '总重量',
-  `value` decimal(10, 2) NULL DEFAULT NULL COMMENT '总价值',
+  `value` decimal(10, 2) NULL DEFAULT NULL COMMENT '物资价值',
   `order_status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '运单状态',
   `pickup_date` date NULL DEFAULT NULL COMMENT '发货日期',
   `estimated_delivery_date` date NULL DEFAULT NULL COMMENT '预计收货日期',
   `actual_delivery_date` date NULL DEFAULT NULL COMMENT '实际收货日期',
-  PRIMARY KEY (`order_id`) USING BTREE,
-  INDEX `consignee_id`(`customer_id`) USING BTREE,
+  PRIMARY KEY (`id`) USING BTREE,
   INDEX `carrier_id`(`carrier_id`) USING BTREE,
   INDEX `shipment_type_id`(`shipment_type_id`) USING BTREE,
-  CONSTRAINT `shipment_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`customer_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `shipment_ibfk_2` FOREIGN KEY (`carrier_id`) REFERENCES `carriers` (`carrier_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `shipment_ibfk_3` FOREIGN KEY (`shipment_type_id`) REFERENCES `shipment_types` (`shipment_type_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+  INDEX `shipment_ibfk_1`(`customer_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of shipment
 -- ----------------------------
+INSERT INTO `shipment` VALUES (1, 1, 1, 1, '广东省深圳市福田区新洲十一街华联工业园', '深圳市', '中国', '518000', '上海市徐汇区虹桥路1234号', '上海市', '中国', '200000', '哈哈哈', 1, 100, 30.00, 9999.00, NULL, '2023-04-21', '2023-04-26', NULL);
 
 -- ----------------------------
--- Table structure for shipment_events
+-- Table structure for shipment_event
 -- ----------------------------
-DROP TABLE IF EXISTS `shipment_events`;
-CREATE TABLE `shipment_events`  (
-  `event_id` int NOT NULL,
+DROP TABLE IF EXISTS `shipment_event`;
+CREATE TABLE `shipment_event`  (
+  `id` int NOT NULL AUTO_INCREMENT,
   `order_id` int NULL DEFAULT NULL,
   `event_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `event_date` date NULL DEFAULT NULL,
   `event_description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `event_location` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`event_id`) USING BTREE,
+  PRIMARY KEY (`id`) USING BTREE,
   INDEX `shipment_events_ibfk_1`(`order_id`) USING BTREE,
-  CONSTRAINT `shipment_events_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `shipment` (`order_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+  CONSTRAINT `shipment_event_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `shipment` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
--- Records of shipment_events
+-- Records of shipment_event
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for shipment_rates
+-- Table structure for shipment_rate
 -- ----------------------------
-DROP TABLE IF EXISTS `shipment_rates`;
-CREATE TABLE `shipment_rates`  (
-  `shipment_rate_id` int NOT NULL,
-  `carrier_id` int NULL DEFAULT NULL,
+DROP TABLE IF EXISTS `shipment_rate`;
+CREATE TABLE `shipment_rate`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `related_id` int NULL DEFAULT NULL,
   `shipment_type_id` int NULL DEFAULT NULL,
   `price_per_kg` decimal(10, 2) NULL DEFAULT NULL,
-  `price_per_km` decimal(10, 2) NULL DEFAULT NULL,
-  PRIMARY KEY (`shipment_rate_id`) USING BTREE,
-  INDEX `carrier_id`(`carrier_id`) USING BTREE,
-  INDEX `shipment_type_id`(`shipment_type_id`) USING BTREE,
-  CONSTRAINT `shipment_rates_ibfk_1` FOREIGN KEY (`carrier_id`) REFERENCES `carriers` (`carrier_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `shipment_rates_ibfk_2` FOREIGN KEY (`shipment_type_id`) REFERENCES `shipment_types` (`shipment_type_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `carrier_id`(`related_id`) USING BTREE,
+  INDEX `shipment_type_id`(`shipment_type_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
--- Records of shipment_rates
+-- Records of shipment_rate
 -- ----------------------------
-INSERT INTO `shipment_rates` VALUES (1, 1, 1, 5.00, 0.10);
-INSERT INTO `shipment_rates` VALUES (2, 1, 2, 10.00, 0.20);
-INSERT INTO `shipment_rates` VALUES (3, 1, 3, 20.00, 0.50);
-INSERT INTO `shipment_rates` VALUES (4, 2, 1, 6.00, 0.15);
-INSERT INTO `shipment_rates` VALUES (5, 2, 2, 12.00, 0.25);
-INSERT INTO `shipment_rates` VALUES (6, 2, 3, 24.00, 0.60);
-INSERT INTO `shipment_rates` VALUES (7, 3, 1, 4.50, 0.12);
-INSERT INTO `shipment_rates` VALUES (8, 3, 2, 9.00, 0.22);
-INSERT INTO `shipment_rates` VALUES (9, 3, 3, 18.00, 0.55);
+INSERT INTO `shipment_rate` VALUES (1, 1, 1, 5.00);
+INSERT INTO `shipment_rate` VALUES (2, 1, 2, 10.00);
+INSERT INTO `shipment_rate` VALUES (3, 1, 3, 20.00);
+INSERT INTO `shipment_rate` VALUES (4, 2, 1, 6.00);
+INSERT INTO `shipment_rate` VALUES (5, 2, 2, 12.00);
+INSERT INTO `shipment_rate` VALUES (6, 2, 3, 24.00);
+INSERT INTO `shipment_rate` VALUES (7, 3, 1, 4.50);
+INSERT INTO `shipment_rate` VALUES (8, 3, 2, 9.00);
+INSERT INTO `shipment_rate` VALUES (9, 3, 3, 18.00);
 
 -- ----------------------------
--- Table structure for shipment_types
+-- Table structure for shipment_type
 -- ----------------------------
-DROP TABLE IF EXISTS `shipment_types`;
-CREATE TABLE `shipment_types`  (
-  `shipment_type_id` int NOT NULL,
+DROP TABLE IF EXISTS `shipment_type`;
+CREATE TABLE `shipment_type`  (
+  `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`shipment_type_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+  `price` decimal(10, 2) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
--- Records of shipment_types
+-- Records of shipment_type
 -- ----------------------------
-INSERT INTO `shipment_types` VALUES (1, '陆运', '通过陆路运输货物');
-INSERT INTO `shipment_types` VALUES (2, '海运', '通过海路运输货物');
-INSERT INTO `shipment_types` VALUES (3, '空运', '通过空运运输货物');
+INSERT INTO `shipment_type` VALUES (1, '陆运', '通过陆路运输货物', 10.00);
+INSERT INTO `shipment_type` VALUES (2, '海运', '通过海路运输货物', 16.00);
+INSERT INTO `shipment_type` VALUES (3, '空运', '通过空运运输货物', 32.00);
 
 -- ----------------------------
 -- Table structure for sys_content
@@ -283,6 +253,7 @@ CREATE TABLE `sys_content`  (
 -- ----------------------------
 -- Records of sys_content
 -- ----------------------------
+INSERT INTO `sys_content` VALUES ('1647964220323385345', '哈哈哈', NULL, '', '1', 1, '', '2023-04-17 22:04:22', NULL);
 
 -- ----------------------------
 -- Table structure for sys_dept
@@ -327,6 +298,11 @@ CREATE TABLE `sys_dict`  (
 INSERT INTO `sys_dict` VALUES ('1255790029680242690', 'sex', '性别', '2020-04-30 17:24:09');
 INSERT INTO `sys_dict` VALUES ('1255790029680242691', 'content_keyword', '关键字', '2020-04-30 17:24:09');
 INSERT INTO `sys_dict` VALUES ('1282504369620430849', 'content_type', '文章类型略略略', '2020-07-13 10:37:24');
+INSERT INTO `sys_dict` VALUES ('1647947785794547714', 'customer_company', '用户id对应公司', '2023-04-17 20:59:04');
+INSERT INTO `sys_dict` VALUES ('1647951583145472001', 'carrier_name', '供应商名', '2023-04-17 21:14:10');
+INSERT INTO `sys_dict` VALUES ('1647953058743472130', 'shipment_type', '物流类型', '2023-04-17 21:20:01');
+INSERT INTO `sys_dict` VALUES ('1647955274611052546', 'fee_type', '包邮/不包邮', '2023-04-17 21:28:50');
+INSERT INTO `sys_dict` VALUES ('1647958980240941057', 'goods_type', '物资类型', '2023-04-17 21:43:33');
 
 -- ----------------------------
 -- Table structure for sys_dict_detail
@@ -352,6 +328,22 @@ INSERT INTO `sys_dict_detail` VALUES ('1282504651729317889', '散文', '2', 2, '
 INSERT INTO `sys_dict_detail` VALUES ('1282846022950842369', '剧本', '3', 3, '1282504369620430849', '2020-07-14 09:15:01');
 INSERT INTO `sys_dict_detail` VALUES ('1282846022950842370', 'java', '1', 1, '1255790029680242691', '2020-07-14 09:15:01');
 INSERT INTO `sys_dict_detail` VALUES ('1282846022950842371', 'mysql', '2', 2, '1255790029680242691', '2020-07-14 09:15:01');
+INSERT INTO `sys_dict_detail` VALUES ('1647948430584901634', 'ABC 公司', '1', 1, '1647947785794547714', '2023-04-17 21:01:38');
+INSERT INTO `sys_dict_detail` VALUES ('1647948510041796610', 'XYZ 有限公司', '2', 2, '1647947785794547714', '2023-04-17 21:01:57');
+INSERT INTO `sys_dict_detail` VALUES ('1647948606489817090', 'PQR 贸易公司', '3', 3, '1647947785794547714', '2023-04-17 21:02:20');
+INSERT INTO `sys_dict_detail` VALUES ('1647951819821658113', '顺丰速运', '1', 1, '1647951583145472001', '2023-04-17 21:15:06');
+INSERT INTO `sys_dict_detail` VALUES ('1647951867854827522', '圆通速运', '2', 2, '1647951583145472001', '2023-04-17 21:15:17');
+INSERT INTO `sys_dict_detail` VALUES ('1647951918014509058', '中通快递', '3', 3, '1647951583145472001', '2023-04-17 21:15:29');
+INSERT INTO `sys_dict_detail` VALUES ('1647953192294305794', '陆运', '1', 1, '1647953058743472130', '2023-04-17 21:20:33');
+INSERT INTO `sys_dict_detail` VALUES ('1647953237148192770', '海运', '2', 2, '1647953058743472130', '2023-04-17 21:20:44');
+INSERT INTO `sys_dict_detail` VALUES ('1647953283868545026', '空运', '3', 3, '1647953058743472130', '2023-04-17 21:20:55');
+INSERT INTO `sys_dict_detail` VALUES ('1647955344781758466', '不包邮', '0', 1, '1647955274611052546', '2023-04-17 21:29:06');
+INSERT INTO `sys_dict_detail` VALUES ('1647955395205681154', '包邮', '1', 2, '1647955274611052546', '2023-04-17 21:29:18');
+INSERT INTO `sys_dict_detail` VALUES ('1647959336085692417', '运动T恤', '1', 1, '1647958980240941057', '2023-04-17 21:44:58');
+INSERT INTO `sys_dict_detail` VALUES ('1647959383389052929', '单人沙发', '2', 2, '1647958980240941057', '2023-04-17 21:45:09');
+INSERT INTO `sys_dict_detail` VALUES ('1647959459696025601', '智能手环', '3', 3, '1647958980240941057', '2023-04-17 21:45:27');
+INSERT INTO `sys_dict_detail` VALUES ('1647959532660137986', '麻辣小龙虾', '4', 4, '1647958980240941057', '2023-04-17 21:45:45');
+INSERT INTO `sys_dict_detail` VALUES ('1647959575869857793', '口红', '5', 5, '1647958980240941057', '2023-04-17 21:45:55');
 
 -- ----------------------------
 -- Table structure for sys_files
@@ -676,6 +668,580 @@ INSERT INTO `sys_job_log` VALUES ('1647617089381130242', '1252884495040782337', 
 INSERT INTO `sys_job_log` VALUES ('1647617341030981634', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-16 23:06:00');
 INSERT INTO `sys_job_log` VALUES ('1647617592668250113', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-16 23:07:00');
 INSERT INTO `sys_job_log` VALUES ('1647617844343267330', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-16 23:08:00');
+INSERT INTO `sys_job_log` VALUES ('1647899198326878210', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 17:46:00');
+INSERT INTO `sys_job_log` VALUES ('1647899449901232130', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 17:47:00');
+INSERT INTO `sys_job_log` VALUES ('1647899701551083521', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 17:48:00');
+INSERT INTO `sys_job_log` VALUES ('1647899953213517825', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 17:49:00');
+INSERT INTO `sys_job_log` VALUES ('1647900204901117953', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 17:50:00');
+INSERT INTO `sys_job_log` VALUES ('1647900456555163649', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 17:51:00');
+INSERT INTO `sys_job_log` VALUES ('1647900708188237825', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 17:52:00');
+INSERT INTO `sys_job_log` VALUES ('1647900959892615169', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 17:53:00');
+INSERT INTO `sys_job_log` VALUES ('1647901211500523521', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 17:54:00');
+INSERT INTO `sys_job_log` VALUES ('1647901463204900865', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 17:55:00');
+INSERT INTO `sys_job_log` VALUES ('1647901714812809217', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 17:56:00');
+INSERT INTO `sys_job_log` VALUES ('1647901966529769473', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 17:57:00');
+INSERT INTO `sys_job_log` VALUES ('1647902218150260738', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 17:58:00');
+INSERT INTO `sys_job_log` VALUES ('1647902469829472258', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 17:59:00');
+INSERT INTO `sys_job_log` VALUES ('1647902721449963522', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 18:00:00');
+INSERT INTO `sys_job_log` VALUES ('1647902973141757953', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 18:01:00');
+INSERT INTO `sys_job_log` VALUES ('1647903224787415041', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 18:02:00');
+INSERT INTO `sys_job_log` VALUES ('1647903476466626562', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 18:03:00');
+INSERT INTO `sys_job_log` VALUES ('1647903728120672257', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 18:04:00');
+INSERT INTO `sys_job_log` VALUES ('1647903979770523649', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 18:05:00');
+INSERT INTO `sys_job_log` VALUES ('1647904231449735170', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 18:06:00');
+INSERT INTO `sys_job_log` VALUES ('1647904483091197953', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 18:07:00');
+INSERT INTO `sys_job_log` VALUES ('1647904734741049345', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 18:08:00');
+INSERT INTO `sys_job_log` VALUES ('1647904986382512130', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 18:09:00');
+INSERT INTO `sys_job_log` VALUES ('1647905238086889473', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 18:10:00');
+INSERT INTO `sys_job_log` VALUES ('1647905489740935170', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 18:11:00');
+INSERT INTO `sys_job_log` VALUES ('1647905741344649218', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 18:12:00');
+INSERT INTO `sys_job_log` VALUES ('1647905993015472130', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 18:13:00');
+INSERT INTO `sys_job_log` VALUES ('1647906244703072258', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 18:14:00');
+INSERT INTO `sys_job_log` VALUES ('1647906496361312257', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 18:15:00');
+INSERT INTO `sys_job_log` VALUES ('1647906748023746561', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 18:16:00');
+INSERT INTO `sys_job_log` VALUES ('1647906999652626433', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 18:17:00');
+INSERT INTO `sys_job_log` VALUES ('1647907251302477825', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 18:18:00');
+INSERT INTO `sys_job_log` VALUES ('1647907502994272257', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 18:19:00');
+INSERT INTO `sys_job_log` VALUES ('1647907754648317954', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 18:20:00');
+INSERT INTO `sys_job_log` VALUES ('1647908006314946562', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 18:21:00');
+INSERT INTO `sys_job_log` VALUES ('1647908257968992257', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 18:22:00');
+INSERT INTO `sys_job_log` VALUES ('1647908509639815170', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 18:23:00');
+INSERT INTO `sys_job_log` VALUES ('1647909767918432258', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 18:28:00');
+INSERT INTO `sys_job_log` VALUES ('1647910019580866562', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 18:29:00');
+INSERT INTO `sys_job_log` VALUES ('1647910271213940738', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 18:30:00');
+INSERT INTO `sys_job_log` VALUES ('1647910522855403521', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 18:31:00');
+INSERT INTO `sys_job_log` VALUES ('1647910774568169473', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 18:32:00');
+INSERT INTO `sys_job_log` VALUES ('1647911026192855041', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 18:33:00');
+INSERT INTO `sys_job_log` VALUES ('1647911277859483650', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 18:34:00');
+INSERT INTO `sys_job_log` VALUES ('1647911529534500866', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 18:35:00');
+INSERT INTO `sys_job_log` VALUES ('1647911781163380738', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 18:36:00');
+INSERT INTO `sys_job_log` VALUES ('1647912032855175170', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 18:37:00');
+INSERT INTO `sys_job_log` VALUES ('1647913291096043522', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 18:42:00');
+INSERT INTO `sys_job_log` VALUES ('1647913542762672130', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 18:43:00');
+INSERT INTO `sys_job_log` VALUES ('1647913794408329218', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 18:44:00');
+INSERT INTO `sys_job_log` VALUES ('1647914046121095169', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 18:45:00');
+INSERT INTO `sys_job_log` VALUES ('1647914297770946562', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 18:46:00');
+INSERT INTO `sys_job_log` VALUES ('1647914549408215041', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 18:47:00');
+INSERT INTO `sys_job_log` VALUES ('1647914801058066433', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 18:48:00');
+INSERT INTO `sys_job_log` VALUES ('1647923609125826562', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 19:23:00');
+INSERT INTO `sys_job_log` VALUES ('1647923860754706433', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 19:24:00');
+INSERT INTO `sys_job_log` VALUES ('1647924112396169218', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 19:25:00');
+INSERT INTO `sys_job_log` VALUES ('1647924364075380737', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 19:26:00');
+INSERT INTO `sys_job_log` VALUES ('1647924615716843522', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 19:27:00');
+INSERT INTO `sys_job_log` VALUES ('1647924867370889217', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 19:28:00');
+INSERT INTO `sys_job_log` VALUES ('1647925119033323522', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 19:29:00');
+INSERT INTO `sys_job_log` VALUES ('1647925370452488193', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 19:30:00');
+INSERT INTO `sys_job_log` VALUES ('1647925622400135170', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 19:31:00');
+INSERT INTO `sys_job_log` VALUES ('1647925874024820738', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 19:32:00');
+INSERT INTO `sys_job_log` VALUES ('1647926125695643649', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 19:33:00');
+INSERT INTO `sys_job_log` VALUES ('1647926377324523521', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 19:34:00');
+INSERT INTO `sys_job_log` VALUES ('1647926629012123649', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 19:35:00');
+INSERT INTO `sys_job_log` VALUES ('1647926880649392130', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 19:36:00');
+INSERT INTO `sys_job_log` VALUES ('1647927132290854914', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 19:37:00');
+INSERT INTO `sys_job_log` VALUES ('1647927383982649346', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 19:38:00');
+INSERT INTO `sys_job_log` VALUES ('1647927635657666561', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 19:39:00');
+INSERT INTO `sys_job_log` VALUES ('1647927887290740738', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 19:40:00');
+INSERT INTO `sys_job_log` VALUES ('1647928138965757954', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 19:41:00');
+INSERT INTO `sys_job_log` VALUES ('1647928390619803649', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 19:42:00');
+INSERT INTO `sys_job_log` VALUES ('1647928642278043650', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 19:43:00');
+INSERT INTO `sys_job_log` VALUES ('1647928893953060866', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 19:44:00');
+INSERT INTO `sys_job_log` VALUES ('1647929145649086465', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 19:45:00');
+INSERT INTO `sys_job_log` VALUES ('1647929397261189121', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 19:46:00');
+INSERT INTO `sys_job_log` VALUES ('1647929648927817730', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 19:47:00');
+INSERT INTO `sys_job_log` VALUES ('1647929900648947714', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 19:48:00');
+INSERT INTO `sys_job_log` VALUES ('1647930152193941505', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 19:49:00');
+INSERT INTO `sys_job_log` VALUES ('1647930418486116354', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 19:50:03');
+INSERT INTO `sys_job_log` VALUES ('1647930655506235394', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 19:51:00');
+INSERT INTO `sys_job_log` VALUES ('1647930907214807041', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 19:52:00');
+INSERT INTO `sys_job_log` VALUES ('1647931158881435650', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 19:53:00');
+INSERT INTO `sys_job_log` VALUES ('1647931410514509826', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 19:54:00');
+INSERT INTO `sys_job_log` VALUES ('1647931662176944129', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 19:55:00');
+INSERT INTO `sys_job_log` VALUES ('1647931913860349953', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 19:56:00');
+INSERT INTO `sys_job_log` VALUES ('1647932165489229826', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 19:57:00');
+INSERT INTO `sys_job_log` VALUES ('1647932417126498305', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 19:58:00');
+INSERT INTO `sys_job_log` VALUES ('1647932668793126914', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 19:59:00');
+INSERT INTO `sys_job_log` VALUES ('1647932920447172610', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 20:00:00');
+INSERT INTO `sys_job_log` VALUES ('1647933172029915137', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 20:01:00');
+INSERT INTO `sys_job_log` VALUES ('1647933423759458306', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 20:02:00');
+INSERT INTO `sys_job_log` VALUES ('1647933675530977282', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 20:03:00');
+INSERT INTO `sys_job_log` VALUES ('1647933941529530370', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 20:04:03');
+INSERT INTO `sys_job_log` VALUES ('1647934178725810178', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 20:05:00');
+INSERT INTO `sys_job_log` VALUES ('1647934430421798914', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 20:06:00');
+INSERT INTO `sys_job_log` VALUES ('1647934682059067393', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 20:07:00');
+INSERT INTO `sys_job_log` VALUES ('1647934933755056129', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 20:08:00');
+INSERT INTO `sys_job_log` VALUES ('1647935185400713217', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 20:09:00');
+INSERT INTO `sys_job_log` VALUES ('1647935437050564610', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 20:10:00');
+INSERT INTO `sys_job_log` VALUES ('1647935688679444482', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 20:11:00');
+INSERT INTO `sys_job_log` VALUES ('1647935940337684482', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 20:12:00');
+INSERT INTO `sys_job_log` VALUES ('1647936192050450434', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 20:13:00');
+INSERT INTO `sys_job_log` VALUES ('1647936443679330305', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 20:14:00');
+INSERT INTO `sys_job_log` VALUES ('1647936695308210177', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 20:15:00');
+INSERT INTO `sys_job_log` VALUES ('1647936946995810306', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 20:16:00');
+INSERT INTO `sys_job_log` VALUES ('1647937198679216129', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 20:17:00');
+INSERT INTO `sys_job_log` VALUES ('1647937450345844738', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 20:18:00');
+INSERT INTO `sys_job_log` VALUES ('1647937701987307522', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 20:19:00');
+INSERT INTO `sys_job_log` VALUES ('1647937953607798786', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 20:20:00');
+INSERT INTO `sys_job_log` VALUES ('1647938205362507777', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 20:21:00');
+INSERT INTO `sys_job_log` VALUES ('1647938456962027521', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 20:22:00');
+INSERT INTO `sys_job_log` VALUES ('1647938708578324482', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 20:23:00');
+INSERT INTO `sys_job_log` VALUES ('1647939212029001730', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 20:25:00');
+INSERT INTO `sys_job_log` VALUES ('1647939463716593666', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 20:26:00');
+INSERT INTO `sys_job_log` VALUES ('1647939715223838721', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 20:27:00');
+INSERT INTO `sys_job_log` VALUES ('1647939966890467330', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 20:28:00');
+INSERT INTO `sys_job_log` VALUES ('1647940218544513026', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 20:29:00');
+INSERT INTO `sys_job_log` VALUES ('1647940470202753026', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 20:30:00');
+INSERT INTO `sys_job_log` VALUES ('1647940721890353154', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 20:31:00');
+INSERT INTO `sys_job_log` VALUES ('1647940973502455810', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 20:32:00');
+INSERT INTO `sys_job_log` VALUES ('1647941225160695810', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 20:33:00');
+INSERT INTO `sys_job_log` VALUES ('1647941476869267458', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 20:34:00');
+INSERT INTO `sys_job_log` VALUES ('1647941728514924546', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 20:35:00');
+INSERT INTO `sys_job_log` VALUES ('1647941980177358849', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 20:36:00');
+INSERT INTO `sys_job_log` VALUES ('1647942231881773057', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 20:37:00');
+INSERT INTO `sys_job_log` VALUES ('1647942483468709890', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 20:38:00');
+INSERT INTO `sys_job_log` VALUES ('1647942735164698626', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 20:39:00');
+INSERT INTO `sys_job_log` VALUES ('1647942986881617921', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 20:40:00');
+INSERT INTO `sys_job_log` VALUES ('1647943490164547586', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 20:42:00');
+INSERT INTO `sys_job_log` VALUES ('1647943741868953601', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 20:43:00');
+INSERT INTO `sys_job_log` VALUES ('1647943993527115777', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 20:44:00');
+INSERT INTO `sys_job_log` VALUES ('1647944245084692482', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 20:45:00');
+INSERT INTO `sys_job_log` VALUES ('1647944496730349569', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 20:46:00');
+INSERT INTO `sys_job_log` VALUES ('1647944748371812353', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 20:47:00');
+INSERT INTO `sys_job_log` VALUES ('1647945000063606785', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 20:48:00');
+INSERT INTO `sys_job_log` VALUES ('1647945259468779522', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 20:49:02');
+INSERT INTO `sys_job_log` VALUES ('1647945503371751425', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 20:50:00');
+INSERT INTO `sys_job_log` VALUES ('1647945755029991426', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 20:51:00');
+INSERT INTO `sys_job_log` VALUES ('1647946006684037122', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 20:52:00');
+INSERT INTO `sys_job_log` VALUES ('1647946258329694210', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 20:53:00');
+INSERT INTO `sys_job_log` VALUES ('1647946509992128514', '1252884495040782337', 'testTask', '1', 0, NULL, 3, '2023-04-17 20:54:00');
+INSERT INTO `sys_job_log` VALUES ('1647946761658757121', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 20:55:00');
+INSERT INTO `sys_job_log` VALUES ('1647947013312802818', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 20:56:00');
+INSERT INTO `sys_job_log` VALUES ('1647947264958459906', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 20:57:00');
+INSERT INTO `sys_job_log` VALUES ('1647947516641865729', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 20:58:00');
+INSERT INTO `sys_job_log` VALUES ('1647947768283328514', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 20:59:00');
+INSERT INTO `sys_job_log` VALUES ('1647948019924791297', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 21:00:00');
+INSERT INTO `sys_job_log` VALUES ('1647948271641751554', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 21:01:00');
+INSERT INTO `sys_job_log` VALUES ('1647948523262242818', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 21:02:00');
+INSERT INTO `sys_job_log` VALUES ('1647948774907899905', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 21:03:00');
+INSERT INTO `sys_job_log` VALUES ('1647949026620665858', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 21:04:00');
+INSERT INTO `sys_job_log` VALUES ('1647949278278905857', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 21:05:00');
+INSERT INTO `sys_job_log` VALUES ('1647949529953972226', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 21:06:00');
+INSERT INTO `sys_job_log` VALUES ('1647949781620600834', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 21:07:00');
+INSERT INTO `sys_job_log` VALUES ('1647950033299812354', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 21:08:00');
+INSERT INTO `sys_job_log` VALUES ('1647950284890943490', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 21:09:00');
+INSERT INTO `sys_job_log` VALUES ('1647950536544989185', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 21:10:00');
+INSERT INTO `sys_job_log` VALUES ('1647950788224200705', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 21:11:00');
+INSERT INTO `sys_job_log` VALUES ('1647951039844691969', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 21:12:00');
+INSERT INTO `sys_job_log` VALUES ('1647951291523903490', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 21:13:00');
+INSERT INTO `sys_job_log` VALUES ('1647951543152783362', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 21:14:00');
+INSERT INTO `sys_job_log` VALUES ('1647951794827800577', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 21:15:00');
+INSERT INTO `sys_job_log` VALUES ('1647952046481846273', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 21:16:00');
+INSERT INTO `sys_job_log` VALUES ('1647952298257436674', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 21:17:00');
+INSERT INTO `sys_job_log` VALUES ('1647952549840179201', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 21:18:00');
+INSERT INTO `sys_job_log` VALUES ('1647952801477447681', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 21:19:00');
+INSERT INTO `sys_job_log` VALUES ('1647953053089550338', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 21:20:00');
+INSERT INTO `sys_job_log` VALUES ('1647953304764567554', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 21:21:00');
+INSERT INTO `sys_job_log` VALUES ('1647953556427001858', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 21:22:00');
+INSERT INTO `sys_job_log` VALUES ('1647953808127184898', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 21:23:00');
+INSERT INTO `sys_job_log` VALUES ('1647954059735093250', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 21:24:00');
+INSERT INTO `sys_job_log` VALUES ('1647954311418499074', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 21:25:00');
+INSERT INTO `sys_job_log` VALUES ('1647954563043184642', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 21:26:00');
+INSERT INTO `sys_job_log` VALUES ('1647954814705618946', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 21:27:00');
+INSERT INTO `sys_job_log` VALUES ('1647955066393219074', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 21:28:00');
+INSERT INTO `sys_job_log` VALUES ('1647955318051459074', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 21:29:00');
+INSERT INTO `sys_job_log` VALUES ('1647955569701310466', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 21:30:00');
+INSERT INTO `sys_job_log` VALUES ('1647955821426659330', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 21:31:00');
+INSERT INTO `sys_job_log` VALUES ('1647956072988430338', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 21:32:00');
+INSERT INTO `sys_job_log` VALUES ('1647956324667641858', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 21:33:00');
+INSERT INTO `sys_job_log` VALUES ('1647956576359436289', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 21:34:00');
+INSERT INTO `sys_job_log` VALUES ('1647956828005093377', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 21:35:00');
+INSERT INTO `sys_job_log` VALUES ('1647957079675916289', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 21:36:00');
+INSERT INTO `sys_job_log` VALUES ('1647957331317379073', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 21:37:00');
+INSERT INTO `sys_job_log` VALUES ('1647957583021756418', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 21:38:00');
+INSERT INTO `sys_job_log` VALUES ('1647958086422175745', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 21:40:00');
+INSERT INTO `sys_job_log` VALUES ('1647958337962975234', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 21:41:00');
+INSERT INTO `sys_job_log` VALUES ('1647958589596049409', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 21:42:00');
+INSERT INTO `sys_job_log` VALUES ('1647958841283649538', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 21:43:00');
+INSERT INTO `sys_job_log` VALUES ('1647959092929306626', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 21:44:00');
+INSERT INTO `sys_job_log` VALUES ('1647959344583352322', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 21:45:00');
+INSERT INTO `sys_job_log` VALUES ('1647959596258369537', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 21:46:00');
+INSERT INTO `sys_job_log` VALUES ('1647959847870472194', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 21:47:00');
+INSERT INTO `sys_job_log` VALUES ('1647960351199535106', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 21:49:00');
+INSERT INTO `sys_job_log` VALUES ('1647960602882940930', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 21:50:00');
+INSERT INTO `sys_job_log` VALUES ('1647960854729924610', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 21:51:00');
+INSERT INTO `sys_job_log` VALUES ('1647961106195226625', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 21:52:00');
+INSERT INTO `sys_job_log` VALUES ('1647961358147051521', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 21:53:00');
+INSERT INTO `sys_job_log` VALUES ('1647961609499107329', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 21:54:00');
+INSERT INTO `sys_job_log` VALUES ('1647961861132181505', '1252884495040782337', 'testTask', '1', 0, NULL, 2, '2023-04-17 21:55:00');
+INSERT INTO `sys_job_log` VALUES ('1647962112832364545', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 21:56:00');
+INSERT INTO `sys_job_log` VALUES ('1647962616245374977', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 21:58:00');
+INSERT INTO `sys_job_log` VALUES ('1647962867802951681', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 21:59:00');
+INSERT INTO `sys_job_log` VALUES ('1647963119427637249', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 22:00:00');
+INSERT INTO `sys_job_log` VALUES ('1647963371115237377', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 22:01:00');
+INSERT INTO `sys_job_log` VALUES ('1647963622790254593', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 22:02:00');
+INSERT INTO `sys_job_log` VALUES ('1647963874456883201', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 22:03:00');
+INSERT INTO `sys_job_log` VALUES ('1647964126073180162', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 22:04:00');
+INSERT INTO `sys_job_log` VALUES ('1647964377769168897', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 22:05:00');
+INSERT INTO `sys_job_log` VALUES ('1647964629419020290', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 22:06:00');
+INSERT INTO `sys_job_log` VALUES ('1647964881295294466', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 22:07:00');
+INSERT INTO `sys_job_log` VALUES ('1647965132718653442', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 22:08:00');
+INSERT INTO `sys_job_log` VALUES ('1647965636098097154', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 22:10:00');
+INSERT INTO `sys_job_log` VALUES ('1647965887689228289', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 22:11:00');
+INSERT INTO `sys_job_log` VALUES ('1647966139381022722', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 22:12:00');
+INSERT INTO `sys_job_log` VALUES ('1647966391060234242', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 22:13:00');
+INSERT INTO `sys_job_log` VALUES ('1647966643217563650', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 22:14:00');
+INSERT INTO `sys_job_log` VALUES ('1647966894338932738', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-17 22:15:00');
+INSERT INTO `sys_job_log` VALUES ('1647967145984589825', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 22:16:00');
+INSERT INTO `sys_job_log` VALUES ('1647967397722583041', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-17 22:17:00');
+INSERT INTO `sys_job_log` VALUES ('1651105324279300097', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 14:06:00');
+INSERT INTO `sys_job_log` VALUES ('1651105575895597058', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 14:07:00');
+INSERT INTO `sys_job_log` VALUES ('1651105827537059841', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 14:08:00');
+INSERT INTO `sys_job_log` VALUES ('1651106079237242882', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 14:09:00');
+INSERT INTO `sys_job_log` VALUES ('1651106330891288577', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 14:10:00');
+INSERT INTO `sys_job_log` VALUES ('1651106582528557057', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 14:11:00');
+INSERT INTO `sys_job_log` VALUES ('1651106834207768577', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 14:12:00');
+INSERT INTO `sys_job_log` VALUES ('1651107085916340226', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 14:13:00');
+INSERT INTO `sys_job_log` VALUES ('1651107337478111233', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 14:14:00');
+INSERT INTO `sys_job_log` VALUES ('1651107589165711362', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 14:15:00');
+INSERT INTO `sys_job_log` VALUES ('1651107840832339969', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 14:16:00');
+INSERT INTO `sys_job_log` VALUES ('1651108092461219841', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 14:17:00');
+INSERT INTO `sys_job_log` VALUES ('1651108344115265537', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 14:18:00');
+INSERT INTO `sys_job_log` VALUES ('1651108595769311234', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 14:19:00');
+INSERT INTO `sys_job_log` VALUES ('1651108847536603137', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 14:20:00');
+INSERT INTO `sys_job_log` VALUES ('1651109099224203266', '1252884495040782337', 'testTask', '1', 0, NULL, 2, '2023-04-26 14:21:00');
+INSERT INTO `sys_job_log` VALUES ('1651109350765002754', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 14:22:00');
+INSERT INTO `sys_job_log` VALUES ('1651109602444214273', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 14:23:00');
+INSERT INTO `sys_job_log` VALUES ('1651109854106648578', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 14:24:00');
+INSERT INTO `sys_job_log` VALUES ('1651110105743917058', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 14:25:00');
+INSERT INTO `sys_job_log` VALUES ('1651110357427322881', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 14:26:00');
+INSERT INTO `sys_job_log` VALUES ('1651110609035231233', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 14:27:00');
+INSERT INTO `sys_job_log` VALUES ('1651110860722831362', '1252884495040782337', 'testTask', '1', 0, NULL, 2, '2023-04-26 14:28:00');
+INSERT INTO `sys_job_log` VALUES ('1651111112372682753', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 14:29:00');
+INSERT INTO `sys_job_log` VALUES ('1651111364001562625', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 14:30:00');
+INSERT INTO `sys_job_log` VALUES ('1651111618608398338', '1252884495040782337', 'testTask', '1', 0, NULL, 11, '2023-04-26 14:31:01');
+INSERT INTO `sys_job_log` VALUES ('1651111867330625537', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 14:32:00');
+INSERT INTO `sys_job_log` VALUES ('1651112119022419970', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 14:33:00');
+INSERT INTO `sys_job_log` VALUES ('1651112370697437186', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 14:34:00');
+INSERT INTO `sys_job_log` VALUES ('1651113125877694466', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 14:37:00');
+INSERT INTO `sys_job_log` VALUES ('1651113377296859137', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 14:38:00');
+INSERT INTO `sys_job_log` VALUES ('1651113628950904834', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 14:39:00');
+INSERT INTO `sys_job_log` VALUES ('1651113880609144833', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 14:40:00');
+INSERT INTO `sys_job_log` VALUES ('1651114132305133570', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 14:41:00');
+INSERT INTO `sys_job_log` VALUES ('1651114383934013441', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 14:42:00');
+INSERT INTO `sys_job_log` VALUES ('1651114635546116097', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 14:43:00');
+INSERT INTO `sys_job_log` VALUES ('1651115139084922882', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 14:45:00');
+INSERT INTO `sys_job_log` VALUES ('1651115390567002113', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 14:46:00');
+INSERT INTO `sys_job_log` VALUES ('1651115642267185154', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 14:47:00');
+INSERT INTO `sys_job_log` VALUES ('1651115893908647937', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 14:48:00');
+INSERT INTO `sys_job_log` VALUES ('1651116145571082241', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 14:49:00');
+INSERT INTO `sys_job_log` VALUES ('1651116397191573506', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 14:50:00');
+INSERT INTO `sys_job_log` VALUES ('1651116649025974274', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 14:51:00');
+INSERT INTO `sys_job_log` VALUES ('1651116900503859201', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 14:52:00');
+INSERT INTO `sys_job_log` VALUES ('1651119681373597698', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 15:03:03');
+INSERT INTO `sys_job_log` VALUES ('1651119920398594050', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 15:04:00');
+INSERT INTO `sys_job_log` VALUES ('1651120172228800513', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 15:05:00');
+INSERT INTO `sys_job_log` VALUES ('1651120423702491137', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 15:06:00');
+INSERT INTO `sys_job_log` VALUES ('1651120675528503297', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 15:07:00');
+INSERT INTO `sys_job_log` VALUES ('1651120927014776833', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 15:08:00');
+INSERT INTO `sys_job_log` VALUES ('1651121178673016834', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 15:09:00');
+INSERT INTO `sys_job_log` VALUES ('1651121682190761985', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 15:11:00');
+INSERT INTO `sys_job_log` VALUES ('1651121933651869697', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 15:12:00');
+INSERT INTO `sys_job_log` VALUES ('1651122185410797570', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 15:13:00');
+INSERT INTO `sys_job_log` VALUES ('1651122436972568577', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 15:14:00');
+INSERT INTO `sys_job_log` VALUES ('1651122940444250113', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 15:16:00');
+INSERT INTO `sys_job_log` VALUES ('1651123191955689474', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 15:17:00');
+INSERT INTO `sys_job_log` VALUES ('1651123443647483906', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 15:18:00');
+INSERT INTO `sys_job_log` VALUES ('1651123695288946689', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 15:19:00');
+INSERT INTO `sys_job_log` VALUES ('1651123946951380993', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 15:20:00');
+INSERT INTO `sys_job_log` VALUES ('1651124198626398210', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 15:21:00');
+INSERT INTO `sys_job_log` VALUES ('1651124452633350145', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 15:22:01');
+INSERT INTO `sys_job_log` VALUES ('1651124701938585601', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 15:23:00');
+INSERT INTO `sys_job_log` VALUES ('1651124953575854081', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 15:24:00');
+INSERT INTO `sys_job_log` VALUES ('1651125205229899777', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 15:25:00');
+INSERT INTO `sys_job_log` VALUES ('1651125456913305602', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 15:26:00');
+INSERT INTO `sys_job_log` VALUES ('1651125708529602561', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 15:27:00');
+INSERT INTO `sys_job_log` VALUES ('1651125960217202690', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 15:28:00');
+INSERT INTO `sys_job_log` VALUES ('1651126211871248385', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 15:29:00');
+INSERT INTO `sys_job_log` VALUES ('1651126463533682689', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 15:30:00');
+INSERT INTO `sys_job_log` VALUES ('1651126715154173953', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 15:31:00');
+INSERT INTO `sys_job_log` VALUES ('1651126966841774082', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 15:32:00');
+INSERT INTO `sys_job_log` VALUES ('1651127218479042562', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 15:33:00');
+INSERT INTO `sys_job_log` VALUES ('1651127470183419906', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 15:34:00');
+INSERT INTO `sys_job_log` VALUES ('1651127721820688385', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 15:35:00');
+INSERT INTO `sys_job_log` VALUES ('1651127973491511298', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 15:36:00');
+INSERT INTO `sys_job_log` VALUES ('1651128225124585474', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 15:37:00');
+INSERT INTO `sys_job_log` VALUES ('1651128476845801473', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 15:38:00');
+INSERT INTO `sys_job_log` VALUES ('1651128728445321217', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 15:39:00');
+INSERT INTO `sys_job_log` VALUES ('1651128980141309953', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 15:40:00');
+INSERT INTO `sys_job_log` VALUES ('1651129231774384130', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 15:41:00');
+INSERT INTO `sys_job_log` VALUES ('1651129483453595649', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 15:42:00');
+INSERT INTO `sys_job_log` VALUES ('1651129986744909825', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 15:44:00');
+INSERT INTO `sys_job_log` VALUES ('1651130238390566913', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 15:45:00');
+INSERT INTO `sys_job_log` VALUES ('1651130490036224001', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 15:46:00');
+INSERT INTO `sys_job_log` VALUES ('1651130741811912706', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 15:47:00');
+INSERT INTO `sys_job_log` VALUES ('1651130993373683713', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 15:48:00');
+INSERT INTO `sys_job_log` VALUES ('1651131245015146497', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 15:49:00');
+INSERT INTO `sys_job_log` VALUES ('1651131496706940930', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 15:50:00');
+INSERT INTO `sys_job_log` VALUES ('1651131748323237889', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 15:51:00');
+INSERT INTO `sys_job_log` VALUES ('1651132000010838018', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 15:52:00');
+INSERT INTO `sys_job_log` VALUES ('1651132251820077057', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 15:53:00');
+INSERT INTO `sys_job_log` VALUES ('1651132503293767682', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 15:54:00');
+INSERT INTO `sys_job_log` VALUES ('1651132755065266178', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 15:55:00');
+INSERT INTO `sys_job_log` VALUES ('1651133258415271938', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 15:57:00');
+INSERT INTO `sys_job_log` VALUES ('1651133509981237249', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 15:58:00');
+INSERT INTO `sys_job_log` VALUES ('1651133761631088642', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 15:59:00');
+INSERT INTO `sys_job_log` VALUES ('1651134013566173185', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 16:00:00');
+INSERT INTO `sys_job_log` VALUES ('1651134265065029633', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 16:01:00');
+INSERT INTO `sys_job_log` VALUES ('1651134516568080385', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 16:02:00');
+INSERT INTO `sys_job_log` VALUES ('1651135019909726209', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 16:04:00');
+INSERT INTO `sys_job_log` VALUES ('1651135271593132034', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 16:05:00');
+INSERT INTO `sys_job_log` VALUES ('1651135523251372033', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 16:06:00');
+INSERT INTO `sys_job_log` VALUES ('1651135774901223426', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 16:07:00');
+INSERT INTO `sys_job_log` VALUES ('1651136026530103297', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 16:08:00');
+INSERT INTO `sys_job_log` VALUES ('1651136278217703425', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 16:09:00');
+INSERT INTO `sys_job_log` VALUES ('1651136529880137730', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 16:10:00');
+INSERT INTO `sys_job_log` VALUES ('1651136781517406209', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 16:11:00');
+INSERT INTO `sys_job_log` VALUES ('1651137033146286081', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 16:12:00');
+INSERT INTO `sys_job_log` VALUES ('1651137284833886209', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 16:13:00');
+INSERT INTO `sys_job_log` VALUES ('1651137536483737602', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 16:14:00');
+INSERT INTO `sys_job_log` VALUES ('1651137788158754817', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 16:15:00');
+INSERT INTO `sys_job_log` VALUES ('1651138039812800514', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 16:16:00');
+INSERT INTO `sys_job_log` VALUES ('1651138291471040513', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 16:17:00');
+INSERT INTO `sys_job_log` VALUES ('1651138543146057729', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 16:18:00');
+INSERT INTO `sys_job_log` VALUES ('1651138794791714818', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 16:19:00');
+INSERT INTO `sys_job_log` VALUES ('1651141311344754689', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 16:29:00');
+INSERT INTO `sys_job_log` VALUES ('1651141563040743425', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 16:30:00');
+INSERT INTO `sys_job_log` VALUES ('1651141814669623298', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 16:31:00');
+INSERT INTO `sys_job_log` VALUES ('1651142066348834818', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 16:32:00');
+INSERT INTO `sys_job_log` VALUES ('1651142317990297602', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 16:33:00');
+INSERT INTO `sys_job_log` VALUES ('1651142569665314817', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 16:34:00');
+INSERT INTO `sys_job_log` VALUES ('1651142821302583297', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 16:35:00');
+INSERT INTO `sys_job_log` VALUES ('1651143072952434689', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 16:36:00');
+INSERT INTO `sys_job_log` VALUES ('1651143324631646210', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 16:37:00');
+INSERT INTO `sys_job_log` VALUES ('1651143576289886209', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 16:38:00');
+INSERT INTO `sys_job_log` VALUES ('1651143827939737601', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 16:39:00');
+INSERT INTO `sys_job_log` VALUES ('1651144079606366209', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 16:40:00');
+INSERT INTO `sys_job_log` VALUES ('1651144331243634689', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 16:41:00');
+INSERT INTO `sys_job_log` VALUES ('1651144582906068994', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 16:42:00');
+INSERT INTO `sys_job_log` VALUES ('1651144834564308994', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 16:43:00');
+INSERT INTO `sys_job_log` VALUES ('1651145086251909122', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 16:44:00');
+INSERT INTO `sys_job_log` VALUES ('1651145337918537729', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 16:45:00');
+INSERT INTO `sys_job_log` VALUES ('1651145589555806210', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 16:46:00');
+INSERT INTO `sys_job_log` VALUES ('1651145841226629121', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 16:47:00');
+INSERT INTO `sys_job_log` VALUES ('1651146092872286209', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 16:48:00');
+INSERT INTO `sys_job_log` VALUES ('1651146344526331906', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 16:49:00');
+INSERT INTO `sys_job_log` VALUES ('1651146596163600385', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 16:50:00');
+INSERT INTO `sys_job_log` VALUES ('1651146847826034689', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 16:51:00');
+INSERT INTO `sys_job_log` VALUES ('1651147099501051905', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 16:52:00');
+INSERT INTO `sys_job_log` VALUES ('1651147351155097601', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 16:53:00');
+INSERT INTO `sys_job_log` VALUES ('1651147602846892033', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 16:54:00');
+INSERT INTO `sys_job_log` VALUES ('1651147854475771905', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 16:55:00');
+INSERT INTO `sys_job_log` VALUES ('1651148106138206210', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 16:56:00');
+INSERT INTO `sys_job_log` VALUES ('1651148357825806338', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 16:57:00');
+INSERT INTO `sys_job_log` VALUES ('1651148609437908994', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 16:58:00');
+INSERT INTO `sys_job_log` VALUES ('1651148861096148994', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 16:59:00');
+INSERT INTO `sys_job_log` VALUES ('1651149112758583297', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 17:00:00');
+INSERT INTO `sys_job_log` VALUES ('1651149364404240385', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 17:01:00');
+INSERT INTO `sys_job_log` VALUES ('1651149616079257601', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 17:02:00');
+INSERT INTO `sys_job_log` VALUES ('1651149867750080514', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 17:03:00');
+INSERT INTO `sys_job_log` VALUES ('1651150119416709121', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 17:04:00');
+INSERT INTO `sys_job_log` VALUES ('1651150371053977601', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 17:05:00');
+INSERT INTO `sys_job_log` VALUES ('1651150622695440386', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 17:06:00');
+INSERT INTO `sys_job_log` VALUES ('1651150874408206337', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 17:07:00');
+INSERT INTO `sys_job_log` VALUES ('1651151126049669121', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 17:08:00');
+INSERT INTO `sys_job_log` VALUES ('1651151377678548993', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 17:09:00');
+INSERT INTO `sys_job_log` VALUES ('1651151629336788994', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 17:10:00');
+INSERT INTO `sys_job_log` VALUES ('1651151881016000514', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 17:11:00');
+INSERT INTO `sys_job_log` VALUES ('1651152132644880386', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 17:12:00');
+INSERT INTO `sys_job_log` VALUES ('1651152384336674818', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 17:13:00');
+INSERT INTO `sys_job_log` VALUES ('1651152635961360385', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 17:14:00');
+INSERT INTO `sys_job_log` VALUES ('1651152887644766210', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 17:15:00');
+INSERT INTO `sys_job_log` VALUES ('1651153139303006210', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 17:16:00');
+INSERT INTO `sys_job_log` VALUES ('1651153390986412033', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 17:17:00');
+INSERT INTO `sys_job_log` VALUES ('1651153642640457730', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 17:18:00');
+INSERT INTO `sys_job_log` VALUES ('1651153894340640769', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 17:19:00');
+INSERT INTO `sys_job_log` VALUES ('1651154145952743426', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 17:20:00');
+INSERT INTO `sys_job_log` VALUES ('1651154397594206210', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 17:21:00');
+INSERT INTO `sys_job_log` VALUES ('1651154649227280386', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 17:22:00');
+INSERT INTO `sys_job_log` VALUES ('1651154900881326082', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 17:23:00');
+INSERT INTO `sys_job_log` VALUES ('1651155152556343297', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 17:24:00');
+INSERT INTO `sys_job_log` VALUES ('1651155404248137729', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 17:25:00');
+INSERT INTO `sys_job_log` VALUES ('1651155655868628993', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 17:26:00');
+INSERT INTO `sys_job_log` VALUES ('1651155907564617729', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 17:27:00');
+INSERT INTO `sys_job_log` VALUES ('1651156159172526081', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 17:28:00');
+INSERT INTO `sys_job_log` VALUES ('1651156410834960386', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 17:29:00');
+INSERT INTO `sys_job_log` VALUES ('1651156662501588994', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 17:30:00');
+INSERT INTO `sys_job_log` VALUES ('1651156914226946050', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 17:31:00');
+INSERT INTO `sys_job_log` VALUES ('1651157165826465793', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 17:32:00');
+INSERT INTO `sys_job_log` VALUES ('1651157417484705793', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 17:33:00');
+INSERT INTO `sys_job_log` VALUES ('1651157669134557185', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 17:34:00');
+INSERT INTO `sys_job_log` VALUES ('1651157920780214274', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 17:35:00');
+INSERT INTO `sys_job_log` VALUES ('1651158172488785921', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 17:36:00');
+INSERT INTO `sys_job_log` VALUES ('1651158424092499970', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 17:37:00');
+INSERT INTO `sys_job_log` VALUES ('1651158675834638338', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 17:38:00');
+INSERT INTO `sys_job_log` VALUES ('1651158927601885185', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 17:39:00');
+INSERT INTO `sys_job_log` VALUES ('1651159430993874945', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 17:41:00');
+INSERT INTO `sys_job_log` VALUES ('1651159682501169153', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 17:42:00');
+INSERT INTO `sys_job_log` VALUES ('1651159934067134466', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 17:43:00');
+INSERT INTO `sys_job_log` VALUES ('1651160185704402945', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 17:44:00');
+INSERT INTO `sys_job_log` VALUES ('1651160437387808770', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 17:45:00');
+INSERT INTO `sys_job_log` VALUES ('1651160689138249729', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 17:46:00');
+INSERT INTO `sys_job_log` VALUES ('1651160940704215042', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 17:47:00');
+INSERT INTO `sys_job_log` VALUES ('1651161192375037954', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 17:48:00');
+INSERT INTO `sys_job_log` VALUES ('1651161444104556546', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 17:49:00');
+INSERT INTO `sys_job_log` VALUES ('1651161695653744642', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 17:50:00');
+INSERT INTO `sys_job_log` VALUES ('1651161947341344770', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 17:51:00');
+INSERT INTO `sys_job_log` VALUES ('1651162198974418946', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 17:52:00');
+INSERT INTO `sys_job_log` VALUES ('1651162450628464641', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 17:53:00');
+INSERT INTO `sys_job_log` VALUES ('1651162702332841986', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 17:54:00');
+INSERT INTO `sys_job_log` VALUES ('1651162954007859202', '1252884495040782337', 'testTask', '1', 0, NULL, 2, '2023-04-26 17:55:00');
+INSERT INTO `sys_job_log` VALUES ('1651163205603184641', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 17:56:00');
+INSERT INTO `sys_job_log` VALUES ('1651163457286590466', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 17:57:00');
+INSERT INTO `sys_job_log` VALUES ('1651163708932247553', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 17:58:00');
+INSERT INTO `sys_job_log` VALUES ('1651163960582098945', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 17:59:00');
+INSERT INTO `sys_job_log` VALUES ('1651164212248727554', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 18:00:00');
+INSERT INTO `sys_job_log` VALUES ('1651164463894384641', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 18:01:00');
+INSERT INTO `sys_job_log` VALUES ('1651164715577790466', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 18:02:00');
+INSERT INTO `sys_job_log` VALUES ('1651164967223447554', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 18:03:00');
+INSERT INTO `sys_job_log` VALUES ('1651165218864910337', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 18:04:00');
+INSERT INTO `sys_job_log` VALUES ('1651165470544121857', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 18:05:00');
+INSERT INTO `sys_job_log` VALUES ('1651165722202361857', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 18:06:00');
+INSERT INTO `sys_job_log` VALUES ('1651165973889961986', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 18:07:00');
+INSERT INTO `sys_job_log` VALUES ('1651166225539813377', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 18:08:00');
+INSERT INTO `sys_job_log` VALUES ('1651166477219024898', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 18:09:00');
+INSERT INTO `sys_job_log` VALUES ('1651166728860487682', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 18:10:00');
+INSERT INTO `sys_job_log` VALUES ('1651166980510339074', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 18:11:00');
+INSERT INTO `sys_job_log` VALUES ('1651167232143413250', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 18:12:00');
+INSERT INTO `sys_job_log` VALUES ('1651167987151687681', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 18:15:00');
+INSERT INTO `sys_job_log` VALUES ('1651168238822510594', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 18:16:00');
+INSERT INTO `sys_job_log` VALUES ('1651168490438807554', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 18:17:00');
+INSERT INTO `sys_job_log` VALUES ('1651168742080270337', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 18:18:00');
+INSERT INTO `sys_job_log` VALUES ('1651168993793036289', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 18:19:00');
+INSERT INTO `sys_job_log` VALUES ('1651169245405138945', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 18:20:00');
+INSERT INTO `sys_job_log` VALUES ('1651169497075961858', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 18:21:00');
+INSERT INTO `sys_job_log` VALUES ('1651169748759367681', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 18:22:00');
+INSERT INTO `sys_job_log` VALUES ('1651170252067459074', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 18:24:00');
+INSERT INTO `sys_job_log` VALUES ('1651170503717310465', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 18:25:00');
+INSERT INTO `sys_job_log` VALUES ('1651170755404910593', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 18:26:00');
+INSERT INTO `sys_job_log` VALUES ('1651171007058956289', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 18:27:00');
+INSERT INTO `sys_job_log` VALUES ('1651178305097584642', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 18:56:00');
+INSERT INTO `sys_job_log` VALUES ('1651178556801961986', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 18:57:00');
+INSERT INTO `sys_job_log` VALUES ('1651178808409870337', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 18:58:00');
+INSERT INTO `sys_job_log` VALUES ('1651179060076498946', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 18:59:00');
+INSERT INTO `sys_job_log` VALUES ('1651179311776681986', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 19:00:00');
+INSERT INTO `sys_job_log` VALUES ('1651179563392978946', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 19:01:00');
+INSERT INTO `sys_job_log` VALUES ('1651179815067996161', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 19:02:00');
+INSERT INTO `sys_job_log` VALUES ('1651180066713653250', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 19:03:00');
+INSERT INTO `sys_job_log` VALUES ('1651180318392864769', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 19:04:00');
+INSERT INTO `sys_job_log` VALUES ('1651180570038521858', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 19:05:00');
+INSERT INTO `sys_job_log` VALUES ('1651180821726121985', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 19:06:00');
+INSERT INTO `sys_job_log` VALUES ('1651181073384361985', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 19:07:00');
+INSERT INTO `sys_job_log` VALUES ('1651181325042601985', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 19:08:00');
+INSERT INTO `sys_job_log` VALUES ('1651181576671481857', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 19:09:00');
+INSERT INTO `sys_job_log` VALUES ('1651181828321333250', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 19:10:00');
+INSERT INTO `sys_job_log` VALUES ('1651182080017321985', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 19:11:00');
+INSERT INTO `sys_job_log` VALUES ('1651182331629424641', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 19:12:00');
+INSERT INTO `sys_job_log` VALUES ('1651182583337996290', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 19:13:00');
+INSERT INTO `sys_job_log` VALUES ('1651182834983653378', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 19:14:00');
+INSERT INTO `sys_job_log` VALUES ('1651183086616727553', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 19:15:00');
+INSERT INTO `sys_job_log` VALUES ('1651183338312716289', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 19:16:00');
+INSERT INTO `sys_job_log` VALUES ('1651183589958373378', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 19:17:00');
+INSERT INTO `sys_job_log` VALUES ('1651183841608224770', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 19:18:00');
+INSERT INTO `sys_job_log` VALUES ('1651184344945676289', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 19:20:00');
+INSERT INTO `sys_job_log` VALUES ('1651184596603916290', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 19:21:00');
+INSERT INTO `sys_job_log` VALUES ('1651184848228601857', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 19:22:00');
+INSERT INTO `sys_job_log` VALUES ('1651185099903619073', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 19:23:00');
+INSERT INTO `sys_job_log` VALUES ('1651185351545081857', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 19:24:00');
+INSERT INTO `sys_job_log` VALUES ('1651185603207516162', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 19:25:00');
+INSERT INTO `sys_job_log` VALUES ('1651185854882533378', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 19:26:00');
+INSERT INTO `sys_job_log` VALUES ('1651186106507218945', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 19:27:00');
+INSERT INTO `sys_job_log` VALUES ('1651186358215790594', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 19:28:00');
+INSERT INTO `sys_job_log` VALUES ('1651186609861447681', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 19:29:00');
+INSERT INTO `sys_job_log` VALUES ('1651186861515493377', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 19:30:00');
+INSERT INTO `sys_job_log` VALUES ('1651187113177927682', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 19:31:00');
+INSERT INTO `sys_job_log` VALUES ('1651187364794224641', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 19:32:00');
+INSERT INTO `sys_job_log` VALUES ('1651187616473436161', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 19:33:00');
+INSERT INTO `sys_job_log` VALUES ('1651187868161036289', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 19:34:00');
+INSERT INTO `sys_job_log` VALUES ('1651188119789916161', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 19:35:00');
+INSERT INTO `sys_job_log` VALUES ('1651188371431378946', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 19:36:00');
+INSERT INTO `sys_job_log` VALUES ('1651188623148339202', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 19:37:00');
+INSERT INTO `sys_job_log` VALUES ('1651188874773024769', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 19:38:00');
+INSERT INTO `sys_job_log` VALUES ('1651189126448041985', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 19:39:00');
+INSERT INTO `sys_job_log` VALUES ('1651189378064338945', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 19:40:00');
+INSERT INTO `sys_job_log` VALUES ('1651189629747744770', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 19:41:00');
+INSERT INTO `sys_job_log` VALUES ('1651189881426956290', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 19:42:00');
+INSERT INTO `sys_job_log` VALUES ('1651190133089390593', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 19:43:00');
+INSERT INTO `sys_job_log` VALUES ('1651190384705687554', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 19:44:00');
+INSERT INTO `sys_job_log` VALUES ('1651190636380704769', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 19:45:00');
+INSERT INTO `sys_job_log` VALUES ('1651190888043139073', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 19:46:00');
+INSERT INTO `sys_job_log` VALUES ('1651191139705573378', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 19:47:00');
+INSERT INTO `sys_job_log` VALUES ('1651191391342841857', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 19:48:00');
+INSERT INTO `sys_job_log` VALUES ('1651191643043024898', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 19:49:00');
+INSERT INTO `sys_job_log` VALUES ('1651191894701264897', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 19:50:00');
+INSERT INTO `sys_job_log` VALUES ('1651192146317561857', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 19:51:00');
+INSERT INTO `sys_job_log` VALUES ('1651192397967413250', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 19:52:00');
+INSERT INTO `sys_job_log` VALUES ('1651192649671790594', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 19:53:00');
+INSERT INTO `sys_job_log` VALUES ('1651192901288087553', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 19:54:00');
+INSERT INTO `sys_job_log` VALUES ('1651193152979881985', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 19:55:00');
+INSERT INTO `sys_job_log` VALUES ('1651193404604567554', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 19:56:00');
+INSERT INTO `sys_job_log` VALUES ('1651193656304750593', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 19:57:00');
+INSERT INTO `sys_job_log` VALUES ('1651193907933630465', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 19:58:00');
+INSERT INTO `sys_job_log` VALUES ('1651194159600259073', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 19:59:00');
+INSERT INTO `sys_job_log` VALUES ('1651194411254304770', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 20:00:00');
+INSERT INTO `sys_job_log` VALUES ('1651194662904156161', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 20:01:00');
+INSERT INTO `sys_job_log` VALUES ('1651194914570784770', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 20:02:00');
+INSERT INTO `sys_job_log` VALUES ('1651195166212247554', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 20:03:00');
+INSERT INTO `sys_job_log` VALUES ('1651195417908236289', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 20:04:00');
+INSERT INTO `sys_job_log` VALUES ('1651195669524533249', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 20:05:00');
+INSERT INTO `sys_job_log` VALUES ('1651195921233104898', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 20:06:00');
+INSERT INTO `sys_job_log` VALUES ('1651196172836818945', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 20:07:00');
+INSERT INTO `sys_job_log` VALUES ('1651196424537001985', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 20:08:00');
+INSERT INTO `sys_job_log` VALUES ('1651196676149104641', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 20:09:00');
+INSERT INTO `sys_job_log` VALUES ('1651196927857676290', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 20:10:00');
+INSERT INTO `sys_job_log` VALUES ('1651197179490750465', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 20:11:00');
+INSERT INTO `sys_job_log` VALUES ('1651197431182544898', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 20:12:00');
+INSERT INTO `sys_job_log` VALUES ('1651197682828201985', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 20:13:00');
+INSERT INTO `sys_job_log` VALUES ('1651197934486441985', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 20:14:00');
+INSERT INTO `sys_job_log` VALUES ('1651198186157264897', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 20:15:00');
+INSERT INTO `sys_job_log` VALUES ('1651198437760978945', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 20:16:00');
+INSERT INTO `sys_job_log` VALUES ('1651198689448579074', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 20:17:00');
+INSERT INTO `sys_job_log` VALUES ('1651198941102624770', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 20:18:00');
+INSERT INTO `sys_job_log` VALUES ('1651199192752476162', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 20:19:00');
+INSERT INTO `sys_job_log` VALUES ('1651199444444270594', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 20:20:00');
+INSERT INTO `sys_job_log` VALUES ('1651199696085733378', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 20:21:00');
+INSERT INTO `sys_job_log` VALUES ('1651199947752361986', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 20:22:00');
+INSERT INTO `sys_job_log` VALUES ('1651200199398019073', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 20:23:00');
+INSERT INTO `sys_job_log` VALUES ('1651200451052064769', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 20:24:00');
+INSERT INTO `sys_job_log` VALUES ('1651200702735470593', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 20:25:00');
+INSERT INTO `sys_job_log` VALUES ('1651200954381127682', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 20:26:00');
+INSERT INTO `sys_job_log` VALUES ('1651201206030979074', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 20:27:00');
+INSERT INTO `sys_job_log` VALUES ('1651201457672441858', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 20:28:00');
+INSERT INTO `sys_job_log` VALUES ('1651201709322293250', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 20:29:00');
+INSERT INTO `sys_job_log` VALUES ('1651201961018281986', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 20:30:00');
+INSERT INTO `sys_job_log` VALUES ('1651202212638773250', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 20:31:00');
+INSERT INTO `sys_job_log` VALUES ('1651202464343150593', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 20:32:00');
+INSERT INTO `sys_job_log` VALUES ('1651202715984613378', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 20:33:00');
+INSERT INTO `sys_job_log` VALUES ('1651202967642853378', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 20:34:00');
+INSERT INTO `sys_job_log` VALUES ('1651203219284316161', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 20:35:00');
+INSERT INTO `sys_job_log` VALUES ('1651203470955139074', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 20:36:00');
+INSERT INTO `sys_job_log` VALUES ('1651203722613379074', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 20:37:00');
+INSERT INTO `sys_job_log` VALUES ('1651203974292590593', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 20:38:00');
+INSERT INTO `sys_job_log` VALUES ('1651204225938247681', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 20:39:00');
+INSERT INTO `sys_job_log` VALUES ('1651204477588099073', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 20:40:00');
+INSERT INTO `sys_job_log` VALUES ('1651204729216978945', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 20:41:00');
+INSERT INTO `sys_job_log` VALUES ('1651204980891996162', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 20:42:00');
+INSERT INTO `sys_job_log` VALUES ('1651205232579596289', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 20:43:00');
+INSERT INTO `sys_job_log` VALUES ('1651205484195893250', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 20:44:00');
+INSERT INTO `sys_job_log` VALUES ('1651205735887687681', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 20:45:00');
+INSERT INTO `sys_job_log` VALUES ('1651205987508178946', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 20:46:00');
+INSERT INTO `sys_job_log` VALUES ('1651206239174807554', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 20:47:00');
+INSERT INTO `sys_job_log` VALUES ('1651206490854019074', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 20:48:00');
+INSERT INTO `sys_job_log` VALUES ('1651206742512259074', '1252884495040782337', 'testTask', '1', 0, NULL, 1, '2023-04-26 20:49:00');
+INSERT INTO `sys_job_log` VALUES ('1651206994178887681', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-26 20:50:00');
+INSERT INTO `sys_job_log` VALUES ('1651510494122504194', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-27 16:56:00');
+INSERT INTO `sys_job_log` VALUES ('1651510745763966977', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-27 16:57:00');
+INSERT INTO `sys_job_log` VALUES ('1651510997342515202', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-27 16:58:00');
+INSERT INTO `sys_job_log` VALUES ('1651511249004949505', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-27 16:59:00');
+INSERT INTO `sys_job_log` VALUES ('1651511500675772418', '1252884495040782337', 'testTask', '1', 0, NULL, 0, '2023-04-27 17:00:00');
 
 -- ----------------------------
 -- Table structure for sys_log
@@ -723,6 +1289,30 @@ INSERT INTO `sys_log` VALUES ('1647559044328374275', '1', 'admin', '用户管理
 INSERT INTO `sys_log` VALUES ('1647588587114123265', '1', 'admin', '机构管理-获取所有组织机构', 8, 'com.company.project.controller.sys.DeptController.getDeptAll()', NULL, '192.168.0.104', '2023-04-16 21:11:45');
 INSERT INTO `sys_log` VALUES ('1647588594907140098', '1', 'admin', '机构管理-树型组织列表', 9, 'com.company.project.controller.sys.DeptController.getTree()', '[\"\"]', '192.168.0.104', '2023-04-16 21:11:46');
 INSERT INTO `sys_log` VALUES ('1647598617997660161', '1', 'admin', '系统操作日志管理-分页查询系统操作日志', 42, 'com.company.project.controller.sys.SysLogController.pageInfo()', '[{\"queryPage\":{\"current\":\"1\",\"hitCount\":false,\"optimizeCountSql\":true,\"orders\":[],\"pages\":\"0\",\"records\":[],\"searchCount\":true,\"size\":\"10\",\"total\":\"0\"}}]', '192.168.0.104', '2023-04-16 21:51:36');
+INSERT INTO `sys_log` VALUES ('1647934628493611009', '1', 'admin', '机构管理-树型组织列表', 24, 'com.company.project.controller.sys.DeptController.getTree()', '[null]', '172.27.181.221', '2023-04-17 20:06:47');
+INSERT INTO `sys_log` VALUES ('1647934628560719874', '1', 'admin', '用户管理-分页获取用户列表', 36, 'com.company.project.controller.sys.UserController.pageInfo()', '[{\"queryPage\":{\"current\":\"1\",\"hitCount\":false,\"optimizeCountSql\":true,\"orders\":[],\"pages\":\"0\",\"records\":[],\"searchCount\":true,\"size\":\"10\",\"total\":\"0\"}}]', '172.27.181.221', '2023-04-17 20:06:47');
+INSERT INTO `sys_log` VALUES ('1647934729681195010', '1', 'admin', '角色管理-分页获取角色信息', 19, 'com.company.project.controller.sys.RoleController.pageInfo()', '[{\"queryPage\":{\"current\":\"1\",\"hitCount\":false,\"optimizeCountSql\":true,\"orders\":[],\"pages\":\"0\",\"records\":[],\"searchCount\":true,\"size\":\"10\",\"total\":\"0\"}}]', '172.27.181.221', '2023-04-17 20:07:11');
+INSERT INTO `sys_log` VALUES ('1647934736849260546', '1', 'admin', '菜单权限管理-获取所有目录菜单树', 189, 'com.company.project.controller.sys.PermissionController.getAllPermissionTree()', NULL, '172.27.181.221', '2023-04-17 20:07:13');
+INSERT INTO `sys_log` VALUES ('1647934763101409282', '1', 'admin', '菜单权限管理-获取所有菜单权限', 175, 'com.company.project.controller.sys.PermissionController.getAllMenusPermission()', NULL, '172.27.181.221', '2023-04-17 20:07:19');
+INSERT INTO `sys_log` VALUES ('1647934768738553857', '1', 'admin', '菜单权限管理-获取所有目录菜单树', 171, 'com.company.project.controller.sys.PermissionController.getAllMenusPermissionTree()', '[\"\"]', '172.27.181.221', '2023-04-17 20:07:21');
+INSERT INTO `sys_log` VALUES ('1647934799201783810', '1', 'admin', '机构管理-树型组织列表', 2, 'com.company.project.controller.sys.DeptController.getTree()', '[null]', '172.27.181.221', '2023-04-17 20:07:28');
+INSERT INTO `sys_log` VALUES ('1647934799331807233', '1', 'admin', '用户管理-分页获取用户列表', 16, 'com.company.project.controller.sys.UserController.pageInfo()', '[{\"queryPage\":{\"current\":\"1\",\"hitCount\":false,\"optimizeCountSql\":true,\"orders\":[],\"pages\":\"0\",\"records\":[],\"searchCount\":true,\"size\":\"10\",\"total\":\"0\"}}]', '172.27.181.221', '2023-04-17 20:07:28');
+INSERT INTO `sys_log` VALUES ('1647934800715927553', '1', 'admin', '机构管理-获取所有组织机构', 6, 'com.company.project.controller.sys.DeptController.getDeptAll()', NULL, '172.27.181.221', '2023-04-17 20:07:28');
+INSERT INTO `sys_log` VALUES ('1647934806214660097', '1', 'admin', '机构管理-树型组织列表', 2, 'com.company.project.controller.sys.DeptController.getTree()', '[\"\"]', '172.27.181.221', '2023-04-17 20:07:30');
+INSERT INTO `sys_log` VALUES ('1647934830914916353', '1', 'admin', '机构管理-获取所有组织机构', 3, 'com.company.project.controller.sys.DeptController.getDeptAll()', NULL, '172.27.181.221', '2023-04-17 20:07:36');
+INSERT INTO `sys_log` VALUES ('1647935039917084674', '1', 'admin', '系统操作日志管理-分页查询系统操作日志', 36, 'com.company.project.controller.sys.SysLogController.pageInfo()', '[{\"queryPage\":{\"current\":\"1\",\"hitCount\":false,\"optimizeCountSql\":true,\"orders\":[],\"pages\":\"0\",\"records\":[],\"searchCount\":true,\"size\":\"10\",\"total\":\"0\"}}]', '172.27.181.221', '2023-04-17 20:08:25');
+INSERT INTO `sys_log` VALUES ('1647936045719572481', '1', 'admin', '系统操作日志管理-分页查询系统操作日志', 9, 'com.company.project.controller.sys.SysLogController.pageInfo()', '[{\"queryPage\":{\"current\":\"1\",\"hitCount\":false,\"optimizeCountSql\":true,\"orders\":[],\"pages\":\"0\",\"records\":[],\"searchCount\":true,\"size\":\"10\",\"total\":\"0\"}}]', '172.27.181.221', '2023-04-17 20:12:25');
+INSERT INTO `sys_log` VALUES ('1647936220475248642', '1', 'admin', '系统操作日志管理-分页查询系统操作日志', 7, 'com.company.project.controller.sys.SysLogController.pageInfo()', '[{\"queryPage\":{\"current\":\"1\",\"hitCount\":false,\"optimizeCountSql\":true,\"orders\":[],\"pages\":\"0\",\"records\":[],\"searchCount\":true,\"size\":\"10\",\"total\":\"0\"}}]', '172.27.181.221', '2023-04-17 20:13:07');
+INSERT INTO `sys_log` VALUES ('1647946108433657858', '1', 'admin', '机构管理-获取所有组织机构', 8, 'com.company.project.controller.sys.DeptController.getDeptAll()', NULL, '172.27.181.221', '2023-04-17 20:52:24');
+INSERT INTO `sys_log` VALUES ('1647946119624060930', '1', 'admin', '机构管理-树型组织列表', 18, 'com.company.project.controller.sys.DeptController.getTree()', '[null]', '172.27.181.221', '2023-04-17 20:52:27');
+INSERT INTO `sys_log` VALUES ('1647946119733112833', '1', 'admin', '用户管理-分页获取用户列表', 43, 'com.company.project.controller.sys.UserController.pageInfo()', '[{\"queryPage\":{\"current\":\"1\",\"hitCount\":false,\"optimizeCountSql\":true,\"orders\":[],\"pages\":\"0\",\"records\":[],\"searchCount\":true,\"size\":\"10\",\"total\":\"0\"}}]', '172.27.181.221', '2023-04-17 20:52:27');
+INSERT INTO `sys_log` VALUES ('1647946136577437697', '1', 'admin', '角色管理-分页获取角色信息', 12, 'com.company.project.controller.sys.RoleController.pageInfo()', '[{\"queryPage\":{\"current\":\"1\",\"hitCount\":false,\"optimizeCountSql\":true,\"orders\":[],\"pages\":\"0\",\"records\":[],\"searchCount\":true,\"size\":\"10\",\"total\":\"0\"}}]', '172.27.181.221', '2023-04-17 20:52:31');
+INSERT INTO `sys_log` VALUES ('1647946151857287170', '1', 'admin', '菜单权限管理-获取所有菜单权限', 190, 'com.company.project.controller.sys.PermissionController.getAllMenusPermission()', NULL, '172.27.181.221', '2023-04-17 20:52:35');
+INSERT INTO `sys_log` VALUES ('1647946173730582529', '1', 'admin', '菜单权限管理-获取所有目录菜单树', 168, 'com.company.project.controller.sys.PermissionController.getAllMenusPermissionTree()', '[\"17\"]', '172.27.181.221', '2023-04-17 20:52:40');
+INSERT INTO `sys_log` VALUES ('1647952185883734017', '1', 'admin', '系统操作日志管理-分页查询系统操作日志', 37, 'com.company.project.controller.sys.SysLogController.pageInfo()', '[{\"queryPage\":{\"current\":\"1\",\"hitCount\":false,\"optimizeCountSql\":true,\"orders\":[],\"pages\":\"0\",\"records\":[],\"searchCount\":true,\"size\":\"10\",\"total\":\"0\"}}]', '172.27.181.221', '2023-04-17 21:16:33');
+INSERT INTO `sys_log` VALUES ('1647955107484815362', '1', 'admin', '系统操作日志管理-分页查询系统操作日志', 18, 'com.company.project.controller.sys.SysLogController.pageInfo()', '[{\"queryPage\":{\"current\":\"1\",\"hitCount\":false,\"optimizeCountSql\":true,\"orders\":[],\"pages\":\"0\",\"records\":[],\"searchCount\":true,\"size\":\"10\",\"total\":\"0\"}}]', '172.27.181.221', '2023-04-17 21:28:10');
+INSERT INTO `sys_log` VALUES ('1647955123096014849', '1', 'admin', '系统操作日志管理-分页查询系统操作日志', 17, 'com.company.project.controller.sys.SysLogController.pageInfo()', '[{\"queryPage\":{\"current\":\"1\",\"hitCount\":false,\"optimizeCountSql\":true,\"orders\":[],\"pages\":\"0\",\"records\":[],\"searchCount\":true,\"size\":\"10\",\"total\":\"0\"}}]', '172.27.181.221', '2023-04-17 21:28:14');
+INSERT INTO `sys_log` VALUES ('1647963957634125826', '1', 'admin', '机构管理-获取所有组织机构', 11, 'com.company.project.controller.sys.DeptController.getDeptAll()', NULL, '172.27.181.221', '2023-04-17 22:03:20');
 
 -- ----------------------------
 -- Table structure for sys_permission
