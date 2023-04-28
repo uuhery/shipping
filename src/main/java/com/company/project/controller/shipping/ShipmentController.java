@@ -44,8 +44,7 @@ public class ShipmentController {
     @RequiresPermissions("shipment:add")
     @ResponseBody
     public DataResult add(@RequestBody Shipment shipment){
-        shipmentService.save(shipment);
-        return DataResult.success();
+        return new DataResult(shipmentService.saveShipment(shipment));
     }
 
     @ApiOperation(value = "删除")
@@ -74,7 +73,7 @@ public class ShipmentController {
         LambdaQueryWrapper<Shipment> queryWrapper = Wrappers.lambdaQuery();
         //查询条件示例
 //        queryWrapper.eq(Shipment::getOrderId, shipment.getOrderId());
-        queryWrapper.orderByDesc(Shipment::getId);
+        queryWrapper.orderByAsc(Shipment::getId);
         IPage<Shipment> iPage = shipmentService.page(shipment.getQueryPage(), queryWrapper);
         return DataResult.success(iPage);
     }

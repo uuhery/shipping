@@ -16,6 +16,7 @@ public class Goods extends BaseEntity implements Serializable {
     private String name;
     private BigDecimal price;
     private BigDecimal weight;
+    private String volume;
 
     public Long getId() {
         return id;
@@ -47,5 +48,13 @@ public class Goods extends BaseEntity implements Serializable {
 
     public void setWeight(BigDecimal weight) {
         this.weight = weight;
+    }
+
+    public String getVolume() {
+        return volume;
+    }
+
+    public void setVolume(String volume) {
+        this.volume = volume;
     }
 }

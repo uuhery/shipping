@@ -13,59 +13,35 @@
   <div class="panel-heading title"></div>
 <div class="layui-card-body">
 <form class="layui-form " action="" lay-filter="info">
-  <input name="customerId" hidden/>
+  <input name="id" hidden/>
     <div class="layui-form-item">
-      <label class="layui-form-label"></label>
+      <label class="layui-form-label">承运人</label>
       <div class="layui-input-block">
-        <input type="firstName" name="firstName" placeholder="请输入" autocomplete="off" class="layui-input disabled">
+        <input type="carrierId" name="carrierId" placeholder="请输入承运人" autocomplete="off" class="layui-input disabled">
       </div>
     </div>
       <div class="layui-form-item">
-      <label class="layui-form-label"></label>
+      <label class="layui-form-label">运单</label>
       <div class="layui-input-block">
-        <input type="lastName" name="lastName" placeholder="请输入" autocomplete="off" class="layui-input disabled">
+        <input type="orderId" name="orderId" placeholder="请输入运单" autocomplete="off" class="layui-input disabled">
       </div>
     </div>
       <div class="layui-form-item">
-      <label class="layui-form-label"></label>
+      <label class="layui-form-label">结算日期</label>
       <div class="layui-input-block">
-        <input type="email" name="email" placeholder="请输入" autocomplete="off" class="layui-input disabled">
+        <input type="billingDate" name="billingDate" placeholder="请输入结算日期" autocomplete="off" class="layui-input disabled">
       </div>
     </div>
       <div class="layui-form-item">
-      <label class="layui-form-label"></label>
+      <label class="layui-form-label">金额</label>
       <div class="layui-input-block">
-        <input type="phone" name="phone" placeholder="请输入" autocomplete="off" class="layui-input disabled">
+        <input type="freightCharge" name="freightCharge" placeholder="请输入金额" autocomplete="off" class="layui-input disabled">
       </div>
     </div>
       <div class="layui-form-item">
-      <label class="layui-form-label"></label>
+      <label class="layui-form-label">状态</label>
       <div class="layui-input-block">
-        <input type="companyName" name="companyName" placeholder="请输入" autocomplete="off" class="layui-input disabled">
-      </div>
-    </div>
-      <div class="layui-form-item">
-      <label class="layui-form-label"></label>
-      <div class="layui-input-block">
-        <input type="address" name="address" placeholder="请输入" autocomplete="off" class="layui-input disabled">
-      </div>
-    </div>
-      <div class="layui-form-item">
-      <label class="layui-form-label"></label>
-      <div class="layui-input-block">
-        <input type="city" name="city" placeholder="请输入" autocomplete="off" class="layui-input disabled">
-      </div>
-    </div>
-      <div class="layui-form-item">
-      <label class="layui-form-label"></label>
-      <div class="layui-input-block">
-        <input type="country" name="country" placeholder="请输入" autocomplete="off" class="layui-input disabled">
-      </div>
-    </div>
-      <div class="layui-form-item">
-      <label class="layui-form-label"></label>
-      <div class="layui-input-block">
-        <input type="postalCode" name="postalCode" placeholder="请输入" autocomplete="off" class="layui-input disabled">
+        <input type="state" name="state" placeholder="请输入状态" autocomplete="off" class="layui-input disabled">
       </div>
     </div>
   <div class="layui-form-item">
@@ -79,7 +55,7 @@
 </div>
 
 <div class="table_div">
-  <div id="searchParam"  shiro:hasPermission="customers:list">
+  <div id="searchParam"  shiro:hasPermission="carrierBilling:list">
     <form class="layui-form ">
       <div class="layui-form-item">
         <div class="layui-input-inline">
@@ -99,14 +75,14 @@
 </div>
 <script type="text/html" id="toolbar">
   <div class="layui-btn-container oper">
-    <button class="layui-btn layui-btn-sm" lay-event="add"  shiro:hasPermission="customers:add">添加</button>
-    <button class="layui-btn layui-btn-sm" lay-event="batchDeleted" shiro:hasPermission="customers:delete">删除</button>
+    <button class="layui-btn layui-btn-sm" lay-event="add"  shiro:hasPermission="carrierBilling:add">添加</button>
+    <button class="layui-btn layui-btn-sm" lay-event="batchDeleted" shiro:hasPermission="carrierBilling:delete">删除</button>
   </div>
 </script>
 <script type="text/html" id="tool">
   <a class="layui-btn layui-btn-xs" lay-event="look">查看</a>
-  <a class="layui-btn layui-btn-xs" lay-event="edit" shiro:hasPermission="customers:update">编辑</a>
-  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" shiro:hasPermission="customers:delete">删除</a>
+  <a class="layui-btn layui-btn-xs" lay-event="edit" shiro:hasPermission="carrierBilling:update">编辑</a>
+  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" shiro:hasPermission="carrierBilling:delete">删除</a>
 </script>
 
 </body>
@@ -136,7 +112,7 @@
       , contentType: 'application/json'
       , headers: {"authorization": token}
       , page: true //开启分页
-      , url: ctx + 'customers/listByPage' //数据接口
+      , url: ctx + 'carrierBilling/listByPage' //数据接口
       , method: 'POST'
       , parseData: function (res) { //将原始数据解析成 table 组件所规定的数据
         return {
@@ -149,15 +125,12 @@
       , cols: [
         [
           {type: 'checkbox', fixed: 'left'},
-          {field: 'id', title: 'ID', sort: true},
-          {field: 'name', title: '姓名', sort: true},
-          {field: 'email', title: '邮箱', sort: true},
-          {field: 'phone', title: '电话', sort: true},
-          {field: 'companyName', title: '公司名称', sort: true},
-          {field: 'address', title: '地址', sort: true},
-          {field: 'city', title: '城市', sort: true},
-          {field: 'country', title: '国家', sort: true},
-          {field: 'postalCode', title: '邮编', sort: true},
+          {field: 'id', title: '账单id', sort: true},
+          {field: 'carrierId', title: '承运人', sort: true},
+          {field: 'orderId', title: '运单', sort: true},
+          {field: 'billingDate', title: '结算日期', sort: true},
+          {field: 'freightCharge', title: '金额', sort: true},
+          {field: 'state', title: '状态', sort: true},
           {width: 120, toolbar: "#tool", title: '操作'}
         ]
       ]
@@ -189,16 +162,12 @@
           setTimeout(function () {
             form.val('info', {
               "test": "test"
-              , "customerId": ""
-              , "firstName": ""
-              , "lastName": ""
-              , "email": ""
-              , "phone": ""
-              , "companyName": ""
-              , "address": ""
-              , "city": ""
-              , "country": ""
-              , "postalCode": ""
+              , "id": ""
+              , "carrierId": ""
+              , "orderId": ""
+              , "billingDate": ""
+              , "freightCharge": ""
+              , "state": ""
             });
           }, 200);
           break;
@@ -232,7 +201,7 @@
         limit: 10000,
         key: $("#key").val()
       };
-      CoreUtil.sendPost(ctx + "customers/listByPage", exportParams, function (res) {
+      CoreUtil.sendPost(ctx + "carrierBilling/listByPage", exportParams, function (res) {
         //初始化渲染数据
         if (res.data != null && res.data.records != null) {
           table.exportFile(tableIns1.config.id, res.data.records, 'xls');
@@ -246,7 +215,7 @@
         content: "确定要删除么?",
         yes: function(index, layero){
           layer.close(index); //如果设定了yes回调，需进行手工关闭
-          CoreUtil.sendDelete(ctx + "customers/delete",ids,function (res) {
+          CoreUtil.sendDelete(ctx + "carrierBilling/delete",ids,function (res) {
             layer.msg(res.msg, {time:1000},function () {
               search();
             });
@@ -265,13 +234,13 @@
     //监听保存
     form.on('submit(submit)', function(data){
       if(data.field.id===undefined || data.field.id===null || data.field.id===""){
-        CoreUtil.sendPost(ctx + "customers/add",data.field,function (res) {
+        CoreUtil.sendPost(ctx + "carrierBilling/add",data.field,function (res) {
           $(".table_div").show();
           $(".operation").hide();
           search();
         });
       }else {
-        CoreUtil.sendPut(ctx + "customers/update",data.field,function (res) {
+        CoreUtil.sendPut(ctx + "carrierBilling/update",data.field,function (res) {
           $(".table_div").show();
           $(".operation").hide();
           search();
@@ -303,16 +272,12 @@
     setTimeout(function () {
       form.val('info', {
         "test": "test"
-        , "customerId": data.customerId
-        , "firstName": data.firstName
-        , "lastName": data.lastName
-        , "email": data.email
-        , "phone": data.phone
-        , "companyName": data.companyName
-        , "address": data.address
-        , "city": data.city
-        , "country": data.country
-        , "postalCode": data.postalCode
+        , "id": data.id
+        , "carrierId": data.carrierId
+        , "orderId": data.orderId
+        , "billingDate": data.billingDate
+        , "freightCharge": data.freightCharge
+        , "state": data.state
       });
     }, 200);
   }

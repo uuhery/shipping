@@ -76,7 +76,7 @@ public class GoodsController {
         LambdaQueryWrapper<Goods> queryWrapper = Wrappers.lambdaQuery();
         //查询条件示例
 //        queryWrapper.eq(Goods::getId, goods.getId());
-        queryWrapper.orderByDesc(Goods::getId);
+        queryWrapper.orderByAsc(Goods::getId);
         IPage<Goods> iPage = goodsService.page(goods.getQueryPage(), queryWrapper);
         return DataResult.success(iPage);
     }

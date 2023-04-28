@@ -145,7 +145,7 @@
       , cols: [
         [
           {type: 'checkbox', fixed: 'left'},
-          {field: 'orderId', title: '', sort: true},
+          {field: 'id', title: 'ID', sort: true},
           // ??? 为什么报错CoreUtil.selectName不是函数？
           // {field: 'customerId', title: '客户名', sort: true, templet: function (item) {
           //   console.log(datas1)
@@ -168,8 +168,7 @@
           {field: 'value', title: '总价值', sort: true},
           {field: 'orderStatus', title: '运单状态', sort: true},
           {field: 'pickupDate', title: '发货日期', sort: true},
-          {field: 'estimatedDeliveryDate', title: '预计收货日期', sort: true},
-          {field: 'actualDeliveryDate', title: '实际收货日期', sort: true},
+          {field: 'deliveryDate', title: '收货日期', sort: true},
           {width: 120, toolbar: "#tool", title: '操作'}
         ]
       ]
@@ -210,8 +209,6 @@
               , "goodsId": ""
               , "num": ""
             });
-            // //获取下拉框数据
-            // loadCustomersOption()
           }, 200);
           break;
       };
@@ -278,6 +275,7 @@
     form.on('submit(submit)', function(data){
       if(data.field.id===undefined || data.field.id===null || data.field.id===""){
         CoreUtil.sendPost(ctx + "shipment/add",data.field,function (res) {
+          CoreUtil.sendPost(ctx + "carrierBilling/add", res.data);
           $(".table_div").show();
           $(".operation").hide();
           search();

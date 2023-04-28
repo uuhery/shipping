@@ -29,17 +29,15 @@ public class Shipment extends BaseEntity implements Serializable {
     private String destinationCountry;
     private String destinationPostalCode;
     private String des;
+    private Integer goodsId;
+    private BigDecimal num;
     private BigDecimal weight;
     private BigDecimal value;
     private Integer orderStatus;
     @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     private Date pickupDate;
     @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
-    private Date estimatedDeliveryDate;
-    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
-    private Date actualDeliveryDate;
-    private Integer goodsId;
-    private BigDecimal num;
+    private Date deliveryDate;
     @TableField(exist = false)
     private List<ShipmentEvent> shipmentEventList;
 
@@ -179,20 +177,12 @@ public class Shipment extends BaseEntity implements Serializable {
         this.pickupDate = pickupDate;
     }
 
-    public Date getEstimatedDeliveryDate() {
-        return estimatedDeliveryDate;
+    public Date getDeliveryDate() {
+        return deliveryDate;
     }
 
-    public void setEstimatedDeliveryDate(Date estimatedDeliveryDate) {
-        this.estimatedDeliveryDate = estimatedDeliveryDate;
-    }
-
-    public Date getActualDeliveryDate() {
-        return actualDeliveryDate;
-    }
-
-    public void setActualDeliveryDate(Date actualDeliveryDate) {
-        this.actualDeliveryDate = actualDeliveryDate;
+    public void setDeliveryDate(Date deliveryDate) {
+        this.deliveryDate = deliveryDate;
     }
 
     public Integer getGoodsId() {

@@ -1,7 +1,7 @@
 package com.company.project.service.shipment;
 
-
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.company.project.entity.shipping.CarrierBilling;
 import com.company.project.entity.shipping.Shipment;
 
 /**
@@ -9,10 +9,10 @@ import com.company.project.entity.shipping.Shipment;
  *
  * @author wenbin
  * @email *****@mail.com
- * @date 2023-04-16 20:58:10
+ * @date 2023-04-26 17:58:48
  */
-public interface ShipmentService extends IService<Shipment> {
+public interface CarrierBillingService extends IService<CarrierBilling> {
 
-    public Shipment saveShipment(Shipment shipment);
+    public boolean saveCarrierBilling(Shipment shipment);
 }
 

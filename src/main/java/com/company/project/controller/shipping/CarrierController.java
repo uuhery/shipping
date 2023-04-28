@@ -74,7 +74,7 @@ public class CarrierController {
         LambdaQueryWrapper<Carrier> queryWrapper = Wrappers.lambdaQuery();
         //查询条件示例
         if(carrier.getId()!=null) queryWrapper.eq(Carrier::getId, carrier.getId());
-        queryWrapper.orderByDesc(Carrier::getId);
+        queryWrapper.orderByAsc(Carrier::getId);
         IPage<Carrier> iPage = carrierService.page(carrier.getQueryPage(), queryWrapper);
         return DataResult.success(iPage);
     }
