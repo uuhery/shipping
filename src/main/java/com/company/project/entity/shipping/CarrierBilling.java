@@ -18,8 +18,11 @@ public class CarrierBilling extends BaseEntity implements Serializable {
     private Integer id;
     private Integer carrierId;
     private Integer orderId;
-    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", timezone = "GMT+8")
+    private Date createDate;
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", timezone = "GMT+8")
     private Date billingDate;
+    private Integer paymentMethod;
     private BigDecimal freightCharge;
     private Integer state;
 
@@ -47,6 +50,14 @@ public class CarrierBilling extends BaseEntity implements Serializable {
         this.orderId = orderId;
     }
 
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
     public Date getBillingDate() {
         return billingDate;
     }
@@ -61,6 +72,14 @@ public class CarrierBilling extends BaseEntity implements Serializable {
 
     public void setFreightCharge(BigDecimal freightCharge) {
         this.freightCharge = freightCharge;
+    }
+
+    public Integer getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(Integer paymentMethod) {
+        this.paymentMethod = paymentMethod;
     }
 
     public Integer getState() {

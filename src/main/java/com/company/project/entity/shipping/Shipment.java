@@ -19,6 +19,7 @@ public class Shipment extends BaseEntity implements Serializable {
     private Integer id;
     private Integer customerId;
     private Integer carrierId;
+    private Integer sendId;
     private Integer shipmentTypeId;
     private String originAddress;
     private String originCity;
@@ -34,9 +35,9 @@ public class Shipment extends BaseEntity implements Serializable {
     private BigDecimal weight;
     private BigDecimal value;
     private Integer orderStatus;
-    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
+    @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss",timezone = "GMT+8")
     private Date pickupDate;
-    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
+    @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss",timezone = "GMT+8")
     private Date deliveryDate;
     @TableField(exist = false)
     private List<ShipmentEvent> shipmentEventList;
@@ -63,6 +64,14 @@ public class Shipment extends BaseEntity implements Serializable {
 
     public void setCarrierId(Integer carrierId) {
         this.carrierId = carrierId;
+    }
+
+    public Integer getSendId() {
+        return sendId;
+    }
+
+    public void setSendId(Integer sendId) {
+        this.sendId = sendId;
     }
 
     public Integer getShipmentTypeId() {

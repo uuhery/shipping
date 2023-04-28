@@ -15,33 +15,12 @@
 <form class="layui-form " action="" lay-filter="info">
   <input name="id" hidden/>
     <div class="layui-form-item">
-      <label class="layui-form-label">承运人</label>
+      <label class="layui-form-label">支付方式</label>
       <div class="layui-input-block">
-        <input type="carrierId" name="carrierId" placeholder="请输入承运人" autocomplete="off" class="layui-input disabled">
-      </div>
-    </div>
-      <div class="layui-form-item">
-      <label class="layui-form-label">运单</label>
-      <div class="layui-input-block">
-        <input type="orderId" name="orderId" placeholder="请输入运单" autocomplete="off" class="layui-input disabled">
-      </div>
-    </div>
-      <div class="layui-form-item">
-      <label class="layui-form-label">结算日期</label>
-      <div class="layui-input-block">
-        <input type="billingDate" name="billingDate" placeholder="请输入结算日期" autocomplete="off" class="layui-input disabled">
-      </div>
-    </div>
-      <div class="layui-form-item">
-      <label class="layui-form-label">金额</label>
-      <div class="layui-input-block">
-        <input type="freightCharge" name="freightCharge" placeholder="请输入金额" autocomplete="off" class="layui-input disabled">
-      </div>
-    </div>
-      <div class="layui-form-item">
-      <label class="layui-form-label">状态</label>
-      <div class="layui-input-block">
-        <input type="state" name="state" placeholder="请输入状态" autocomplete="off" class="layui-input disabled">
+        <select id="paymentMethod" name="paymentMethod" lay-filter="select-type"
+                th:with="type=${@sysDictService.getType('payway')}">
+          <option th:each="dict : ${type}" th:text="${dict.label}" th:value="${dict.value}"></option>
+        </select>
       </div>
     </div>
   <div class="layui-form-item">
@@ -75,14 +54,14 @@
 </div>
 <script type="text/html" id="toolbar">
   <div class="layui-btn-container oper">
-    <button class="layui-btn layui-btn-sm" lay-event="add"  shiro:hasPermission="carrierBilling:add">添加</button>
+<!--    <button class="layui-btn layui-btn-sm" lay-event="add"  shiro:hasPermission="carrierBilling:add">添加</button>-->
     <button class="layui-btn layui-btn-sm" lay-event="batchDeleted" shiro:hasPermission="carrierBilling:delete">删除</button>
   </div>
 </script>
 <script type="text/html" id="tool">
-  <a class="layui-btn layui-btn-xs" lay-event="look">查看</a>
-  <a class="layui-btn layui-btn-xs" lay-event="edit" shiro:hasPermission="carrierBilling:update">编辑</a>
-  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" shiro:hasPermission="carrierBilling:delete">删除</a>
+<!--  <a class="layui-btn layui-btn-xs" lay-event="look">查看</a>-->
+  <a class="layui-btn layui-btn-xs" lay-event="edit" shiro:hasPermission="carrierBilling:update">结算</a>
+<!--  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" shiro:hasPermission="carrierBilling:delete">删除</a>-->
 </script>
 
 </body>
@@ -93,6 +72,10 @@
 <script th:src="@{/layui/layui.all.js}"></script>
 <script th:src="@{/js/core.util.js}"></script>
 <script>
+  // 承运方字典数据
+  var datas1 = "[[${@carrierService.getType()}]]".replace(/&quot;/g, "\"");
+  // 状态字典数据
+  var datas2 = "[[${@sysDictService.getType('billing_state')}]]".replace(/&quot;/g, "\"");
   //获取token
   var token = CoreUtil.getData("access_token");
   //地址栏转义token中的#号
@@ -126,11 +109,16 @@
         [
           {type: 'checkbox', fixed: 'left'},
           {field: 'id', title: '账单id', sort: true},
-          {field: 'carrierId', title: '承运人', sort: true},
+          {field: 'carrierId', title: '承运方', sort: true, templet: function (item) {
+              return CoreUtil.selectByName(datas1, item.carrierId);
+            }},
           {field: 'orderId', title: '运单', sort: true},
+          {field: 'createDate', title: '创建日期', sort: true},
           {field: 'billingDate', title: '结算日期', sort: true},
           {field: 'freightCharge', title: '金额', sort: true},
-          {field: 'state', title: '状态', sort: true},
+          {field: 'state', title: '状态', sort: true, templet: function (item) {
+              return CoreUtil.selectDictLabel(datas2, item.state)
+            }},
           {width: 120, toolbar: "#tool", title: '操作'}
         ]
       ]
@@ -154,23 +142,23 @@
             tipDialog(ids);
           }
           break;
-        case 'add':
-          toUnDisabled();
-          $(".table_div").hide();
-          $(".operation").show();
-          $(".title").html("新增");
-          setTimeout(function () {
-            form.val('info', {
-              "test": "test"
-              , "id": ""
-              , "carrierId": ""
-              , "orderId": ""
-              , "billingDate": ""
-              , "freightCharge": ""
-              , "state": ""
-            });
-          }, 200);
-          break;
+        // case 'add':
+        //   toUnDisabled();
+        //   $(".table_div").hide();
+        //   $(".operation").show();
+        //   $(".title").html("新增");
+        //   setTimeout(function () {
+        //     form.val('info', {
+        //       "test": "test"
+        //       , "id": ""
+        //       , "carrierId": ""
+        //       , "orderId": ""
+        //       , "billingDate": ""
+        //       , "freightCharge": ""
+        //       , "state": ""
+        //     });
+        //   }, 200);
+        //   break;
       };
     });
     //列操作
@@ -241,12 +229,12 @@
         });
       }else {
         CoreUtil.sendPut(ctx + "carrierBilling/update",data.field,function (res) {
+          CoreUtil.sendPut(ctx + "shipment/update",{id: data.field.orderId, orderStatus: 1})
           $(".table_div").show();
           $(".operation").hide();
           search();
         });
       }
-
       return false;
     });
   });
@@ -273,11 +261,7 @@
       form.val('info', {
         "test": "test"
         , "id": data.id
-        , "carrierId": data.carrierId
-        , "orderId": data.orderId
-        , "billingDate": data.billingDate
-        , "freightCharge": data.freightCharge
-        , "state": data.state
+        , "payment_method": data.paymentMethod
       });
     }, 200);
   }

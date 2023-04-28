@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+
+import java.util.Date;
 import java.util.List;
 import com.company.project.common.utils.DataResult;
 
@@ -61,6 +63,7 @@ public class ShipmentController {
     @RequiresPermissions("shipment:update")
     @ResponseBody
     public DataResult update(@RequestBody Shipment shipment){
+        if(shipment.getOrderStatus()==2) shipment.setDeliveryDate(new Date());
         shipmentService.updateById(shipment);
         return DataResult.success();
     }

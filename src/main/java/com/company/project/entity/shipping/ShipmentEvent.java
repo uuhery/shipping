@@ -15,9 +15,9 @@ import java.util.Date;
 public class ShipmentEvent extends BaseEntity implements Serializable {
     @TableId(type = IdType.AUTO)
     private Integer id;
-    private Shipment shipment;
+    private Integer orderId;
     private String eventType;
-    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
+    @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss",timezone = "GMT+8")
     private Date eventDate;
     private String eventDescription;
     private String eventLocation;
@@ -30,12 +30,12 @@ public class ShipmentEvent extends BaseEntity implements Serializable {
         this.id = id;
     }
 
-    public Shipment getShipment() {
-        return shipment;
+    public Integer getOrderId() {
+        return orderId;
     }
 
-    public void setShipment(Shipment shipment) {
-        this.shipment = shipment;
+    public void setOrderId(Integer orderId) {
+        this.orderId = orderId;
     }
 
     public String getEventType() {

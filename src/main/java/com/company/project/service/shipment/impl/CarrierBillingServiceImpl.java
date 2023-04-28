@@ -2,6 +2,7 @@ package com.company.project.service.shipment.impl;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -31,12 +33,24 @@ public class CarrierBillingServiceImpl extends ServiceImpl<CarrierBillingMapper,
         CarrierBilling carrierBilling = new CarrierBilling();
         carrierBilling.setCarrierId(shipment.getCarrierId());
         carrierBilling.setOrderId(shipment.getId());
-        carrierBilling.setBillingDate(new Date());
+        carrierBilling.setCreateDate(new Date());
         LambdaQueryWrapper<ShipmentRate> queryWrapper = Wrappers.lambdaQuery();
         queryWrapper.eq(ShipmentRate::getShipmentTypeId, shipment.getShipmentTypeId());
         queryWrapper.eq(ShipmentRate::getRelatedId, shipment.getCarrierId());
         ShipmentRate shipmentRate = shipmentRateMapper.selectOne(queryWrapper);
         carrierBilling.setFreightCharge(shipment.getWeight().multiply(shipmentRate.getPricePerKg()));
         return SqlHelper.retBool(this.getBaseMapper().insert(carrierBilling));
+    }
+
+    public Double carrierCount() {
+        LambdaQueryWrapper<CarrierBilling> queryWrapper = Wrappers.lambdaQuery();
+        queryWrapper.eq(CarrierBilling::getState, 1);
+        List<CarrierBilling> list = this.baseMapper.selectList(queryWrapper);
+        Double total = 0.0;
+        for(CarrierBilling c:list) {
+            total += Double.parseDouble(c.getFreightCharge().toString());
+        }
+        System.out.println(total);
+        return Double.parseDouble(total.toString());
     }
 }

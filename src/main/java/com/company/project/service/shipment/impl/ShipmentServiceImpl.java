@@ -17,13 +17,13 @@ import com.company.project.service.shipment.ShipmentService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
+import java.util.List;
 
 
 @Service("shipmentService")
 public class ShipmentServiceImpl extends ServiceImpl<ShipmentMapper, Shipment> implements ShipmentService {
 
-    @Resource
-    CarrierMapper carrierMapper;
     @Resource
     CustomerMapper customerMapper;
     @Resource
@@ -32,13 +32,13 @@ public class ShipmentServiceImpl extends ServiceImpl<ShipmentMapper, Shipment> i
     ShipmentMapper shipmentMapper;
 
     public Shipment saveShipment(Shipment shipment) {
-        LambdaQueryWrapper<Carrier> q1 = Wrappers.lambdaQuery();
-        q1.eq(Carrier::getId, shipment.getCarrierId());
-        Carrier carrier = carrierMapper.selectOne(q1);
-        shipment.setOriginAddress(carrier.getAddress());
-        shipment.setOriginCountry(carrier.getCountry());
-        shipment.setOriginCity(carrier.getCity());
-        shipment.setOriginPostalCode(carrier.getPostalCode());
+        LambdaQueryWrapper<Customer> q1 = Wrappers.lambdaQuery();
+        q1.eq(Customer::getId, shipment.getSendId());
+        Customer send = customerMapper.selectOne(q1);
+        shipment.setOriginAddress(send.getAddress());
+        shipment.setOriginCountry(send.getCountry());
+        shipment.setOriginCity(send.getCity());
+        shipment.setOriginPostalCode(send.getPostalCode());
         LambdaQueryWrapper<Customer> q2 = Wrappers.lambdaQuery();
         q2.eq(Customer::getId, shipment.getCustomerId());
         Customer customer = customerMapper.selectOne(q2);
@@ -51,8 +51,17 @@ public class ShipmentServiceImpl extends ServiceImpl<ShipmentMapper, Shipment> i
         Goods goods = goodsMapper.selectOne(q3);
         shipment.setWeight(goods.getWeight().multiply(shipment.getNum()));
         shipment.setValue(goods.getPrice().multiply(shipment.getNum()));
+        shipment.setPickupDate(new Date());
         shipment.setOrderStatus(0);
         shipmentMapper.insert(shipment);
         return shipment;
+    }
+
+    public List<Shipment> getId() {
+        return shipmentMapper.selectList(new QueryWrapper<>());
+    }
+
+    public int shipmentCount() {
+        return shipmentMapper.selectCount(new QueryWrapper<>());
     }
 }

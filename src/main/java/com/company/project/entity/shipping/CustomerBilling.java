@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.company.project.entity.sys.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.models.auth.In;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -15,27 +16,31 @@ import java.util.Date;
 @TableName("customer_billing")
 public class CustomerBilling extends BaseEntity implements Serializable {
     @TableId(type = IdType.AUTO)
-    private Integer paymentId;
-    private Integer customerId;
+    private Integer id;
+    private Integer sendId;
     private Integer orderId;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT+8")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss", timezone = "GMT+8")
+    private Date createDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss", timezone = "GMT+8")
     private Date paymentDate;
     private BigDecimal paymentAmount;
-    private String paymentMethod;
+    private Integer paymentMethod;
+    private Integer state;
 
-    public Integer getPaymentId() {
-        return paymentId;
-    }
-    public void setPaymentId(Integer paymentId) {
-        this.paymentId = paymentId;
+    public Integer getId() {
+        return id;
     }
 
-    public Integer getCustomerId() {
-        return customerId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public void setCustomerId(Integer customerId) {
-        this.customerId = customerId;
+    public Integer getSendId() {
+        return sendId;
+    }
+
+    public void setSendId(Integer sendId) {
+        this.sendId = sendId;
     }
 
     public Integer getOrderId() {
@@ -44,6 +49,14 @@ public class CustomerBilling extends BaseEntity implements Serializable {
 
     public void setOrderId(Integer orderId) {
         this.orderId = orderId;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
     public Date getPaymentDate() {
@@ -62,11 +75,20 @@ public class CustomerBilling extends BaseEntity implements Serializable {
         this.paymentAmount = paymentAmount;
     }
 
-    public String getPaymentMethod() {
+    public Integer getPaymentMethod() {
         return paymentMethod;
     }
 
-    public void setPaymentMethod(String paymentMethod) {
+    public void setPaymentMethod(Integer paymentMethod) {
         this.paymentMethod = paymentMethod;
     }
+
+    public Integer getState() {
+        return state;
+    }
+
+    public void setState(Integer state) {
+        this.state = state;
+    }
+
 }

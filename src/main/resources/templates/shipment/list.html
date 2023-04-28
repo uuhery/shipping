@@ -6,74 +6,121 @@
   <title>Title</title>
   <link rel="stylesheet" th:href="@{/layui/css/layui.css}"/>
   <link rel="stylesheet" th:href="@{/css/custom.form.css}">
-    <style id="layuimini-bg-color">
-    </style>
+  <style id="layuimini-bg-color">
+  </style>
 <body>
 <div class="panel panel-default operation" hidden>
   <div class="panel-heading title"></div>
-<div class="layui-card-body">
-<form class="layui-form " action="" lay-filter="info">
-  <div class="layui-form-item">
-    <label class="layui-form-label">客户名</label>
-    <div class="layui-input-block">
-      <select id="customerId" name="customerId" placeholder="请选择客户" lay-filter="select-type"
-              th:with="type=${@customerService.getType()}">
-        <option th:each="dict : ${type}" th:text="${dict.name}" th:value="${dict.id}"></option>
-      </select>
-    </div>
-  </div>
-  <div class="layui-form-item">
-    <label class="layui-form-label">承运方</label>
-    <div class="layui-input-block">
-      <select id="carrierId" name="carrierId" placeholder="请选择承运方" lay-filter="select-type"
-              th:with="type=${@carrierService.getType()}">
-        <option th:each="dict : ${type}" th:text="${dict.name}" th:value="${dict.id}"></option>
-      </select>
-    </div>
-  </div>
-  <div class="layui-form-item">
-    <label class="layui-form-label">物流类型</label>
-    <div class="layui-input-block">
-      <select id="shipmentTypeId" name="shipmentTypeId" placeholder="请选择物流类型" lay-filter="select-type"
-              th:with="type=${@shipmentTypeService.getType()}">
-        <option th:each="dict : ${type}" th:text="${dict.name}" th:value="${dict.id}"></option>
-      </select>
-    </div>
-  </div>
-  <div class="layui-form-item">
-    <label class="layui-form-label">物资类型</label>
-    <div class="layui-input-block">
-      <select id="goodsId" name="goodsId" placeholder="请选择物资类型" lay-filter="select-type"
-              th:with="type=${@goodsService.getType()}">
-        <option th:each="dict : ${type}" th:text="${dict.name}" th:value="${dict.id}"></option>
-      </select>
-    </div>
-  </div>
-  <div class="layui-form-item">
-    <label class="layui-form-label">发货数量</label>
-    <div class="layui-input-block">
-      <input type="num" name="num" placeholder="请输入总数量" autocomplete="off" class="layui-input disabled">
-    </div>
-  </div>
+  <div class="layui-card-body">
+    <form class="layui-form " action="" lay-filter="info">
       <div class="layui-form-item">
-      <label class="layui-form-label">备注</label>
-      <div class="layui-input-block">
-        <input type="des" name="des" placeholder="请输入备注" autocomplete="off" class="layui-input disabled">
+        <label class="layui-form-label">发货人</label>
+        <div class="layui-input-block">
+          <select id="sendId" name="sendId" placeholder="请选择发货人" lay-filter="select-type"
+                  th:with="type=${@customerService.getType()}">
+            <option th:each="dict : ${type}" th:text="${dict.name}" th:value="${dict.id}"></option>
+          </select>
+        </div>
       </div>
-    </div>
-  <div class="layui-form-item">
-  <div class="layui-input-block">
-    <button type="submit" class="layui-btn" lay-submit="" lay-filter="submit">保存</button>
-    <button  class="layui-btn layui-btn-primary" id="btn_cancel">返回</button>
+      <div class="layui-form-item">
+        <label class="layui-form-label">承运方</label>
+        <div class="layui-input-block">
+          <select id="carrierId" name="carrierId" placeholder="请选择承运方" lay-filter="select-type"
+                  th:with="type=${@carrierService.getType()}">
+            <option th:each="dict : ${type}" th:text="${dict.name}" th:value="${dict.id}"></option>
+          </select>
+        </div>
+      </div>
+      <div class="layui-form-item">
+        <label class="layui-form-label">物流类型</label>
+        <div class="layui-input-block">
+          <select id="shipmentTypeId" name="shipmentTypeId" placeholder="请选择物流类型" lay-filter="select-type"
+                  th:with="type=${@shipmentTypeService.getType()}">
+            <option th:each="dict : ${type}" th:text="${dict.name}" th:value="${dict.id}"></option>
+          </select>
+        </div>
+      </div>
+      <div class="layui-form-item">
+        <label class="layui-form-label">物资类型</label>
+        <div class="layui-input-block">
+          <select id="goodsId" name="goodsId" placeholder="请选择物资类型" lay-filter="select-type"
+                  th:with="type=${@goodsService.getType()}">
+            <option th:each="dict : ${type}" th:text="${dict.name}" th:value="${dict.id}"></option>
+          </select>
+        </div>
+      </div>
+      <div class="layui-form-item">
+        <label class="layui-form-label">发货数量</label>
+        <div class="layui-input-block">
+          <input type="num" name="num" placeholder="请输入总数量" autocomplete="off">
+        </div>
+      </div>
+      <div class="layui-form-item">
+        <label class="layui-form-label">备注</label>
+        <div class="layui-input-block">
+          <input type="des" name="des" placeholder="请输入备注" autocomplete="off">
+        </div>
+      </div>
+      <div class="layui-form-item">
+        <label class="layui-form-label">订单状态</label>
+        <div class="layui-input-block">
+          <select id="orderStatus" name="orderStatus" lay-filter="select-type"
+                  th:with="type=${@sysDictService.getType('shipment_state')}">
+            <option th:each="dict : ${type}" th:text="${dict.label}" th:value="${dict.value}"></option>
+          </select>
+        </div>
+      </div>
+      <div class="layui-form-item">
+        <div class="layui-input-block">
+          <button type="submit" class="layui-btn" lay-submit="" lay-filter="submit">保存</button>
+          <button  class="layui-btn layui-btn-primary" id="btn_cancel">返回</button>
+        </div>
+      </div>
+    </form>
   </div>
 </div>
-</form>
-</div>
+
+<div class="panel panel-default ship" hidden>
+  <div class="panel-heading title"></div>
+  <div class="layui-card-body">
+    <form class="layui-form " action="" lay-filter="info">
+      <div class="layui-form-item">
+        <label class="layui-form-label">运单id</label>
+        <div class="layui-input-block">
+          <input type="orderId" name="orderId" placeholder="请输入运单id" autocomplete="off">
+        </div>
+      </div>
+      <div class="layui-form-item">
+        <label class="layui-form-label">事件类型</label>
+        <div class="layui-input-block">
+          <input type="eventType" name="eventType" placeholder="请输入事件类型" autocomplete="off">
+        </div>
+      </div>
+      <div class="layui-form-item">
+        <label class="layui-form-label">地点</label>
+        <div class="layui-input-block">
+          <input type="eventLocation" name="eventLocation" placeholder="请输入地点" autocomplete="off">
+        </div>
+      </div>
+      <div class="layui-form-item">
+        <label class="layui-form-label">描述</label>
+        <div class="layui-input-block">
+          <input type="eventDescription" name="eventDescription" placeholder="请输入事件描述" autocomplete="off">
+        </div>
+      </div>
+      <div class="layui-form-item">
+        <div class="layui-input-block">
+          <button type="submit" class="layui-btn" lay-submit="" lay-filter="submit">保存</button>
+          <button  class="layui-btn layui-btn-primary" id="btn_event_cancel">返回</button>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>
 
 <div class="table_div">
   <div id="searchParam"  shiro:hasPermission="shipment:list">
-    <form class="layui-form ">
+    <form class="layui-form">
       <div class="layui-form-item">
         <div class="layui-input-inline">
           <label class="layui-form-label">名称</label>
@@ -101,6 +148,9 @@
   <a class="layui-btn layui-btn-xs" lay-event="edit" shiro:hasPermission="shipment:update">编辑</a>
   <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" shiro:hasPermission="shipment:delete">删除</a>
 </script>
+<script type="text/html" id="shipEvent">
+  <a class="layui-btn layui-btn-xs" lay-event="sevent">添加</a>
+</script>
 
 </body>
 </html>
@@ -110,10 +160,12 @@
 <script th:src="@{/layui/layui.all.js}"></script>
 <script th:src="@{/js/core.util.js}"></script>
 <script>
-  // //客户字典数据
-  // var datas1 = "[[${@customerService.getType()}]]".replace(/&quot;/g, "\"");
-  // //承运方字典数据
-  // var datas2 = "[[${@carrierService.getType()}]]".replace(/&quot;/g, "\"");
+  // 客户字典数据
+  var datas1 = "[[${@customerService.getType()}]]".replace(/&quot;/g, "\"");
+  // 承运方字典数据
+  var datas2 = "[[${@carrierService.getType()}]]".replace(/&quot;/g, "\"");
+  // 状态字典数据
+  var datas3 = "[[${@sysDictService.getType('shipment_state')}]]".replace(/&quot;/g, "\"");
   //获取token
   var token = CoreUtil.getData("access_token");
   //地址栏转义token中的#号
@@ -121,6 +173,7 @@
   var tableIns1;
   var table = layui.table;
   var form = layui.form;
+  var temp;
   var layer = layui.layer;
   var $ = jQuery = layui.jquery;
   var laydate = layui.laydate;
@@ -146,14 +199,15 @@
         [
           {type: 'checkbox', fixed: 'left'},
           {field: 'id', title: 'ID', sort: true},
-          // ??? 为什么报错CoreUtil.selectName不是函数？
-          // {field: 'customerId', title: '客户名', sort: true, templet: function (item) {
-          //   console.log(datas1)
-          //   return CoreUtil.selectName(datas1, item.customerId);
-          // }},
-          // {field: 'carrierId', title: '承运方', sort: true, templet: function (item) {
-          //   return CoreUtil.selectName(datas2, item.carrierId);
-          // }},
+          {field: 'sendId', title: '发货人', sort: true, templet: function (item) {
+              return CoreUtil.selectByName(datas1, item.customerId);
+            }},
+          {field: 'customerId', title: '收货人', sort: true, templet: function (item) {
+              return CoreUtil.selectByName(datas1, item.sendId);
+            }},
+          {field: 'carrierId', title: '承运方', sort: true, templet: function (item) {
+              return CoreUtil.selectByName(datas2, item.carrierId);
+            }},
           // {field: 'shipmentTypeId', title: '物流类型', sort: true},
           {field: 'originAddress', title: '发货详细地址', sort: true},
           // {field: 'originCity', title: '发货地', sort: true},
@@ -166,10 +220,13 @@
           // {field: 'des', title: '备注', sort: true},
           {field: 'weight', title: '总重量', sort: true},
           {field: 'value', title: '总价值', sort: true},
-          {field: 'orderStatus', title: '运单状态', sort: true},
+          {field: 'orderStatus', title: '运单状态', sort: true, templet: function (item) {
+              return CoreUtil.selectDictLabel(datas3, item.orderStatus)
+            }},
           {field: 'pickupDate', title: '发货日期', sort: true},
           {field: 'deliveryDate', title: '收货日期', sort: true},
-          {width: 120, toolbar: "#tool", title: '操作'}
+          {width: 120, toolbar: "#tool", title: '操作'},
+          {width: 40, toolbar: "#shipEvent", title: '添加事件'}
         ]
       ]
       , toolbar: '#toolbar'
@@ -197,18 +254,24 @@
           $(".table_div").hide();
           $(".operation").show();
           $(".title").html("新增");
+          // $(".add-enable").show();
+          // $(".info-enable").hide();
+          // $(".edit-enable").hide();
 
           setTimeout(function () {
             form.val('info', {
               "test": "test"
+              , "sendId": ""
               , "customerId": ""
               , "carrierId": ""
               , "shipmentTypeId": ""
-              , "isFreeShipping": ""
               , "des": ""
               , "goodsId": ""
               , "num": ""
+              , "orderStatus": ""
             });
+            // form.render('select', 'info'); // 重新渲染 orderStatus 组件
+            // form.render('input', 'info'); // 重新渲染 orderStatus 组件
           }, 200);
           break;
       };
@@ -223,13 +286,23 @@
           tipDialog(ids);
           break;
         case 'look':
-          backshow(data);
+          backshow1(data);
           toDisabled();
           break;
         case 'edit':
-          backshow(data);
+          backshow1(data);
           $(".title").html("编辑");
           toUnDisabled();
+          break;
+      }
+    });
+    //列操作
+    table.on('shipEvent(showTable)',function (obj) {
+      var data = obj.data
+      console.log(obj.event)
+      switch (obj.event) {
+        case 'sevent':
+          backshow3(data);
           break;
       }
     });
@@ -282,6 +355,9 @@
         });
       }else {
         CoreUtil.sendPut(ctx + "shipment/update",data.field,function (res) {
+          if(data.field.status===3) {
+            CoreUtil.sendPost(ctx + "customerBilling/add", res.data);
+          }
           $(".table_div").show();
           $(".operation").hide();
           search();
@@ -306,34 +382,74 @@
   };
 
   //回显
-  function backshow(data) {
+  function backshow1(data) {
     $(".table_div").hide();
     $(".operation").show();
     $(".title").html("查看");
+    // $(".edit-enable").show();
+    // $(".add-enable").show();
+    // $(".info-enable").show();
+
     setTimeout(function () {
       form.val('info', {
         "test": "test"
-        , "orderId": data.orderId
+        , "id": data.id
+        , "sendId": data.sendId
         , "customerId": data.customerId
         , "carrierId": data.carrierId
         , "shipmentTypeId": data.shipmentTypeId
-        , "isFreeShipping": data.isFreeShipping
+        , "goodsId": data.goodsId
+        , "num": data.num
         , "originAddress": data.originAddress
-        , "originCity": data.originCity
-        , "originCountry": data.originCountry
-        , "originPostalCode": data.originPostalCode
         , "destinationAddress": data.destinationAddress
-        , "destinationCity": data.destinationCity
-        , "destinationCountry": data.destinationCountry
-        , "destinationPostalCode": data.destinationPostalCode
         , "des": data.des
         , "weight": data.weight
         , "value": data.value
         , "orderStatus": data.orderStatus
         , "pickupDate": data.pickupDate
-        , "estimatedDeliveryDate": data.estimatedDeliveryDate
-        , "actualDeliveryDate": data.actualDeliveryDate
+        , "deliveryDate": data.deliveryDate
       });
+      // form.render('select', 'info'); // 重新渲染 orderStatus 组件
+      // form.render('input', 'info'); // 重新渲染 orderStatus 组件
+    }, 200);
+  }
+
+  //回显
+  function backshow2(data) {
+    $(".table_div").hide();
+    $(".operation").show();
+    $(".title").html("查看");
+    // $(".edit-enable").show();
+    // $(".add-enable").hide();
+    // $(".info-enable").hide();
+
+    setTimeout(function () {
+      form.val('info', {
+        "test": "test"
+        , "id": data.id
+        , "orderStatus": data.orderStatus
+      });
+      // form.render('select', 'info'); // 重新渲染 orderStatus 组件
+      // form.render('input', 'info'); // 重新渲染 orderStatus 组件
+    }, 200);
+  }
+
+  //添加事件
+  function backshow3(data) {
+    $(".table_div").hide();
+    $(".ship").show();
+    $(".title").html("新增事件");
+
+    setTimeout(function () {
+      temp.val('info', {
+        "test": "test"
+        , "orderId": data.id
+        , "eventType": ''
+        , "eventLocation": ''
+        , "eventDescription": ''
+      });
+      // form.render('select', 'info'); // 重新渲染 orderStatus 组件
+      // form.render('input', 'info'); // 重新渲染 orderStatus 组件
     }, 200);
   }
 

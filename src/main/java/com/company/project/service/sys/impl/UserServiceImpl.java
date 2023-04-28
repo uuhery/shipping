@@ -1,6 +1,7 @@
 package com.company.project.service.sys.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
@@ -33,7 +34,7 @@ import java.util.List;
  * @version V1.0
  * @date 2020年3月18日
  */
-@Service
+@Service("userService")
 @Slf4j
 public class UserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements UserService {
 
@@ -244,5 +245,9 @@ public class UserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impleme
         vo.setAllRole(list);
         vo.setOwnRoles(roleIdsByUserId);
         return vo;
+    }
+
+    public int userNum() {
+        return sysUserMapper.selectCount(new QueryWrapper<>());
     }
 }

@@ -12,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+
+import java.util.Date;
 import java.util.List;
 import com.company.project.common.utils.DataResult;
 
@@ -60,6 +62,10 @@ public class CarrierBillingController {
     @RequiresPermissions("carrierBilling:update")
     @ResponseBody
     public DataResult update(@RequestBody CarrierBilling carrierBilling){
+        if(carrierBilling.getPaymentMethod()!=null) {
+            carrierBilling.setState(1);
+            carrierBilling.setBillingDate(new Date());
+        }
         carrierBillingService.updateById(carrierBilling);
         return DataResult.success();
     }
