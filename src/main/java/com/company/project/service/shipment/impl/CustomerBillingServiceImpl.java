@@ -21,6 +21,7 @@ public class CustomerBillingServiceImpl extends ServiceImpl<CustomerBillingMappe
 
     @Resource
     ShipmentTypeMapper shipmentTypeMapper;
+
     public boolean saveCustomerBilling(Shipment shipment) {
         CustomerBilling customerBilling = new CustomerBilling();
         customerBilling.setSendId(shipment.getSendId());

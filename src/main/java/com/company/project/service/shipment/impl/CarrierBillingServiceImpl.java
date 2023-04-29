@@ -28,7 +28,6 @@ public class CarrierBillingServiceImpl extends ServiceImpl<CarrierBillingMapper,
     @Resource
     ShipmentRateMapper shipmentRateMapper;
 
-
     public boolean saveCarrierBilling(Shipment shipment) {
         CarrierBilling carrierBilling = new CarrierBilling();
         carrierBilling.setCarrierId(shipment.getCarrierId());

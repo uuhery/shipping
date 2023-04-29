@@ -96,7 +96,9 @@ public class UserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impleme
         }
         String token = httpSessionService.createTokenAndUser(sysUser, roleService.getRoleNames(sysUser.getId()), permissionService.getPermissionsByUserId(sysUser.getId()));
         respVO.setAccessToken(token);
-
+        System.out.println("看看我看看我快夸我");
+        System.out.println(token);
+        System.out.println("看看我看看我快夸我");
         return respVO;
     }
 
