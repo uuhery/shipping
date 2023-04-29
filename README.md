@@ -10,3 +10,7 @@
 ## 💎项目成员
 - 祁麟
 - 赵天舒
+
+## 📁项目设计报告&运行截图
+- 报告：https://github.com/uuhery/shipping/tree/master/doc
+- 截图：https://github.com/uuhery/shipping/tree/master/screenshot
