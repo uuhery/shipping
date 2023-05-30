@@ -8,8 +8,9 @@ import com.company.project.service.sys.SysFilesService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.apache.shiro.authz.annotation.Logical;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+//import org.apache.shiro.authz.annotation.Logical;
+//import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -33,7 +34,7 @@ public class SysFilesController {
 
     @ApiOperation(value = "新增")
     @PostMapping("/upload")
-    @RequiresPermissions(value = {"sysFiles:add", "sysContent:update", "sysContent:add"}, logical = Logical.OR)
+    @PreAuthorize("hasAnyAuthority('sysFiles:add', 'sysContent:update', 'sysContent:add')")
     public DataResult add(@RequestParam(value = "file") MultipartFile file) {
         //判断文件是否空
         if (file == null || file.getOriginalFilename() == null || "".equalsIgnoreCase(file.getOriginalFilename().trim())) {
@@ -44,7 +45,7 @@ public class SysFilesController {
 
     @ApiOperation(value = "删除")
     @DeleteMapping("/delete")
-    @RequiresPermissions("sysFiles:delete")
+    @PreAuthorize("hasAuthority('sysFiles:delete')")
     public DataResult delete(@RequestBody @ApiParam(value = "id集合") List<String> ids) {
         sysFilesService.removeByIdsAndFiles(ids);
         return DataResult.success();
@@ -52,7 +53,7 @@ public class SysFilesController {
 
     @ApiOperation(value = "查询分页数据")
     @PostMapping("/listByPage")
-    @RequiresPermissions("sysFiles:list")
+    @PreAuthorize("hasAuthority('sysFiles:list')")
     public DataResult findListByPage(@RequestBody SysFilesEntity sysFiles) {
         IPage<SysFilesEntity> iPage = sysFilesService.page(sysFiles.getQueryPage(), Wrappers.<SysFilesEntity>lambdaQuery().orderByDesc(SysFilesEntity::getCreateDate));
         return DataResult.success(iPage);

@@ -7,8 +7,9 @@ import com.company.project.entity.shipping.Customer;
 import com.company.project.service.shipment.CustomerService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+//import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -40,7 +41,7 @@ public class CustomerController {
 
     @ApiOperation(value = "新增")
     @PostMapping("customers/add")
-    @RequiresPermissions("customers:add")
+    @PreAuthorize("hasAuthority('customers:add')")
     @ResponseBody
     public DataResult add(@RequestBody Customer customers){
         customerService.save(customers);
@@ -49,7 +50,7 @@ public class CustomerController {
 
     @ApiOperation(value = "删除")
     @DeleteMapping("customers/delete")
-    @RequiresPermissions("customers:delete")
+    @PreAuthorize("hasAuthority('customers:delete')")
     @ResponseBody
     public DataResult delete(@RequestBody @ApiParam(value = "id集合") List<String> ids){
         customerService.removeByIds(ids);
@@ -58,7 +59,7 @@ public class CustomerController {
 
     @ApiOperation(value = "更新")
     @PutMapping("customers/update")
-    @RequiresPermissions("customers:update")
+    @PreAuthorize("hasAuthority('customers:update')")
     @ResponseBody
     public DataResult update(@RequestBody Customer customers){
         customerService.updateById(customers);
@@ -67,7 +68,7 @@ public class CustomerController {
 
     @ApiOperation(value = "查询分页数据")
     @PostMapping("customers/listByPage")
-    @RequiresPermissions("customers:list")
+    @PreAuthorize("hasAuthority('customers:list')")
     @ResponseBody
     public DataResult findListByPage(@RequestBody Customer customers){
         LambdaQueryWrapper<Customer> queryWrapper = Wrappers.lambdaQuery();

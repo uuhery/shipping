@@ -5,8 +5,9 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.company.project.entity.shipping.Shipment;
 import com.company.project.service.shipment.ShipmentService;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+//import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 import io.swagger.annotations.ApiOperation;
@@ -43,7 +44,7 @@ public class ShipmentController {
 
     @ApiOperation(value = "新增")
     @PostMapping("shipment/add")
-    @RequiresPermissions("shipment:add")
+    @PreAuthorize("hasAuthority('shipment:add')")
     @ResponseBody
     public DataResult add(@RequestBody Shipment shipment){
         return new DataResult(shipmentService.saveShipment(shipment));
@@ -51,7 +52,7 @@ public class ShipmentController {
 
     @ApiOperation(value = "删除")
     @DeleteMapping("shipment/delete")
-    @RequiresPermissions("shipment:delete")
+    @PreAuthorize("hasAuthority('shipment:delete')")
     @ResponseBody
     public DataResult delete(@RequestBody @ApiParam(value = "id集合") List<String> ids){
         shipmentService.removeByIds(ids);
@@ -60,7 +61,7 @@ public class ShipmentController {
 
     @ApiOperation(value = "更新")
     @PutMapping("shipment/update")
-    @RequiresPermissions("shipment:update")
+    @PreAuthorize("hasAuthority('shipment:update')")
     @ResponseBody
     public DataResult update(@RequestBody Shipment shipment){
         if(shipment.getOrderStatus()==2) shipment.setDeliveryDate(new Date());
@@ -70,7 +71,7 @@ public class ShipmentController {
 
     @ApiOperation(value = "查询分页数据")
     @PostMapping("shipment/listByPage")
-    @RequiresPermissions("shipment:list")
+    @PreAuthorize("hasAuthority('shipment:list')")
     @ResponseBody
     public DataResult findListByPage(@RequestBody Shipment shipment){
         LambdaQueryWrapper<Shipment> queryWrapper = Wrappers.lambdaQuery();

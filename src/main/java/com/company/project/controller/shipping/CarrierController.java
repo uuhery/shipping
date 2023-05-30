@@ -4,8 +4,9 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.company.project.entity.shipping.Carrier;
 import com.company.project.service.shipment.CarrierService;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+//import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -41,7 +42,7 @@ public class CarrierController {
 
     @ApiOperation(value = "新增")
     @PostMapping("carriers/add")
-    @RequiresPermissions("carriers:add")
+    @PreAuthorize("hasAuthority('carriers:add')")
     @ResponseBody
     public DataResult add(@RequestBody Carrier carriers){
         carrierService.save(carriers);
@@ -50,7 +51,7 @@ public class CarrierController {
 
     @ApiOperation(value = "删除")
     @DeleteMapping("carriers/delete")
-    @RequiresPermissions("carriers:delete")
+    @PreAuthorize("hasAuthority('carriers:delete')")
     @ResponseBody
     public DataResult delete(@RequestBody @ApiParam(value = "id集合") List<String> ids){
         carrierService.removeByIds(ids);
@@ -59,7 +60,7 @@ public class CarrierController {
 
     @ApiOperation(value = "更新")
     @PutMapping("carriers/update")
-    @RequiresPermissions("carriers:update")
+    @PreAuthorize("hasAuthority('carriers:update')")
     @ResponseBody
     public DataResult update(@RequestBody Carrier carriers){
         carrierService.updateById(carriers);
@@ -68,7 +69,7 @@ public class CarrierController {
 
     @ApiOperation(value = "查询分页数据")
     @PostMapping("carriers/listByPage")
-    @RequiresPermissions("carriers:list")
+    @PreAuthorize("hasAuthority('carriers:list')")
     @ResponseBody
     public DataResult findListByPage(@RequestBody Carrier carrier){
         LambdaQueryWrapper<Carrier> queryWrapper = Wrappers.lambdaQuery();

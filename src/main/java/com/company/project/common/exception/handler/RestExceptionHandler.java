@@ -4,7 +4,8 @@ import com.company.project.common.exception.BusinessException;
 import com.company.project.common.exception.code.BaseResponseCode;
 import com.company.project.common.utils.DataResult;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.shiro.authz.AuthorizationException;
+//import org.apache.shiro.authz.AuthorizationException;
+import org.springframework.security.oauth2.client.resource.OAuth2AccessDeniedException;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -47,11 +48,11 @@ public class RestExceptionHandler {
     /**
      * 没有权限 返回403视图
      */
-    @ExceptionHandler(value = AuthorizationException.class)
-    public DataResult errorPermission(AuthorizationException e) {
-        log.error("Exception,exception:{}", e, e);
-        return new DataResult(BaseResponseCode.UNAUTHORIZED_ERROR);
 
+    @ExceptionHandler(OAuth2AccessDeniedException.class)
+    public DataResult errorPermission(OAuth2AccessDeniedException ex) {
+        log.error("Exception, exception:{}", ex, ex);
+        return new DataResult(BaseResponseCode.UNAUTHORIZED_ERROR);
     }
 
     /**

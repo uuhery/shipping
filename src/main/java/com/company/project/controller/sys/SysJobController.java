@@ -12,9 +12,10 @@ import com.company.project.service.sys.SysJobService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+//import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.quartz.TriggerUtils;
 import org.quartz.impl.triggers.CronTriggerImpl;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,7 +44,7 @@ public class SysJobController {
     @ApiOperation(value = "新增")
     @LogAnnotation(title = "新增")
     @PostMapping("/add")
-    @RequiresPermissions("sysJob:add")
+    @PreAuthorize("hasAuthority('sysJob:add')")
     public DataResult add(@RequestBody SysJobEntity sysJob) {
         if (isValidExpression(sysJob.getCronExpression())) {
             return DataResult.fail("cron表达式有误");
@@ -59,7 +60,7 @@ public class SysJobController {
 
     @ApiOperation(value = "删除")
     @DeleteMapping("/delete")
-    @RequiresPermissions("sysJob:delete")
+    @PreAuthorize("hasAuthority('sysJob:delete')")
     @LogAnnotation(title = "删除")
     public DataResult delete(@RequestBody @ApiParam(value = "id集合") List<String> ids) {
         sysJobService.delete(ids);
@@ -68,7 +69,7 @@ public class SysJobController {
 
     @ApiOperation(value = "更新")
     @PutMapping("/update")
-    @RequiresPermissions("sysJob:update")
+    @PreAuthorize("hasAuthority('sysJob:update')")
     @LogAnnotation(title = "更新")
     public DataResult update(@RequestBody SysJobEntity sysJob) {
         if (isValidExpression(sysJob.getCronExpression())) {
@@ -85,7 +86,7 @@ public class SysJobController {
 
     @ApiOperation(value = "查询分页数据")
     @PostMapping("/listByPage")
-    @RequiresPermissions("sysJob:list")
+    @PreAuthorize("hasAuthority('sysJob:list')")
     public DataResult findListByPage(@RequestBody SysJobEntity sysJob) {
         LambdaQueryWrapper<SysJobEntity> queryWrapper = Wrappers.lambdaQuery();
         //查询条件示例
@@ -103,7 +104,7 @@ public class SysJobController {
     @ApiOperation(value = "立即执行任务")
     @LogAnnotation(title = "立即执行任务")
     @PostMapping("/run")
-    @RequiresPermissions("sysJob:run")
+    @PreAuthorize("hasAuthority('sysJob:run')")
     public DataResult run(@RequestBody List<String> ids) {
         sysJobService.run(ids);
 
@@ -116,7 +117,7 @@ public class SysJobController {
     @ApiOperation(value = "暂停定时任务")
     @LogAnnotation(title = "暂停定时任务")
     @PostMapping("/pause")
-    @RequiresPermissions("sysJob:pause")
+    @PreAuthorize("hasAuthority('sysJob:pause')")
     public DataResult pause(@RequestBody List<String> ids) {
         sysJobService.pause(ids);
 
@@ -129,7 +130,7 @@ public class SysJobController {
     @ApiOperation(value = "恢复定时任务")
     @LogAnnotation(title = "恢复定时任务")
     @PostMapping("/resume")
-    @RequiresPermissions("sysJob:resume")
+    @PreAuthorize("hasAuthority('sysJob:resume')")
     public DataResult resume(@RequestBody List<String> ids) {
         sysJobService.resume(ids);
         return DataResult.success();
@@ -156,7 +157,7 @@ public class SysJobController {
     @ApiOperation(value = "获取运行时间")
     @LogAnnotation(title = "获取运行时间")
     @PostMapping("/getRecentTriggerTime")
-    @RequiresPermissions("sysJob:add")
+    @PreAuthorize("hasAuthority('sysJob:add')")
     public DataResult getRecentTriggerTime(String cron) {
         List<String> list = new ArrayList<>();
         try {

@@ -8,7 +8,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+//import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -35,7 +36,7 @@ public class SysGeneratorController {
      */
     @ApiOperation(value = "生成")
     @GetMapping("/gen")
-    @RequiresPermissions("sysGenerator:add")
+    @PreAuthorize("hasAuthority('sysGenerator:add')")
     public void code(String tables, HttpServletResponse response) throws IOException {
         byte[] data = sysGeneratorService.generatorCode(tables.split(","));
 
@@ -49,7 +50,7 @@ public class SysGeneratorController {
 
     @ApiOperation(value = "查询分页数据")
     @PostMapping("/listByPage")
-    @RequiresPermissions("sysGenerator:list")
+    @PreAuthorize("hasAuthority('sysGenerator:list')")
     public DataResult findListByPage(@RequestBody SysGenerator vo) {
         IPage<SysGenerator> iPage = sysGeneratorService.selectAllTables(vo.getQueryPage(), vo);
         return DataResult.success(iPage);
