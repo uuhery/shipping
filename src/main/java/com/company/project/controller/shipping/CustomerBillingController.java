@@ -5,12 +5,10 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.company.project.entity.shipping.CustomerBilling;
 import com.company.project.entity.shipping.Shipment;
 import com.company.project.service.shipment.CustomerBillingService;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -45,7 +43,7 @@ public class CustomerBillingController {
 
     @ApiOperation(value = "新增")
     @PostMapping("customerBilling/add")
-    @RequiresPermissions("customerBilling:add")
+    @PreAuthorize("hasAuthority('customerBilling:add')")
     @ResponseBody
     public DataResult add(@RequestBody Shipment shipment){
         customerBillingService.saveCustomerBilling(shipment);
@@ -54,7 +52,7 @@ public class CustomerBillingController {
 
     @ApiOperation(value = "删除")
     @DeleteMapping("customerBilling/delete")
-    @RequiresPermissions("customerBilling:delete")
+    @PreAuthorize("hasAuthority('customerBilling:delete')")
     @ResponseBody
     public DataResult delete(@RequestBody @ApiParam(value = "id集合") List<String> ids){
         customerBillingService.removeByIds(ids);
@@ -63,7 +61,7 @@ public class CustomerBillingController {
 
     @ApiOperation(value = "更新")
     @PutMapping("customerBilling/update")
-    @RequiresPermissions("customerBilling:update")
+    @PreAuthorize("hasAuthority('customerBilling:update')")
     @ResponseBody
     public DataResult update(@RequestBody CustomerBilling customerBilling){
         if(customerBilling.getPaymentMethod()!=null) {
@@ -76,7 +74,7 @@ public class CustomerBillingController {
 
     @ApiOperation(value = "查询分页数据")
     @PostMapping("customerBilling/listByPage")
-    @RequiresPermissions("customerBilling:list")
+    @PreAuthorize("hasAuthority('customerBilling:list')")
     @ResponseBody
     public DataResult findListByPage(@RequestBody CustomerBilling customerBilling){
         LambdaQueryWrapper<CustomerBilling> queryWrapper = Wrappers.lambdaQuery();

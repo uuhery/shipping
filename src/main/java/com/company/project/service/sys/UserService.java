@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.company.project.entity.sys.SysUser;
 import com.company.project.vo.resp.LoginRespVO;
 import com.company.project.vo.resp.UserOwnRoleRespVO;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**
  * 用户 服务类
@@ -13,7 +15,7 @@ import com.company.project.vo.resp.UserOwnRoleRespVO;
  * @version V1.0
  * @date 2020年3月18日
  */
-public interface UserService extends IService<SysUser> {
+public interface UserService extends IService<SysUser>{
 
     /**
      * 注册
@@ -73,4 +75,6 @@ public interface UserService extends IService<SysUser> {
      * @param vo vo
      */
     void updateUserInfoMy(SysUser vo);
+
+    SysUser getUserByName(String username);
 }

@@ -1,8 +1,6 @@
 package com.company.project.controller.sys;
 
 import io.swagger.annotations.Api;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,10 +20,10 @@ public class IndexController {
 
     @GetMapping("/login")
     public String logout() {
-        Subject subject = SecurityUtils.getSubject();
-        if (subject.isAuthenticated()) {
-            return "home";
-        }
+//        Subject subject = SecurityUtils.getSubject();
+//        if (subject.isAuthenticated()) {
+//            return "home";
+//        }
         return "login";
     }
 

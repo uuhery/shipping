@@ -6,8 +6,7 @@ import com.company.project.entity.sys.SysDept;
 import com.company.project.service.sys.DeptService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.shiro.authz.annotation.Logical;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,7 +31,7 @@ public class DeptController {
     @PostMapping("/dept")
     @ApiOperation(value = "新增组织接口")
     @LogAnnotation(title = "机构管理", action = "新增组织")
-    @RequiresPermissions("sys:dept:add")
+    @PreAuthorize("hasAuthority('sys:dept:add')")
     public DataResult addDept(@RequestBody @Valid SysDept vo) {
         deptService.addDept(vo);
         return DataResult.success();
@@ -41,7 +40,7 @@ public class DeptController {
     @DeleteMapping("/dept/{id}")
     @ApiOperation(value = "删除组织接口")
     @LogAnnotation(title = "机构管理", action = "删除组织")
-    @RequiresPermissions("sys:dept:deleted")
+    @PreAuthorize("hasAuthority('sys:dept:deleted')")
     public DataResult deleted(@PathVariable("id") String id) {
         deptService.deleted(id);
         return DataResult.success();
@@ -50,7 +49,7 @@ public class DeptController {
     @PutMapping("/dept")
     @ApiOperation(value = "更新组织信息接口")
     @LogAnnotation(title = "机构管理", action = "更新组织信息")
-    @RequiresPermissions("sys:dept:update")
+    @PreAuthorize("hasAuthority('sys:dept:update')")
     public DataResult updateDept(@RequestBody SysDept vo) {
         if (StringUtils.isEmpty(vo.getId())) {
             return DataResult.fail("id不能为空");
@@ -62,7 +61,7 @@ public class DeptController {
     @GetMapping("/dept/{id}")
     @ApiOperation(value = "查询组织详情接口")
     @LogAnnotation(title = "机构管理", action = "查询组织详情")
-    @RequiresPermissions("sys:dept:detail")
+    @PreAuthorize("hasAuthority('sys:dept:detail')")
     public DataResult detailInfo(@PathVariable("id") String id) {
         return DataResult.success(deptService.getById(id));
     }
@@ -70,7 +69,7 @@ public class DeptController {
     @GetMapping("/dept/tree")
     @ApiOperation(value = "树型组织列表接口")
     @LogAnnotation(title = "机构管理", action = "树型组织列表")
-    @RequiresPermissions(value = {"sys:user:list", "sys:user:update", "sys:user:add", "sys:dept:add", "sys:dept:update"}, logical = Logical.OR)
+    @PreAuthorize("hasAuthority('sys:user:list') or hasAuthority('sys:user:update') or hasAuthority('sys:user:add') or hasAuthority('sys:dept:add') or hasAuthority('sys:dept:update') ")
     public DataResult getTree(@RequestParam(required = false) String deptId) {
         return DataResult.success(deptService.deptTreeList(deptId, false));
     }
@@ -78,7 +77,7 @@ public class DeptController {
     @GetMapping("/depts")
     @ApiOperation(value = "获取机构列表接口")
     @LogAnnotation(title = "机构管理", action = "获取所有组织机构")
-    @RequiresPermissions("sys:dept:list")
+    @PreAuthorize("hasAuthority('sys:dept:list')")
     public DataResult getDeptAll() {
         List<SysDept> deptList = deptService.list();
         deptList.stream().forEach(entity -> {

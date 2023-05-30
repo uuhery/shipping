@@ -4,12 +4,10 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.company.project.entity.shipping.Goods;
 import com.company.project.service.shipment.GoodsService;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -43,7 +41,7 @@ public class GoodsController {
 
     @ApiOperation(value = "新增")
     @PostMapping("goods/add")
-    @RequiresPermissions("goods:add")
+    @PreAuthorize("hasAuthority('goods:add')")
     @ResponseBody
     public DataResult add(@RequestBody Goods goods){
         goodsService.save(goods);
@@ -52,7 +50,7 @@ public class GoodsController {
 
     @ApiOperation(value = "删除")
     @DeleteMapping("goods/delete")
-    @RequiresPermissions("goods:delete")
+    @PreAuthorize("hasAuthority('goods:add')")
     @ResponseBody
     public DataResult delete(@RequestBody @ApiParam(value = "id集合") List<String> ids){
         goodsService.removeByIds(ids);
@@ -61,7 +59,7 @@ public class GoodsController {
 
     @ApiOperation(value = "更新")
     @PutMapping("goods/update")
-    @RequiresPermissions("goods:update")
+    @PreAuthorize("hasAuthority('goods:update')")
     @ResponseBody
     public DataResult update(@RequestBody Goods goods){
         goodsService.updateById(goods);
@@ -70,7 +68,7 @@ public class GoodsController {
 
     @ApiOperation(value = "查询分页数据")
     @PostMapping("goods/listByPage")
-    @RequiresPermissions("goods:list")
+    @PreAuthorize("hasAuthority('goods:list')")
     @ResponseBody
     public DataResult findListByPage(@RequestBody Goods goods){
         LambdaQueryWrapper<Goods> queryWrapper = Wrappers.lambdaQuery();

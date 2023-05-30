@@ -5,8 +5,8 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.company.project.entity.shipping.CarrierBilling;
 import com.company.project.entity.shipping.Shipment;
 import com.company.project.service.shipment.CarrierBillingService;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -41,7 +41,7 @@ public class CarrierBillingController {
 
     @ApiOperation(value = "新增")
     @PostMapping("carrierBilling/add")
-    @RequiresPermissions("carrierBilling:add")
+    @PreAuthorize("hasAuthority('carrierBilling:add')")
     @ResponseBody
     public DataResult add(@RequestBody Shipment shipment){
         carrierBillingService.saveCarrierBilling(shipment);
@@ -50,7 +50,7 @@ public class CarrierBillingController {
 
     @ApiOperation(value = "删除")
     @DeleteMapping("carrierBilling/delete")
-    @RequiresPermissions("carrierBilling:delete")
+    @PreAuthorize("hasAuthority('carrierBilling:delete')")
     @ResponseBody
     public DataResult delete(@RequestBody @ApiParam(value = "id集合") List<String> ids){
         carrierBillingService.removeByIds(ids);
@@ -59,7 +59,7 @@ public class CarrierBillingController {
 
     @ApiOperation(value = "更新")
     @PutMapping("carrierBilling/update")
-    @RequiresPermissions("carrierBilling:update")
+    @PreAuthorize("hasAuthority('carrierBilling:update')")
     @ResponseBody
     public DataResult update(@RequestBody CarrierBilling carrierBilling){
         if(carrierBilling.getPaymentMethod()!=null) {
@@ -72,7 +72,7 @@ public class CarrierBillingController {
 
     @ApiOperation(value = "查询分页数据")
     @PostMapping("carrierBilling/listByPage")
-    @RequiresPermissions("carrierBilling:list")
+    @PreAuthorize("hasAuthority('carrierBilling:list')")
     @ResponseBody
     public DataResult findListByPage(@RequestBody CarrierBilling carrierBilling){
         LambdaQueryWrapper<CarrierBilling> queryWrapper = Wrappers.lambdaQuery();

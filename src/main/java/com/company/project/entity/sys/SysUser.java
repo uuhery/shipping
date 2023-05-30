@@ -5,9 +5,13 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -85,4 +89,15 @@ public class SysUser extends BaseEntity implements Serializable {
 
     @TableField(exist = false)
     private String captcha;
+
+    @TableField(exist = false)
+    private List<SysPermission> permissionList;
+
+    public void setPermissionList(List<SysPermission> permissionList) {
+        this.permissionList = permissionList;
+    }
+
+    public List<SysPermission> getPermissionList() {
+        return this.permissionList;
+    }
 }

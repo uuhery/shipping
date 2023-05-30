@@ -6,8 +6,7 @@ import com.company.project.service.sys.RolePermissionService;
 import com.company.project.vo.req.RolePermissionOperationReqVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.shiro.authz.annotation.Logical;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,7 +32,7 @@ public class RolePermissionController {
     @PostMapping("/role/permission")
     @ApiOperation(value = "修改或者新增角色菜单权限接口")
     @LogAnnotation(title = "角色和菜单关联接口", action = "修改或者新增角色菜单权限")
-    @RequiresPermissions(value = {"sys:role:update", "sys:role:add"}, logical = Logical.OR)
+    @PreAuthorize("hasAuthority('sys:role:update') or hasAuthority('sys:role:add')")
     public DataResult operationRolePermission(@RequestBody @Valid RolePermissionOperationReqVO vo) {
         rolePermissionService.addRolePermission(vo);
         return DataResult.success();

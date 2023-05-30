@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.company.project.common.exception.BusinessException;
 import com.company.project.common.exception.code.BaseResponseCode;
+import com.company.project.common.jwt.JwtTokenUtil;
 import com.company.project.common.utils.PasswordUtils;
 import com.company.project.entity.sys.SysDept;
 import com.company.project.entity.sys.SysRole;
@@ -21,7 +22,9 @@ import com.company.project.vo.resp.UserOwnRoleRespVO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -50,11 +53,17 @@ public class UserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impleme
     private SysDeptMapper sysDeptMapper;
     @Resource
     private HttpSessionService httpSessionService;
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
+    @Value("${jwt.tokenHead}")
+    private String tokenHead;
 
     @Value("${spring.redis.allowMultipleLogin}")
     private Boolean allowMultipleLogin;
     @Value("${spring.profiles.active}")
     private String env;
+    @Resource
+    MyUserDetailsService userDetailsService;
 
     @Override
     public void register(SysUser sysUser) {
@@ -83,22 +92,16 @@ public class UserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impleme
         LoginRespVO respVO = new LoginRespVO();
         BeanUtils.copyProperties(sysUser, respVO);
 
-        //是否删除之前token， 此处控制是否支持多登陆端；
-        // true:允许多处登陆; false:只能单处登陆，顶掉之前登陆
-        if (!allowMultipleLogin) {
-            httpSessionService.abortUserById(sysUser.getId());
-        }
         if (StringUtils.isNotBlank(sysUser.getDeptId())) {
             SysDept sysDept = sysDeptMapper.selectById(sysUser.getDeptId());
             if (sysDept != null) {
                 sysUser.setDeptNo(sysDept.getDeptNo());
             }
         }
-        String token = httpSessionService.createTokenAndUser(sysUser, roleService.getRoleNames(sysUser.getId()), permissionService.getPermissionsByUserId(sysUser.getId()));
+
+        String token = tokenHead+" "+jwtTokenUtil.generateToken(userDetailsService.loadUserByUsername(sysUser.getUsername()));
         respVO.setAccessToken(token);
-        System.out.println("看看我看看我快夸我");
         System.out.println(token);
-        System.out.println("看看我看看我快夸我");
         return respVO;
     }
 
@@ -251,5 +254,13 @@ public class UserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impleme
 
     public int userNum() {
         return sysUserMapper.selectCount(new QueryWrapper<>());
+    }
+
+    public SysUser getUserByName(String username) {
+        SysUser sysUserOne = sysUserMapper.selectOne(Wrappers.<SysUser>lambdaQuery().eq(SysUser::getUsername, username));
+        if (sysUserOne == null) {
+            throw new UsernameNotFoundException("用户不存在");
+        }
+        return sysUserOne;
     }
 }

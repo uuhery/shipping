@@ -10,7 +10,7 @@ import com.company.project.service.sys.SysContentService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -36,7 +36,7 @@ public class SysContentController {
 
     @ApiOperation(value = "新增")
     @PostMapping("/add")
-    @RequiresPermissions("sysContent:add")
+    @PreAuthorize("hasAuthority('sysContent:add')")
     public DataResult add(@RequestBody SysContentEntity sysContent) {
         sysContentService.save(sysContent);
         return DataResult.success();
@@ -44,7 +44,7 @@ public class SysContentController {
 
     @ApiOperation(value = "删除")
     @DeleteMapping("/delete")
-    @RequiresPermissions("sysContent:delete")
+    @PreAuthorize("hasAuthority('sysContent:delete')")
     public DataResult delete(@RequestBody @ApiParam(value = "id集合") List<String> ids) {
         sysContentService.removeByIds(ids);
         return DataResult.success();
@@ -52,7 +52,7 @@ public class SysContentController {
 
     @ApiOperation(value = "更新")
     @PutMapping("/update")
-    @RequiresPermissions("sysContent:update")
+    @PreAuthorize("hasAuthority('sysContent:update')")
     public DataResult update(@RequestBody SysContentEntity sysContent) {
         sysContentService.updateById(sysContent);
         return DataResult.success();
@@ -60,7 +60,7 @@ public class SysContentController {
 
     @ApiOperation(value = "查询分页数据")
     @PostMapping("/listByPage")
-    @RequiresPermissions("sysContent:list")
+    @PreAuthorize("hasAuthority('sysContent:list')")
     @DataScope
     public DataResult findListByPage(@RequestBody SysContentEntity sysContent) {
         LambdaQueryWrapper<SysContentEntity> queryWrapper = Wrappers.lambdaQuery();
