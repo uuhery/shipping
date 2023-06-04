@@ -3,11 +3,15 @@ package com.company.project.controller.shipping;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.company.project.DTO.ShipmentDTO;
 import com.company.project.entity.shipping.Shipment;
 import com.company.project.service.shipping.ShipmentService;
+import com.company.project.utilities.kafka.KafkaMessageSender;
 import com.company.project.utilities.utils.DataResult;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import lombok.SneakyThrows;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -30,6 +34,8 @@ public class ShipmentController {
     @Resource
     private ShipmentService shipmentService;
 
+    @Resource
+    private KafkaMessageSender kafkaMessageSender;
 
     /**
     * 跳转到页面
@@ -39,12 +45,20 @@ public class ShipmentController {
         return "shipment/list";
         }
 
+    @SneakyThrows
     @ApiOperation(value = "新增")
     @PostMapping("shipment/add")
     @PreAuthorize("hasAuthority('shipment:add')")
     @ResponseBody
-    public DataResult add(@RequestBody Shipment shipment){
-        return new DataResult(shipmentService.saveShipment(shipment));
+    public DataResult add(@RequestBody Shipment shipment) throws JsonProcessingException {
+        Shipment savedShipment = shipmentService.saveShipment(shipment);
+        // 发送消息给external-service服务
+        try {
+            kafkaMessageSender.sendMessage("carrier-billing-events", shipment);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return new DataResult(savedShipment);
     }
 
     @ApiOperation(value = "删除")

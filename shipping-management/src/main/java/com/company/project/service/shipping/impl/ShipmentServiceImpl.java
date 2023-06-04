@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.company.project.DTO.ShipmentDTO;
 import com.company.project.client.ExternalClient;
 import com.company.project.entity.shipping.Customer;
 import com.company.project.entity.shipping.Goods;
@@ -46,6 +47,7 @@ public class ShipmentServiceImpl extends ServiceImpl<ShipmentMapper, Shipment> i
         shipment.setPickupDate(new Date());
         shipment.setOrderStatus(0);
         shipmentMapper.insert(shipment);
+//        ShipmentDTO dto = convertToShipmentDTO(shipment);
         return shipment;
     }
 

@@ -2,6 +2,7 @@ package com.company.project.service.shipping;
 
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.company.project.DTO.ShipmentDTO;
 import com.company.project.entity.shipping.Shipment;
 
 /**
@@ -13,6 +14,6 @@ import com.company.project.entity.shipping.Shipment;
  */
 public interface ShipmentService extends IService<Shipment> {
 
-    public Shipment saveShipment(Shipment shipment);
+    Shipment saveShipment(Shipment shipment);
 }
 

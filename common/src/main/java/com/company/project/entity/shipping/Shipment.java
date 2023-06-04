@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.company.project.entity.sys.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -14,6 +15,7 @@ import java.util.Date;
 import java.util.List;
 
 @TableName("shipment")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Shipment extends BaseEntity implements Serializable {
     @TableId(type = IdType.AUTO)
     private Integer id;
@@ -41,6 +43,34 @@ public class Shipment extends BaseEntity implements Serializable {
     private Date deliveryDate;
     @TableField(exist = false)
     private List<ShipmentEvent> shipmentEventList;
+
+    @Override
+    public String toString() {
+        return "Shipment{" +
+                "id=" + id +
+                ", customerId=" + customerId +
+                ", carrierId=" + carrierId +
+                ", sendId=" + sendId +
+                ", shipmentTypeId=" + shipmentTypeId +
+                ", originAddress='" + originAddress + '\'' +
+                ", originCity='" + originCity + '\'' +
+                ", originCountry='" + originCountry + '\'' +
+                ", originPostalCode='" + originPostalCode + '\'' +
+                ", destinationAddress='" + destinationAddress + '\'' +
+                ", destinationCity='" + destinationCity + '\'' +
+                ", destinationCountry='" + destinationCountry + '\'' +
+                ", destinationPostalCode='" + destinationPostalCode + '\'' +
+                ", des='" + des + '\'' +
+                ", goodsId=" + goodsId +
+                ", num=" + num +
+                ", weight=" + weight +
+                ", value=" + value +
+                ", orderStatus=" + orderStatus +
+                ", pickupDate=" + pickupDate +
+                ", deliveryDate=" + deliveryDate +
+                ", shipmentEventList=" + shipmentEventList +
+                '}';
+    }
 
     public Integer getId() {
         return id;
