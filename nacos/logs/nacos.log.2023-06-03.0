@@ -1,0 +1,108 @@
+2023-06-03 21:56:23,493 INFO Starting Nacos v1.4.1 on LAPTOP-H3CBR1HD with PID 21832 (D:\.workspace\springboot\shipping-homework3\nacos\target\nacos-server.jar started by marimo in D:\.workspace\springboot\shipping-homework3)
+
+2023-06-03 21:56:23,496 INFO The following profiles are active: standalone
+
+2023-06-03 21:56:35,609 INFO Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@552518c3' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+
+2023-06-03 21:56:35,634 INFO Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+
+2023-06-03 21:56:37,569 INFO Tomcat initialized with port(s): 8848 (http)
+
+2023-06-03 21:56:37,739 INFO Starting service [Tomcat]
+
+2023-06-03 21:56:37,739 INFO Starting Servlet engine: [Apache Tomcat/9.0.38]
+
+2023-06-03 21:56:39,089 INFO At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+
+2023-06-03 21:56:39,264 INFO Initializing Spring embedded WebApplicationContext
+
+2023-06-03 21:56:39,265 INFO Root WebApplicationContext: initialization completed in 15621 ms
+
+2023-06-03 21:56:41,582 INFO HikariPool-1 - Starting...
+
+2023-06-03 21:56:41,614 WARN Registered driver with driverClassName=org.apache.derby.jdbc.EmbeddedDriver was not found, trying direct instantiation.
+
+2023-06-03 21:56:42,988 INFO HikariPool-1 - Driver does not support get/set network timeout for connections. (Feature not implemented: No details.)
+
+2023-06-03 21:56:43,000 INFO HikariPool-1 - Start completed.
+
+2023-06-03 21:56:45,575 INFO Nacos-related cluster resource initialization
+
+2023-06-03 21:56:45,603 INFO The cluster resource is initialized
+
+2023-06-03 21:56:46,833 INFO Reflections took 127 ms to scan 1 urls, producing 4 keys and 6 values 
+
+2023-06-03 21:56:46,924 INFO Reflections took 21 ms to scan 1 urls, producing 6 keys and 26 values 
+
+2023-06-03 21:56:46,972 INFO Reflections took 15 ms to scan 1 urls, producing 3 keys and 15 values 
+
+2023-06-03 21:56:47,003 INFO Reflections took 10 ms to scan 1 urls, producing 2 keys and 12 values 
+
+2023-06-03 21:56:48,855 INFO Initializing ExecutorService 'applicationTaskExecutor'
+
+2023-06-03 21:56:49,307 INFO Adding welcome page: class path resource [static/index.html]
+
+2023-06-03 21:56:50,212 INFO Creating filter chain: Ant [pattern='/**'], []
+
+2023-06-03 21:56:50,296 INFO Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@45adc393, org.springframework.security.web.context.SecurityContextPersistenceFilter@16aed49f, org.springframework.security.web.header.HeaderWriterFilter@3f5156a6, org.springframework.security.web.csrf.CsrfFilter@3fd05b3e, org.springframework.security.web.authentication.logout.LogoutFilter@54089484, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6e03db1f, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1e977098, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@65fe2691, org.springframework.security.web.session.SessionManagementFilter@2f14b0f6, org.springframework.security.web.access.ExceptionTranslationFilter@33379242]
+
+2023-06-03 21:56:50,532 INFO Initializing ExecutorService 'taskScheduler'
+
+2023-06-03 21:56:50,584 INFO Exposing 2 endpoint(s) beneath base path '/actuator'
+
+2023-06-03 21:56:50,835 INFO Tomcat started on port(s): 8848 (http) with context path '/nacos'
+
+2023-06-03 21:56:50,843 INFO Started Nacos in 30.928 seconds (JVM running for 32.643)
+
+2023-06-03 21:56:50,843 INFO Nacos started successfully in stand alone mode. use embedded storage
+
+2023-06-03 21:56:56,338 INFO Initializing Spring DispatcherServlet 'dispatcherServlet'
+
+2023-06-03 21:56:56,339 INFO Initializing Servlet 'dispatcherServlet'
+
+2023-06-03 21:56:56,358 INFO Completed initialization in 17 ms
+
+2023-06-03 22:06:47,852 WARN clearConfigHistory start
+
+2023-06-03 22:06:47,875 WARN clearConfigHistory, getBeforeStamp:2023-05-04 22:06:47.0, totalCount:6, pageSize:1000, removeTime:1
+
+2023-06-03 22:06:54,308 WARN HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m11s23ms120µs).
+
+2023-06-03 22:07:28,417 INFO [capacityManagement] start correct usage
+
+2023-06-03 22:07:28,450 INFO [capacityManagement] end correct usage, cost: 0s
+
+2023-06-03 22:12:09,156 WARN HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m44s803ms346µs900ns).
+
+2023-06-03 22:16:48,029 WARN clearConfigHistory start
+
+2023-06-03 22:16:48,032 WARN clearConfigHistory, getBeforeStamp:2023-05-04 22:16:48.0, totalCount:6, pageSize:1000, removeTime:1
+
+2023-06-03 22:18:43,240 INFO [capacityManagement] start correct usage
+
+2023-06-03 22:18:43,241 INFO [capacityManagement] end correct usage, cost: 0s
+
+2023-06-03 22:26:48,039 WARN clearConfigHistory start
+
+2023-06-03 22:26:48,040 WARN clearConfigHistory, getBeforeStamp:2023-05-04 22:26:48.0, totalCount:6, pageSize:1000, removeTime:1
+
+2023-06-03 22:28:43,244 INFO [capacityManagement] start correct usage
+
+2023-06-03 22:28:43,245 INFO [capacityManagement] end correct usage, cost: 0s
+
+2023-06-03 22:36:48,047 WARN clearConfigHistory start
+
+2023-06-03 22:36:48,048 WARN clearConfigHistory, getBeforeStamp:2023-05-04 22:36:48.0, totalCount:6, pageSize:1000, removeTime:1
+
+2023-06-03 22:38:43,248 INFO [capacityManagement] start correct usage
+
+2023-06-03 22:38:43,248 INFO [capacityManagement] end correct usage, cost: 0s
+
+2023-06-03 22:46:48,052 WARN clearConfigHistory start
+
+2023-06-03 22:46:48,053 WARN clearConfigHistory, getBeforeStamp:2023-05-04 22:46:48.0, totalCount:6, pageSize:1000, removeTime:1
+
+2023-06-03 22:48:45,172 INFO [capacityManagement] start correct usage
+
+2023-06-03 22:48:45,172 INFO [capacityManagement] end correct usage, cost: 0s
+

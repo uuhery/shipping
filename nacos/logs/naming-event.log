@@ -1,0 +1,244 @@
+2023-06-04 10:42:15,503 INFO DEFAULT_GROUP@@external-management {SYNC} {IP-NEW} cluster: DEFAULT, new ips size: 1, content: [172.27.239.124:7101:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2023-06-04 10:42:15,519 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@external-management, ips: 172.27.239.124:7101_true,
+
+2023-06-04 10:42:15,519 INFO DEFAULT_GROUP@@external-management {SYNC} {IP-NEW} cluster: DEFAULT, new ips size: 1, content: [172.27.239.124:7101:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2023-06-04 10:42:15,519 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@external-management, ips: 172.27.239.124:7101_true,
+
+2023-06-04 10:42:15,535 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@external-management, ips: 172.27.239.124:7101_true,
+
+2023-06-04 10:42:15,535 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@external-management, ips: 172.27.239.124:7101_true,
+
+2023-06-04 10:42:52,107 INFO DEFAULT_GROUP@@shipping-management {SYNC} {IP-NEW} cluster: DEFAULT, new ips size: 1, content: [172.27.239.124:7102:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2023-06-04 10:42:52,107 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@shipping-management, ips: 172.27.239.124:7102_true,
+
+2023-06-04 10:42:52,107 INFO DEFAULT_GROUP@@shipping-management {SYNC} {IP-NEW} cluster: DEFAULT, new ips size: 1, content: [172.27.239.124:7102:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2023-06-04 10:42:52,122 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@shipping-management, ips: 172.27.239.124:7102_true,
+
+2023-06-04 10:42:52,122 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@shipping-management, ips: 172.27.239.124:7102_true,
+
+2023-06-04 10:42:52,122 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@shipping-management, ips: 172.27.239.124:7102_true,
+
+2023-06-04 10:44:37,357 INFO {POS} {IP-DISABLED} valid: 172.27.239.124:7102@DEFAULT@DEFAULT_GROUP@@shipping-management, region: unknown, msg: client timeout after 15000, last beat: 1685846657491
+
+2023-06-04 10:44:37,357 INFO {POS} {IP-DISABLED} valid: 172.27.239.124:7102@DEFAULT@DEFAULT_GROUP@@shipping-management, region: unknown, msg: client timeout after 15000, last beat: 1685846657491
+
+2023-06-04 10:44:52,622 INFO DEFAULT_GROUP@@shipping-management {SYNC} {IP-DEAD} cluster: DEFAULT, dead ips size: 1, content: [172.27.239.124:7102:unknown:DEFAULT_1.0_false_false_DEFAULT]
+
+2023-06-04 10:44:52,622 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@shipping-management, ips: 
+
+2023-06-04 10:44:52,622 INFO DEFAULT_GROUP@@shipping-management {SYNC} {IP-DEAD} cluster: DEFAULT, dead ips size: 1, content: [172.27.239.124:7102:unknown:DEFAULT_1.0_false_false_DEFAULT]
+
+2023-06-04 10:44:52,622 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@shipping-management, ips: 
+
+2023-06-04 10:44:52,622 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@shipping-management, ips: 
+
+2023-06-04 10:44:52,622 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@shipping-management, ips: 
+
+2023-06-04 10:45:15,140 INFO DEFAULT_GROUP@@shipping-management {SYNC} {IP-NEW} cluster: DEFAULT, new ips size: 1, content: [172.27.239.124:7102:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2023-06-04 10:45:15,140 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@shipping-management, ips: 172.27.239.124:7102_true,
+
+2023-06-04 10:45:15,155 INFO DEFAULT_GROUP@@shipping-management {SYNC} {IP-NEW} cluster: DEFAULT, new ips size: 1, content: [172.27.239.124:7102:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2023-06-04 10:45:15,155 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@shipping-management, ips: 172.27.239.124:7102_true,
+
+2023-06-04 10:45:15,155 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@shipping-management, ips: 172.27.239.124:7102_true,
+
+2023-06-04 10:45:15,155 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@shipping-management, ips: 172.27.239.124:7102_true,
+
+2023-06-04 10:56:03,806 INFO {POS} {IP-DISABLED} valid: 172.27.239.124:7102@DEFAULT@DEFAULT_GROUP@@shipping-management, region: unknown, msg: client timeout after 15000, last beat: 1685847347020
+
+2023-06-04 10:56:18,813 INFO DEFAULT_GROUP@@shipping-management {SYNC} {IP-DEAD} cluster: DEFAULT, dead ips size: 1, content: [172.27.239.124:7102:unknown:DEFAULT_1.0_false_false_DEFAULT]
+
+2023-06-04 10:56:18,813 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@shipping-management, ips: 
+
+2023-06-04 10:56:18,813 INFO DEFAULT_GROUP@@shipping-management {SYNC} {IP-DEAD} cluster: DEFAULT, dead ips size: 1, content: [172.27.239.124:7102:unknown:DEFAULT_1.0_false_false_DEFAULT]
+
+2023-06-04 10:56:18,813 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@shipping-management, ips: 
+
+2023-06-04 10:58:42,476 INFO {POS} {IP-DISABLED} valid: 172.27.239.124:7101@DEFAULT@DEFAULT_GROUP@@external-management, region: unknown, msg: client timeout after 15000, last beat: 1685847503882
+
+2023-06-04 10:58:57,493 INFO DEFAULT_GROUP@@external-management {SYNC} {IP-DEAD} cluster: DEFAULT, dead ips size: 1, content: [172.27.239.124:7101:unknown:DEFAULT_1.0_false_false_DEFAULT]
+
+2023-06-04 10:58:57,493 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@external-management, ips: 
+
+2023-06-04 10:58:57,493 INFO DEFAULT_GROUP@@external-management {SYNC} {IP-DEAD} cluster: DEFAULT, dead ips size: 1, content: [172.27.239.124:7101:unknown:DEFAULT_1.0_false_false_DEFAULT]
+
+2023-06-04 10:58:57,493 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@external-management, ips: 
+
+2023-06-04 10:58:57,493 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@external-management, ips: 
+
+2023-06-04 10:58:57,493 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@external-management, ips: 
+
+2023-06-04 13:16:14,000 INFO DEFAULT_GROUP@@external-service {SYNC} {IP-NEW} cluster: DEFAULT, new ips size: 1, content: [172.27.239.124:7101:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2023-06-04 13:16:14,016 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@external-service, ips: 172.27.239.124:7101_true,
+
+2023-06-04 13:16:14,016 INFO DEFAULT_GROUP@@external-service {SYNC} {IP-NEW} cluster: DEFAULT, new ips size: 1, content: [172.27.239.124:7101:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2023-06-04 13:16:14,016 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@external-service, ips: 172.27.239.124:7101_true,
+
+2023-06-04 13:16:14,032 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@external-service, ips: 172.27.239.124:7101_true,
+
+2023-06-04 13:16:14,032 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@external-service, ips: 172.27.239.124:7101_true,
+
+2023-06-04 13:16:32,874 INFO DEFAULT_GROUP@@shipping-management {SYNC} {IP-NEW} cluster: DEFAULT, new ips size: 1, content: [172.27.239.124:7102:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2023-06-04 13:16:32,874 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@shipping-management, ips: 172.27.239.124:7102_true,
+
+2023-06-04 13:16:32,874 INFO DEFAULT_GROUP@@shipping-management {SYNC} {IP-NEW} cluster: DEFAULT, new ips size: 1, content: [172.27.239.124:7102:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2023-06-04 13:16:32,874 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@shipping-management, ips: 172.27.239.124:7102_true,
+
+2023-06-04 13:16:32,879 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@shipping-management, ips: 172.27.239.124:7102_true,
+
+2023-06-04 13:16:32,884 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@shipping-management, ips: 172.27.239.124:7102_true,
+
+2023-06-04 13:28:40,631 INFO {POS} {IP-DISABLED} valid: 172.27.239.124:7101@DEFAULT@DEFAULT_GROUP@@external-service, region: unknown, msg: client timeout after 15000, last beat: 1685856502336
+
+2023-06-04 13:28:45,366 INFO {POS} {IP-DISABLED} valid: 172.27.239.124:7102@DEFAULT@DEFAULT_GROUP@@shipping-management, region: unknown, msg: client timeout after 15000, last beat: 1685856505974
+
+2023-06-04 13:28:55,824 INFO DEFAULT_GROUP@@external-service {SYNC} {IP-DEAD} cluster: DEFAULT, dead ips size: 1, content: [172.27.239.124:7101:unknown:DEFAULT_1.0_false_false_DEFAULT]
+
+2023-06-04 13:28:55,824 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@external-service, ips: 
+
+2023-06-04 13:28:55,824 INFO DEFAULT_GROUP@@external-service {SYNC} {IP-DEAD} cluster: DEFAULT, dead ips size: 1, content: [172.27.239.124:7101:unknown:DEFAULT_1.0_false_false_DEFAULT]
+
+2023-06-04 13:28:55,824 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@external-service, ips: 
+
+2023-06-04 13:28:55,824 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@external-service, ips: 
+
+2023-06-04 13:28:55,824 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@external-service, ips: 
+
+2023-06-04 13:29:00,392 INFO DEFAULT_GROUP@@shipping-management {SYNC} {IP-DEAD} cluster: DEFAULT, dead ips size: 1, content: [172.27.239.124:7102:unknown:DEFAULT_1.0_false_false_DEFAULT]
+
+2023-06-04 13:29:00,392 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@shipping-management, ips: 
+
+2023-06-04 13:29:00,392 INFO DEFAULT_GROUP@@shipping-management {SYNC} {IP-DEAD} cluster: DEFAULT, dead ips size: 1, content: [172.27.239.124:7102:unknown:DEFAULT_1.0_false_false_DEFAULT]
+
+2023-06-04 13:29:00,392 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@shipping-management, ips: 
+
+2023-06-04 13:29:26,700 INFO DEFAULT_GROUP@@shipping-management {SYNC} {IP-NEW} cluster: DEFAULT, new ips size: 1, content: [172.27.239.124:7102:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2023-06-04 13:29:26,700 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@shipping-management, ips: 172.27.239.124:7102_true,
+
+2023-06-04 13:29:26,715 INFO DEFAULT_GROUP@@shipping-management {SYNC} {IP-NEW} cluster: DEFAULT, new ips size: 1, content: [172.27.239.124:7102:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2023-06-04 13:29:26,715 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@shipping-management, ips: 172.27.239.124:7102_true,
+
+2023-06-04 13:29:26,715 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@shipping-management, ips: 172.27.239.124:7102_true,
+
+2023-06-04 13:29:26,715 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@shipping-management, ips: 172.27.239.124:7102_true,
+
+2023-06-04 13:29:39,569 INFO DEFAULT_GROUP@@external-service {SYNC} {IP-NEW} cluster: DEFAULT, new ips size: 1, content: [172.27.239.124:7101:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2023-06-04 13:29:39,569 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@external-service, ips: 172.27.239.124:7101_true,
+
+2023-06-04 13:29:39,569 INFO DEFAULT_GROUP@@external-service {SYNC} {IP-NEW} cluster: DEFAULT, new ips size: 1, content: [172.27.239.124:7101:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2023-06-04 13:29:39,569 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@external-service, ips: 172.27.239.124:7101_true,
+
+2023-06-04 13:39:08,084 INFO {POS} {IP-DISABLED} valid: 172.27.239.124:7102@DEFAULT@DEFAULT_GROUP@@shipping-management, region: unknown, msg: client timeout after 15000, last beat: 1685856822415
+
+2023-06-04 13:39:08,084 INFO {POS} {IP-DISABLED} valid: 172.27.239.124:7102@DEFAULT@DEFAULT_GROUP@@shipping-management, region: unknown, msg: client timeout after 15000, last beat: 1685856822415
+
+2023-06-04 13:39:08,084 INFO {POS} {IP-DISABLED} valid: 172.27.239.124:7101@DEFAULT@DEFAULT_GROUP@@external-service, region: unknown, msg: client timeout after 15000, last beat: 1685856820190
+
+2023-06-04 13:39:08,084 INFO DEFAULT_GROUP@@shipping-management {SYNC} {IP-DEAD} cluster: DEFAULT, dead ips size: 1, content: [172.27.239.124:7102:unknown:DEFAULT_1.0_false_false_DEFAULT]
+
+2023-06-04 13:39:08,084 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@shipping-management, ips: 
+
+2023-06-04 13:39:08,084 INFO DEFAULT_GROUP@@shipping-management {SYNC} {IP-DEAD} cluster: DEFAULT, dead ips size: 1, content: [172.27.239.124:7102:unknown:DEFAULT_1.0_false_false_DEFAULT]
+
+2023-06-04 13:39:08,084 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@shipping-management, ips: 
+
+2023-06-04 13:39:08,084 INFO DEFAULT_GROUP@@external-service {SYNC} {IP-DEAD} cluster: DEFAULT, dead ips size: 1, content: [172.27.239.124:7101:unknown:DEFAULT_1.0_false_false_DEFAULT]
+
+2023-06-04 13:39:08,084 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@external-service, ips: 
+
+2023-06-04 13:39:08,084 INFO DEFAULT_GROUP@@external-service {SYNC} {IP-DEAD} cluster: DEFAULT, dead ips size: 1, content: [172.27.239.124:7101:unknown:DEFAULT_1.0_false_false_DEFAULT]
+
+2023-06-04 13:39:08,084 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@external-service, ips: 
+
+2023-06-04 13:39:08,084 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@shipping-management, ips: 
+
+2023-06-04 13:39:08,084 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@shipping-management, ips: 
+
+2023-06-04 13:39:08,084 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@external-service, ips: 
+
+2023-06-04 13:39:08,084 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@external-service, ips: 
+
+2023-06-04 13:39:10,631 INFO DEFAULT_GROUP@@external-service {SYNC} {IP-NEW} cluster: DEFAULT, new ips size: 1, content: [172.27.239.124:7101:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2023-06-04 13:39:10,631 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@external-service, ips: 172.27.239.124:7101_true,
+
+2023-06-04 13:39:10,631 INFO DEFAULT_GROUP@@external-service {SYNC} {IP-NEW} cluster: DEFAULT, new ips size: 1, content: [172.27.239.124:7101:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2023-06-04 13:39:10,631 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@external-service, ips: 172.27.239.124:7101_true,
+
+2023-06-04 13:39:12,842 INFO DEFAULT_GROUP@@shipping-management {SYNC} {IP-NEW} cluster: DEFAULT, new ips size: 1, content: [172.27.239.124:7102:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2023-06-04 13:39:12,842 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@shipping-management, ips: 172.27.239.124:7102_true,
+
+2023-06-04 13:39:12,842 INFO DEFAULT_GROUP@@shipping-management {SYNC} {IP-NEW} cluster: DEFAULT, new ips size: 1, content: [172.27.239.124:7102:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2023-06-04 13:39:12,842 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@shipping-management, ips: 172.27.239.124:7102_true,
+
+2023-06-04 14:11:07,174 INFO {POS} {IP-DISABLED} valid: 172.27.239.124:7101@DEFAULT@DEFAULT_GROUP@@external-service, region: unknown, msg: client timeout after 15000, last beat: 1685859051621
+
+2023-06-04 14:11:22,200 INFO DEFAULT_GROUP@@external-service {SYNC} {IP-DEAD} cluster: DEFAULT, dead ips size: 1, content: [172.27.239.124:7101:unknown:DEFAULT_1.0_false_false_DEFAULT]
+
+2023-06-04 14:11:22,200 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@external-service, ips: 
+
+2023-06-04 14:11:22,200 INFO DEFAULT_GROUP@@external-service {SYNC} {IP-DEAD} cluster: DEFAULT, dead ips size: 1, content: [172.27.239.124:7101:unknown:DEFAULT_1.0_false_false_DEFAULT]
+
+2023-06-04 14:11:22,200 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@external-service, ips: 
+
+2023-06-04 14:11:31,346 INFO DEFAULT_GROUP@@external-service {SYNC} {IP-NEW} cluster: DEFAULT, new ips size: 1, content: [172.27.239.124:7101:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2023-06-04 14:11:31,346 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@external-service, ips: 172.27.239.124:7101_true,
+
+2023-06-04 14:11:31,346 INFO DEFAULT_GROUP@@external-service {SYNC} {IP-NEW} cluster: DEFAULT, new ips size: 1, content: [172.27.239.124:7101:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2023-06-04 14:11:31,346 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@external-service, ips: 172.27.239.124:7101_true,
+
+2023-06-04 14:11:31,346 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@external-service, ips: 172.27.239.124:7101_true,
+
+2023-06-04 14:11:31,346 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@external-service, ips: 172.27.239.124:7101_true,
+
+2023-06-04 14:12:42,304 INFO {POS} {IP-DISABLED} valid: 172.27.239.124:7102@DEFAULT@DEFAULT_GROUP@@shipping-management, region: unknown, msg: client timeout after 15000, last beat: 1685859143108
+
+2023-06-04 14:12:57,287 INFO service: DEFAULT_GROUP@@shipping-management {POS} {IP-ENABLED} valid: 172.27.239.124:7102@DEFAULT, region: unknown, msg: client beat ok
+
+2023-06-04 14:12:57,287 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@shipping-management, ips: 172.27.239.124:7102_true,
+
+2023-06-04 14:12:57,287 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@shipping-management, ips: 172.27.239.124:7102_true,
+
+2023-06-04 14:13:32,382 INFO {POS} {IP-DISABLED} valid: 172.27.239.124:7101@DEFAULT@DEFAULT_GROUP@@external-service, region: unknown, msg: client timeout after 15000, last beat: 1685859196627
+
+2023-06-04 14:13:32,382 INFO {POS} {IP-DISABLED} valid: 172.27.239.124:7102@DEFAULT@DEFAULT_GROUP@@shipping-management, region: unknown, msg: client timeout after 15000, last beat: 1685859197349
+
+2023-06-04 14:13:47,419 INFO DEFAULT_GROUP@@shipping-management {SYNC} {IP-DEAD} cluster: DEFAULT, dead ips size: 1, content: [172.27.239.124:7102:unknown:DEFAULT_1.0_false_false_DEFAULT]
+
+2023-06-04 14:13:47,419 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@shipping-management, ips: 
+
+2023-06-04 14:13:47,419 INFO DEFAULT_GROUP@@shipping-management {SYNC} {IP-DEAD} cluster: DEFAULT, dead ips size: 1, content: [172.27.239.124:7102:unknown:DEFAULT_1.0_false_false_DEFAULT]
+
+2023-06-04 14:13:47,419 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@shipping-management, ips: 
+
+2023-06-04 14:13:47,419 INFO DEFAULT_GROUP@@external-service {SYNC} {IP-DEAD} cluster: DEFAULT, dead ips size: 1, content: [172.27.239.124:7101:unknown:DEFAULT_1.0_false_false_DEFAULT]
+
+2023-06-04 14:13:47,419 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@external-service, ips: 
+
+2023-06-04 14:13:47,419 INFO DEFAULT_GROUP@@external-service {SYNC} {IP-DEAD} cluster: DEFAULT, dead ips size: 1, content: [172.27.239.124:7101:unknown:DEFAULT_1.0_false_false_DEFAULT]
+
+2023-06-04 14:13:47,419 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@external-service, ips: 
+
+2023-06-04 14:13:47,419 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@shipping-management, ips: 
+
+2023-06-04 14:13:47,419 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@shipping-management, ips: 
+

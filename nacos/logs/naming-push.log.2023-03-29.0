@@ -1,0 +1,18 @@
+2023-03-29 11:27:37,736 INFO DEFAULT_GROUP@@userservice is changed, add it to push queue.
+
+2023-03-29 11:27:41,929 INFO DEFAULT_GROUP@@userservice is changed, add it to push queue.
+
+2023-03-29 12:02:45,481 INFO DEFAULT_GROUP@@userservice is changed, add it to push queue.
+
+2023-03-29 12:02:45,489 INFO serviceName: DEFAULT_GROUP@@userservice changed, schedule push for: 172.27.178.59:59744, agent: Nacos-Java-Client:v1.4.2, key: 172.27.178.59,59744,94294257628100
+
+2023-03-29 12:02:45,489 INFO send udp packet: 172.27.178.59,59744,94294257628100
+
+2023-03-29 12:02:55,498 INFO retry to push data, key: 172.27.178.59,59744,94294257628100
+
+2023-03-29 12:02:55,499 INFO send udp packet: 172.27.178.59,59744,94294257628100
+
+2023-03-29 12:03:05,513 INFO retry to push data, key: 172.27.178.59,59744,94294257628100
+
+2023-03-29 12:03:05,513 WARN max re-push times reached, retry times 2, key: 172.27.178.59,59744,94294257628100
+

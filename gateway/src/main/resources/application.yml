@@ -1,0 +1,40 @@
+# 端口
+server:
+  port: 7777
+
+spring:
+  #nacos配置
+  application:
+    name: gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+    gateway:
+      routes: # 用来配置网关路由规则
+        - id: external-management
+          uri: lb://external-management
+          predicates:
+            - Path=/external/**
+          filters:
+            - StripPrefix=1
+
+        - id: shipping-management
+          uri: lb://shipping-management
+          predicates:
+            - Path=/shipping/**
+          filters:
+            - StripPrefix=1
+  devtools:
+    restart:
+      enabled: true
+  datasource:
+    username: root
+    password: 111
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/shipping?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=GMT%2b8
+    druid:
+      stat-view-servlet:
+        enabled: false
+      web-stat-filter:
+        enabled: false

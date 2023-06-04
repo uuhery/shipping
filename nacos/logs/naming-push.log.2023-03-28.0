@@ -1,0 +1,30 @@
+2023-03-28 14:19:58,953 INFO DEFAULT_GROUP@@userservice is changed, add it to push queue.
+
+2023-03-28 14:19:58,988 INFO serviceName: DEFAULT_GROUP@@userservice changed, schedule push for: 172.27.178.59:59744, agent: Nacos-Java-Client:v1.4.2, key: 172.27.178.59,59744,16127744455900
+
+2023-03-28 14:19:58,988 INFO send udp packet: 172.27.178.59,59744,16127744455900
+
+2023-03-28 14:19:58,994 INFO received ack: {"type": "push-ack", "lastRefTime":"16127744455900", "data":""} from: 172.27.178.59:59744, cost: 6 ms, unacked: 0, total push: 1
+
+2023-03-28 14:35:50,436 INFO DEFAULT_GROUP@@userservice is changed, add it to push queue.
+
+2023-03-28 14:35:53,145 INFO DEFAULT_GROUP@@userservice is changed, add it to push queue.
+
+2023-03-28 14:51:04,937 INFO DEFAULT_GROUP@@userservice is changed, add it to push queue.
+
+2023-03-28 14:51:07,779 INFO DEFAULT_GROUP@@userservice is changed, add it to push queue.
+
+2023-03-28 16:03:03,946 INFO DEFAULT_GROUP@@userservice is changed, add it to push queue.
+
+2023-03-28 16:03:07,858 INFO DEFAULT_GROUP@@userservice is changed, add it to push queue.
+
+2023-03-28 17:30:43,373 INFO DEFAULT_GROUP@@userservice is changed, add it to push queue.
+
+2023-03-28 18:47:44,574 INFO DEFAULT_GROUP@@userservice is changed, add it to push queue.
+
+2023-03-28 18:47:46,941 INFO DEFAULT_GROUP@@userservice is changed, add it to push queue.
+
+2023-03-28 21:55:43,780 INFO DEFAULT_GROUP@@userservice is changed, add it to push queue.
+
+2023-03-28 21:55:47,604 INFO DEFAULT_GROUP@@userservice is changed, add it to push queue.
+

@@ -1,0 +1,58 @@
+2023-03-28 14:19:57,940 INFO DEFAULT_GROUP@@userservice {SYNC} {IP-NEW} cluster: DEFAULT, new ips size: 1, content: [172.27.178.59:8101:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2023-03-28 14:19:57,943 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@userservice, ips: 172.27.178.59:8101_true,
+
+2023-03-28 14:35:49,428 INFO {POS} {IP-DISABLED} valid: 172.27.178.59:8101@DEFAULT@DEFAULT_GROUP@@userservice, region: unknown, msg: client timeout after 15000, last beat: 1679985299586
+
+2023-03-28 14:35:49,745 INFO DEFAULT_GROUP@@userservice {SYNC} {IP-DEAD} cluster: DEFAULT, dead ips size: 1, content: [172.27.178.59:8101:unknown:DEFAULT_1.0_false_false_DEFAULT]
+
+2023-03-28 14:35:49,745 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@userservice, ips: 
+
+2023-03-28 14:35:52,138 INFO DEFAULT_GROUP@@userservice {SYNC} {IP-NEW} cluster: DEFAULT, new ips size: 1, content: [172.27.178.59:8101:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2023-03-28 14:35:52,139 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@userservice, ips: 172.27.178.59:8101_true,
+
+2023-03-28 14:51:03,926 INFO {POS} {IP-DISABLED} valid: 172.27.178.59:8101@DEFAULT@DEFAULT_GROUP@@userservice, region: unknown, msg: client timeout after 15000, last beat: 1679986038554
+
+2023-03-28 14:51:03,929 INFO DEFAULT_GROUP@@userservice {SYNC} {IP-DEAD} cluster: DEFAULT, dead ips size: 1, content: [172.27.178.59:8101:unknown:DEFAULT_1.0_false_false_DEFAULT]
+
+2023-03-28 14:51:03,929 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@userservice, ips: 
+
+2023-03-28 14:51:06,770 INFO DEFAULT_GROUP@@userservice {SYNC} {IP-NEW} cluster: DEFAULT, new ips size: 1, content: [172.27.178.59:8101:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2023-03-28 14:51:06,770 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@userservice, ips: 172.27.178.59:8101_true,
+
+2023-03-28 16:03:02,930 INFO {POS} {IP-DISABLED} valid: 172.27.178.59:8101@DEFAULT@DEFAULT_GROUP@@userservice, region: unknown, msg: client timeout after 15000, last beat: 1679990484515
+
+2023-03-28 16:03:02,936 INFO DEFAULT_GROUP@@userservice {SYNC} {IP-DEAD} cluster: DEFAULT, dead ips size: 1, content: [172.27.178.59:8101:unknown:DEFAULT_1.0_false_false_DEFAULT]
+
+2023-03-28 16:03:02,936 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@userservice, ips: 
+
+2023-03-28 16:03:06,849 INFO DEFAULT_GROUP@@userservice {SYNC} {IP-NEW} cluster: DEFAULT, new ips size: 1, content: [172.27.178.59:8101:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2023-03-28 16:03:06,849 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@userservice, ips: 172.27.178.59:8101_true,
+
+2023-03-28 17:30:42,358 INFO {POS} {IP-DISABLED} valid: 172.27.178.59:8101@DEFAULT@DEFAULT_GROUP@@userservice, region: unknown, msg: client timeout after 15000, last beat: 1679995794680
+
+2023-03-28 17:30:42,361 INFO DEFAULT_GROUP@@userservice {SYNC} {IP-DEAD} cluster: DEFAULT, dead ips size: 1, content: [172.27.178.59:8101:unknown:DEFAULT_1.0_false_false_DEFAULT]
+
+2023-03-28 17:30:42,361 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@userservice, ips: 
+
+2023-03-28 17:30:43,251 INFO DEFAULT_GROUP@@userservice {SYNC} {IP-NEW} cluster: DEFAULT, new ips size: 1, content: [172.27.178.59:8101:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2023-03-28 17:30:43,251 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@userservice, ips: 172.27.178.59:8101_true,
+
+2023-03-28 18:47:43,568 INFO {POS} {IP-DISABLED} valid: 172.27.178.59:8101@DEFAULT@DEFAULT_GROUP@@userservice, region: unknown, msg: client timeout after 15000, last beat: 1680000442204
+
+2023-03-28 18:47:45,927 INFO service: DEFAULT_GROUP@@userservice {POS} {IP-ENABLED} valid: 172.27.178.59:8101@DEFAULT, region: unknown, msg: client beat ok
+
+2023-03-28 21:55:42,766 INFO {POS} {IP-DISABLED} valid: 172.27.178.59:8101@DEFAULT@DEFAULT_GROUP@@userservice, region: unknown, msg: client timeout after 15000, last beat: 1680011692043
+
+2023-03-28 21:55:42,770 INFO DEFAULT_GROUP@@userservice {SYNC} {IP-DEAD} cluster: DEFAULT, dead ips size: 1, content: [172.27.178.59:8101:unknown:DEFAULT_1.0_false_false_DEFAULT]
+
+2023-03-28 21:55:42,770 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@userservice, ips: 
+
+2023-03-28 21:55:46,598 INFO DEFAULT_GROUP@@userservice {SYNC} {IP-NEW} cluster: DEFAULT, new ips size: 1, content: [172.27.178.59:8101:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2023-03-28 21:55:46,598 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@userservice, ips: 172.27.178.59:8101_true,
+

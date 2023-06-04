@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" th:href="@{/layui/css/layui.css}"/>
+  <link rel="stylesheet" th:href="@{/css/custom.form.css}">
+    <style id="layuimini-bg-color">
+    </style>
+<body>
+<div class="panel panel-default operation" hidden>
+  <div class="panel-heading title"></div>
+<div class="layui-card-body">
+<form class="layui-form " action="" lay-filter="info">
+  <input name="id" hidden/>
+    <div class="layui-form-item">
+      <label class="layui-form-label">支付方式</label>
+      <div class="layui-input-block">
+        <select id="paymentMethod" name="paymentMethod" lay-filter="select-type"
+                th:with="type=${@sysDictService.getType('payway')}">
+          <option th:each="dict : ${type}" th:text="${dict.label}" th:value="${dict.value}"></option>
+        </select>
+      </div>
+    </div>
+  <div class="layui-form-item">
+  <div class="layui-input-block">
+    <button type="submit" class="layui-btn" lay-submit="" lay-filter="submit">保存</button>
+    <button  class="layui-btn layui-btn-primary" id="btn_cancel">返回</button>
+  </div>
+</div>
+</form>
+</div>
+</div>
+
+<div class="table_div">
+  <div id="searchParam"  shiro:hasPermission="carrierBilling:list">
+    <form class="layui-form ">
+      <div class="layui-form-item">
+        <div class="layui-input-inline">
+          <label class="layui-form-label">名称</label>
+          <input type="text" id="key" class="layui-input"  autocomplete="off" placeholder="请输入">
+        </div>
+
+      </div>
+
+      <div class="layui-input-inline ">
+        <button class="layui-btn" onclick="search()"  id="search">查询</button>
+        <button class="layui-btn"   id="export">导出全部</button>
+      </div>
+    </form>
+  </div>
+  <table class="layui-table" id="showTable" lay-filter="showTable" ></table>
+</div>
+<script type="text/html" id="toolbar">
+  <div class="layui-btn-container oper">
+<!--    <button class="layui-btn layui-btn-sm" lay-event="add"  shiro:hasPermission="carrierBilling:add">添加</button>-->
+    <button class="layui-btn layui-btn-sm" lay-event="batchDeleted" shiro:hasPermission="carrierBilling:delete">删除</button>
+  </div>
+</script>
+<script type="text/html" id="tool">
+<!--  <a class="layui-btn layui-btn-xs" lay-event="look">查看</a>-->
+  <a class="layui-btn layui-btn-xs" lay-event="edit" shiro:hasPermission="carrierBilling:update">结算</a>
+<!--  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" shiro:hasPermission="carrierBilling:delete">删除</a>-->
+</script>
+
+</body>
+</html>
+<script th:inline="javascript" type="text/javascript">
+  var ctx = '[[@{/}]]'.replaceAll("\"", "").replace('//', '/');
+</script>
+<script th:src="@{/layui/layui.all.js}"></script>
+<script th:src="@{/js/core.util.js}"></script>
+<script>
+  // 承运方字典数据
+  var datas1 = "[[${@carrierService.getType()}]]".replace(/&quot;/g, "\"");
+  // 状态字典数据
+  var datas2 = "[[${@sysDictService.getType('billing_state')}]]".replace(/&quot;/g, "\"");
+  //获取token
+  var token = CoreUtil.getData("access_token");
+  //地址栏转义token中的#号
+  var tokenQuery = token.replace("#", "%23");
+  var tableIns1;
+  var table = layui.table;
+  var form = layui.form;
+  var layer = layui.layer;
+  var $ = jQuery = layui.jquery;
+  var laydate = layui.laydate;
+
+  layui.use(['table', 'layer', 'laydate'], function () {
+
+    //加载table
+    tableIns1 = table.render({
+      elem: '#showTable'
+      , contentType: 'application/json'
+      , headers: {"authorization": token}
+      , page: true //开启分页
+      , url: ctx + 'carrierBilling/listByPage' //数据接口
+      , method: 'POST'
+      , parseData: function (res) { //将原始数据解析成 table 组件所规定的数据
+        return {
+          "code": res.code, //解析接口状态
+          "msg": res.msg, //解析提示文本
+          "count": CoreUtil.isEmpty(res.data) ? 0 : res.data.total, //解析数据长度
+          "data": CoreUtil.isEmpty(res.data) ? null : res.data.records //解析数据列表
+        }
+      }
+      , cols: [
+        [
+          {type: 'checkbox', fixed: 'left'},
+          {field: 'id', title: '账单id', sort: true},
+          {field: 'carrierId', title: '承运方', sort: true, templet: function (item) {
+              return CoreUtil.selectByName(datas1, item.carrierId);
+            }},
+          {field: 'orderId', title: '运单', sort: true},
+          {field: 'createDate', title: '创建日期', sort: true},
+          {field: 'billingDate', title: '结算日期', sort: true},
+          {field: 'freightCharge', title: '金额', sort: true},
+          {field: 'state', title: '状态', sort: true, templet: function (item) {
+              return CoreUtil.selectDictLabel(datas2, item.state)
+            }},
+          {width: 120, toolbar: "#tool", title: '操作'}
+        ]
+      ]
+      , toolbar: '#toolbar'
+    });
+
+
+    //表头工具
+    table.on('toolbar(showTable)', function(obj){
+      switch(obj.event){
+        case 'batchDeleted':
+          var checkStatus = table.checkStatus(obj.config.id);
+          var data = checkStatus.data;
+          if(data.length==0){
+            layer.msg("请选择要批量删除的列");
+          }else {
+            var ids = [];
+            $(data).each(function (index,item) {
+              ids.push(item.id);
+            });
+            tipDialog(ids);
+          }
+          break;
+        // case 'add':
+        //   toUnDisabled();
+        //   $(".table_div").hide();
+        //   $(".operation").show();
+        //   $(".title").html("新增");
+        //   setTimeout(function () {
+        //     form.val('info', {
+        //       "test": "test"
+        //       , "id": ""
+        //       , "carrierId": ""
+        //       , "orderId": ""
+        //       , "billingDate": ""
+        //       , "freightCharge": ""
+        //       , "state": ""
+        //     });
+        //   }, 200);
+        //   break;
+      };
+    });
+    //列操作
+    table.on('tool(showTable)',function (obj) {
+      var data = obj.data;
+      switch (obj.event) {
+        case 'del':
+          var ids=[];
+          ids.push(data.id);
+          tipDialog(ids);
+          break;
+        case 'look':
+          backshow(data);
+          toDisabled();
+          break;
+        case 'edit':
+          backshow(data);
+          $(".title").html("编辑");
+          toUnDisabled();
+          break;
+      }
+    });
+
+    //导出
+    $('#export').on('click', function () {
+      //原先分页limit
+      var exportParams = {
+        limit: 10000,
+        key: $("#key").val()
+      };
+      CoreUtil.sendPost(ctx + "carrierBilling/listByPage", exportParams, function (res) {
+        //初始化渲染数据
+        if (res.data != null && res.data.records != null) {
+          table.exportFile(tableIns1.config.id, res.data.records, 'xls');
+        }
+      });
+    });
+
+    //删除
+    var tipDialog=function (ids) {
+      layer.open({
+        content: "确定要删除么?",
+        yes: function(index, layero){
+          layer.close(index); //如果设定了yes回调，需进行手工关闭
+          CoreUtil.sendDelete(ctx + "carrierBilling/delete",ids,function (res) {
+            layer.msg(res.msg, {time:1000},function () {
+              search();
+            });
+          });
+        }
+      });
+    };
+
+    //返回
+    $("#btn_cancel").click(function() {
+      $(".table_div").show();
+      $(".operation").hide();
+      return false;
+    });
+
+    //监听保存
+    form.on('submit(submit)', function(data){
+      if(data.field.id===undefined || data.field.id===null || data.field.id===""){
+        CoreUtil.sendPost(ctx + "carrierBilling/add",data.field,function (res) {
+          $(".table_div").show();
+          $(".operation").hide();
+          search();
+        });
+      }else {
+        CoreUtil.sendPut(ctx + "carrierBilling/update",data.field,function (res) {
+          CoreUtil.sendPut(ctx + "shipment/update",{id: data.field.orderId, orderStatus: 1})
+          $(".table_div").show();
+          $(".operation").hide();
+          search();
+        });
+      }
+      return false;
+    });
+  });
+
+  //执行查询
+  function search() {
+    //这里以搜索为例
+    tableIns1.reload({
+      where: { //设定异步数据接口的额外参数，任意设
+        key: $("#key").val()
+      }
+      , page: {
+        curr: 1 //重新从第 1 页开始
+      }
+    });
+  };
+
+  //回显
+  function backshow(data) {
+    $(".table_div").hide();
+    $(".operation").show();
+    $(".title").html("查看");
+    setTimeout(function () {
+      form.val('info', {
+        "test": "test"
+        , "id": data.id
+        , "payment_method": data.paymentMethod
+      });
+    }, 200);
+  }
+
+  //禁用输入
+  function toDisabled() {
+    $(".oper").hide();
+    $(".disabled").each(function (index, elem) {
+      $(elem).attr("disabled", "")
+    })
+  }
+
+  //放开输入
+  function toUnDisabled() {
+    $(".oper").show();
+    $(".disabled").each(function (index, elem) {
+      $(elem).removeAttr("disabled", "")
+    })
+  }
+</script>

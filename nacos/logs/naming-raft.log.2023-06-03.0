@@ -1,0 +1,56 @@
+2023-06-03 21:56:45,709 INFO raft peers changed: [Member{ip='172.27.239.124', port=8848, state=UP, extendInfo={raftPort=7848}}]
+
+2023-06-03 21:56:45,777 INFO initializing Raft sub-system
+
+2023-06-03 21:56:45,778 INFO finish loading all datums, size: 0 cost 1 ms.
+
+2023-06-03 21:56:45,783 INFO cache loaded, datum count: 0, current term: 0
+
+2023-06-03 21:56:45,783 INFO finish to load data from disk, cost: 6 ms.
+
+2023-06-03 21:56:45,790 INFO timer started: leader timeout ms: 15000, heart-beat timeout ms: 5000
+
+2023-06-03 21:56:47,255 INFO add listener: com.alibaba.nacos.naming.domains.meta.00-00---000-NACOS_SWITCH_DOMAIN-000---00-00
+
+2023-06-03 21:56:47,301 INFO add listener: com.alibaba.nacos.naming.domains.meta.
+
+2023-06-03 21:56:50,691 WARN start to close old raft protocol!!!
+
+2023-06-03 21:56:50,691 WARN stop old raft protocol task for notifier
+
+2023-06-03 21:56:50,691 WARN stop old raft protocol task for master task
+
+2023-06-03 21:56:50,691 WARN stop old raft protocol task for heartbeat task
+
+2023-06-03 21:56:50,691 WARN clean old cache datum for old raft
+
+2023-06-03 21:56:50,691 WARN start to close old raft protocol!!!
+
+2023-06-03 21:56:50,692 WARN stop old raft protocol task for notifier
+
+2023-06-03 21:56:50,692 WARN stop old raft protocol task for master task
+
+2023-06-03 21:56:50,692 WARN stop old raft protocol task for heartbeat task
+
+2023-06-03 21:56:50,692 WARN clean old cache datum for old raft
+
+2023-06-03 21:56:50,692 WARN start to move old raft protocol metadata
+
+2023-06-03 21:56:50,695 WARN start to move old raft protocol metadata
+
+2023-06-03 21:56:50,696 INFO raft peers changed: [Member{ip='172.27.239.124', port=8848, state=UP, extendInfo={lastRefreshTime=1685800610695, raftPort=7848, version=1.4.1}}]
+
+2023-06-03 21:56:56,622 INFO add listener: com.alibaba.nacos.naming.iplist.public##DEFAULT_GROUP@@gateway
+
+2023-06-03 21:56:56,622 INFO add listener: com.alibaba.nacos.naming.iplist.public##DEFAULT_GROUP@@gateway
+
+2023-06-03 22:03:07,313 INFO [RAFT-NOTIFIER] datum is deleted, key: com.alibaba.nacos.naming.domains.meta.public##DEFAULT_GROUP@@gateway
+
+2023-06-03 22:50:21,413 INFO add listener: com.alibaba.nacos.naming.iplist.public##DEFAULT_GROUP@@shipping-management
+
+2023-06-03 22:50:21,413 INFO add listener: com.alibaba.nacos.naming.iplist.public##DEFAULT_GROUP@@shipping-management
+
+2023-06-03 22:51:48,139 INFO add listener: com.alibaba.nacos.naming.iplist.public##DEFAULT_GROUP@@external-management
+
+2023-06-03 22:51:48,139 INFO add listener: com.alibaba.nacos.naming.iplist.public##DEFAULT_GROUP@@external-management
+

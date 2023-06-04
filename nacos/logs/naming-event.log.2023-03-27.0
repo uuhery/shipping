@@ -1,0 +1,116 @@
+2023-03-27 17:38:38,361 INFO DEFAULT_GROUP@@userservice {SYNC} {IP-NEW} cluster: DEFAULT, new ips size: 1, content: [192.168.0.102:8101:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2023-03-27 17:38:38,364 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@userservice, ips: 192.168.0.102:8101_true,
+
+2023-03-27 18:26:28,170 INFO {POS} {IP-DISABLED} valid: 192.168.0.102:8101@DEFAULT@DEFAULT_GROUP@@userservice, region: unknown, msg: client timeout after 15000, last beat: 1679912278207
+
+2023-03-27 18:26:28,180 INFO DEFAULT_GROUP@@userservice {SYNC} {IP-DEAD} cluster: DEFAULT, dead ips size: 1, content: [192.168.0.102:8101:unknown:DEFAULT_1.0_false_false_DEFAULT]
+
+2023-03-27 18:26:28,180 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@userservice, ips: 
+
+2023-03-27 18:26:30,371 INFO DEFAULT_GROUP@@userservice {SYNC} {IP-NEW} cluster: DEFAULT, new ips size: 1, content: [192.168.0.102:8101:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2023-03-27 18:26:30,371 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@userservice, ips: 192.168.0.102:8101_true,
+
+2023-03-27 18:32:02,169 INFO {POS} {IP-DISABLED} valid: 192.168.0.102:8101@DEFAULT@DEFAULT_GROUP@@userservice, region: unknown, msg: client timeout after 15000, last beat: 1679913045885
+
+2023-03-27 18:32:02,169 INFO service: DEFAULT_GROUP@@userservice {POS} {IP-ENABLED} valid: 192.168.0.102:8101@DEFAULT, region: unknown, msg: client beat ok
+
+2023-03-27 19:01:09,778 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@userservice, ips: 192.168.0.102:8101_true,
+
+2023-03-27 19:15:54,191 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@userservice, ips: 192.168.0.102:8101_true,
+
+2023-03-27 19:16:58,558 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@userservice, ips: 192.168.0.102:8101_true,
+
+2023-03-27 19:31:34,561 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@userservice, ips: 192.168.0.102:8101_true,
+
+2023-03-27 19:33:23,425 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@userservice, ips: 192.168.0.102:8101_true,
+
+2023-03-27 19:34:53,206 INFO {POS} {IP-DISABLED} valid: 192.168.0.102:8101@DEFAULT@DEFAULT_GROUP@@userservice, region: unknown, msg: client timeout after 15000, last beat: 1679916873560
+
+2023-03-27 19:34:56,453 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@userservice, ips: 192.168.0.102:8101_false,
+
+2023-03-27 19:35:01,454 INFO service: DEFAULT_GROUP@@userservice {POS} {IP-ENABLED} valid: 192.168.0.102:8101@DEFAULT, region: unknown, msg: client beat ok
+
+2023-03-27 19:43:04,722 INFO DEFAULT_GROUP@@infoservice {SYNC} {IP-NEW} cluster: DEFAULT, new ips size: 1, content: [192.168.0.102:8102:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2023-03-27 19:43:04,722 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@infoservice, ips: 192.168.0.102:8102_true,
+
+2023-03-27 19:45:38,468 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@infoservice, ips: 192.168.0.102:8102_true,
+
+2023-03-27 20:01:14,298 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@infoservice, ips: 192.168.0.102:8102_true,
+
+2023-03-27 20:01:58,216 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@infoservice, ips: 192.168.0.102:8102_true,
+
+2023-03-27 20:02:10,033 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@userservice, ips: 192.168.0.102:8101_true,
+
+2023-03-27 20:08:23,020 INFO DEFAULT_GROUP@@infoservice {SYNC} {IP-DEAD} cluster: DEFAULT, dead ips size: 1, content: [192.168.0.102:8102:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2023-03-27 20:08:23,020 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@infoservice, ips: 
+
+2023-03-27 20:08:31,620 INFO {POS} {IP-DISABLED} valid: 192.168.0.102:8101@DEFAULT@DEFAULT_GROUP@@userservice, region: unknown, msg: client timeout after 15000, last beat: 1679918895782
+
+2023-03-27 20:08:33,114 INFO DEFAULT_GROUP@@infoservice {SYNC} {IP-NEW} cluster: DEFAULT, new ips size: 1, content: [192.168.0.102:8102:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2023-03-27 20:08:33,114 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@infoservice, ips: 192.168.0.102:8102_true,
+
+2023-03-27 20:08:33,972 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@userservice, ips: 192.168.0.102:8101_false,
+
+2023-03-27 20:08:34,369 INFO DEFAULT_GROUP@@infoservice {SYNC} {IP-DEAD} cluster: DEFAULT, dead ips size: 1, content: [192.168.0.102:8102:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2023-03-27 20:08:34,369 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@infoservice, ips: 
+
+2023-03-27 20:08:38,985 INFO service: DEFAULT_GROUP@@userservice {POS} {IP-ENABLED} valid: 192.168.0.102:8101@DEFAULT, region: unknown, msg: client beat ok
+
+2023-03-27 20:08:45,527 INFO DEFAULT_GROUP@@infoservice {SYNC} {IP-NEW} cluster: DEFAULT, new ips size: 1, content: [192.168.0.102:8102:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2023-03-27 20:08:45,527 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@infoservice, ips: 192.168.0.102:8102_true,
+
+2023-03-27 20:11:02,874 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@userservice, ips: 192.168.0.102:8101_true,
+
+2023-03-27 20:18:07,926 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@userservice, ips: 192.168.0.102:8101_true,
+
+2023-03-27 20:18:32,996 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@userservice, ips: 192.168.0.102:8101_true,
+
+2023-03-27 20:35:16,607 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@userservice, ips: 192.168.0.102:8101_true,
+
+2023-03-27 20:54:31,002 INFO {POS} {IP-DISABLED} valid: 192.168.0.102:8101@DEFAULT@DEFAULT_GROUP@@userservice, region: unknown, msg: client timeout after 15000, last beat: 1679921654365
+
+2023-03-27 20:54:36,680 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@userservice, ips: 192.168.0.102:8101_false,
+
+2023-03-27 20:54:41,683 INFO service: DEFAULT_GROUP@@userservice {POS} {IP-ENABLED} valid: 192.168.0.102:8101@DEFAULT, region: unknown, msg: client beat ok
+
+2023-03-27 23:09:27,424 INFO DEFAULT_GROUP@@infoservice {SYNC} {IP-DEAD} cluster: DEFAULT, dead ips size: 1, content: [192.168.0.102:8102:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2023-03-27 23:09:27,424 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@infoservice, ips: 
+
+2023-03-27 23:09:28,123 INFO DEFAULT_GROUP@@userservice {SYNC} {IP-DEAD} cluster: DEFAULT, dead ips size: 1, content: [192.168.0.102:8101:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2023-03-27 23:09:28,123 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@userservice, ips: 
+
+2023-03-27 23:09:38,439 INFO DEFAULT_GROUP@@infoservice {SYNC} {IP-NEW} cluster: DEFAULT, new ips size: 1, content: [192.168.0.102:8102:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2023-03-27 23:09:38,439 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@infoservice, ips: 192.168.0.102:8102_true,
+
+2023-03-27 23:09:39,507 INFO DEFAULT_GROUP@@userservice {SYNC} {IP-NEW} cluster: DEFAULT, new ips size: 1, content: [192.168.0.102:8101:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2023-03-27 23:09:39,507 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@userservice, ips: 192.168.0.102:8101_true,
+
+2023-03-27 23:18:19,800 INFO {POS} {IP-DISABLED} valid: 192.168.0.102:8101@DEFAULT@DEFAULT_GROUP@@userservice, region: unknown, msg: client timeout after 15000, last beat: 1679930280479
+
+2023-03-27 23:18:25,402 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@userservice, ips: 192.168.0.102:8101_false,
+
+2023-03-27 23:18:30,412 INFO service: DEFAULT_GROUP@@userservice {POS} {IP-ENABLED} valid: 192.168.0.102:8101@DEFAULT, region: unknown, msg: client beat ok
+
+2023-03-27 23:19:49,933 INFO {POS} {IP-DISABLED} valid: 192.168.0.102:8101@DEFAULT@DEFAULT_GROUP@@userservice, region: unknown, msg: client timeout after 15000, last beat: 1679930370555
+
+2023-03-27 23:19:52,391 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@userservice, ips: 192.168.0.102:8101_false,
+
+2023-03-27 23:19:57,394 INFO service: DEFAULT_GROUP@@userservice {POS} {IP-ENABLED} valid: 192.168.0.102:8101@DEFAULT, region: unknown, msg: client beat ok
+
+2023-03-27 23:21:05,900 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@userservice, ips: 192.168.0.102:8101_true,
+
+2023-03-27 23:22:19,591 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@userservice, ips: 192.168.0.102:8101_true,
+
+2023-03-27 23:29:27,485 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@userservice, ips: 192.168.0.102:8101_true,
+

@@ -1,0 +1,48 @@
+2023-06-03 21:56:56,878 INFO DEFAULT_GROUP@@gateway {SYNC} {IP-NEW} cluster: DEFAULT, new ips size: 1, content: [172.27.239.124:7777:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2023-06-03 21:56:56,883 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@gateway, ips: 172.27.239.124:7777_true,
+
+2023-06-03 21:56:56,890 INFO DEFAULT_GROUP@@gateway {SYNC} {IP-NEW} cluster: DEFAULT, new ips size: 1, content: [172.27.239.124:7777:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2023-06-03 21:56:56,890 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@gateway, ips: 172.27.239.124:7777_true,
+
+2023-06-03 21:56:56,892 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@gateway, ips: 172.27.239.124:7777_true,
+
+2023-06-03 21:56:56,893 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@gateway, ips: 172.27.239.124:7777_true,
+
+2023-06-03 22:00:52,020 INFO {POS} {IP-DISABLED} valid: 172.27.239.124:7777@DEFAULT@DEFAULT_GROUP@@gateway, region: unknown, msg: client timeout after 15000, last beat: 1685800832660
+
+2023-06-03 22:00:52,020 INFO {POS} {IP-DISABLED} valid: 172.27.239.124:7777@DEFAULT@DEFAULT_GROUP@@gateway, region: unknown, msg: client timeout after 15000, last beat: 1685800832660
+
+2023-06-03 22:01:07,195 INFO DEFAULT_GROUP@@gateway {SYNC} {IP-DEAD} cluster: DEFAULT, dead ips size: 1, content: [172.27.239.124:7777:unknown:DEFAULT_1.0_false_false_DEFAULT]
+
+2023-06-03 22:01:07,195 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@gateway, ips: 
+
+2023-06-03 22:01:07,195 INFO DEFAULT_GROUP@@gateway {SYNC} {IP-DEAD} cluster: DEFAULT, dead ips size: 1, content: [172.27.239.124:7777:unknown:DEFAULT_1.0_false_false_DEFAULT]
+
+2023-06-03 22:01:07,196 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@gateway, ips: 
+
+2023-06-03 22:01:07,196 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@gateway, ips: 
+
+2023-06-03 22:01:07,197 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@gateway, ips: 
+
+2023-06-03 22:50:21,414 INFO DEFAULT_GROUP@@shipping-management {SYNC} {IP-NEW} cluster: DEFAULT, new ips size: 1, content: [172.27.239.124:7102:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2023-06-03 22:50:21,415 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@shipping-management, ips: 172.27.239.124:7102_true,
+
+2023-06-03 22:50:21,415 INFO DEFAULT_GROUP@@shipping-management {SYNC} {IP-NEW} cluster: DEFAULT, new ips size: 1, content: [172.27.239.124:7102:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2023-06-03 22:50:21,415 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@shipping-management, ips: 172.27.239.124:7102_true,
+
+2023-06-03 22:51:48,141 INFO DEFAULT_GROUP@@external-management {SYNC} {IP-NEW} cluster: DEFAULT, new ips size: 1, content: [172.27.239.124:7101:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2023-06-03 22:51:48,141 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@external-management, ips: 172.27.239.124:7101_true,
+
+2023-06-03 22:51:48,146 INFO DEFAULT_GROUP@@external-management {SYNC} {IP-NEW} cluster: DEFAULT, new ips size: 1, content: [172.27.239.124:7101:unknown:DEFAULT_1.0_true_false_DEFAULT]
+
+2023-06-03 22:51:48,146 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@external-management, ips: 172.27.239.124:7101_true,
+
+2023-06-03 22:51:48,147 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@external-management, ips: 172.27.239.124:7101_true,
+
+2023-06-03 22:51:48,148 INFO [IP-UPDATED] namespace: public, service: DEFAULT_GROUP@@external-management, ips: 172.27.239.124:7101_true,
+
