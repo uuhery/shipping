@@ -11,3 +11,8 @@
 ## 💎项目成员
 - 祁麟
 - 赵天舒
+
+## 📁项目设计报告&运行截图
+- 报告：https://github.com/uuhery/shipping/tree/homework2/doc
+- 截图：https://github.com/uuhery/shipping/tree/homework2/screenshot
+- knife4j接口文档：http://localhost:8080/doc.html
