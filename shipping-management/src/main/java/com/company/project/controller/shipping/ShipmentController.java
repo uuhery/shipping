@@ -3,7 +3,6 @@ package com.company.project.controller.shipping;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.company.project.DTO.ShipmentDTO;
 import com.company.project.entity.shipping.Shipment;
 import com.company.project.service.shipping.ShipmentService;
 import com.company.project.utilities.kafka.KafkaMessageSender;

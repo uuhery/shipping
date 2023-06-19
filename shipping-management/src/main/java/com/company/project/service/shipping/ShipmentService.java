@@ -2,7 +2,6 @@ package com.company.project.service.shipping;
 
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.company.project.DTO.ShipmentDTO;
 import com.company.project.entity.shipping.Shipment;
 
 /**
