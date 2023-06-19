@@ -18,6 +18,10 @@ spring:
             - Path=/external/**
           filters:
             - StripPrefix=1
+            - name: Hystrix
+                args:
+                  name: externalHystrixFilter
+                  fallbackUri: forward:/fallback/external
 
         - id: shipping-management
           uri: lb://shipping-management
@@ -25,6 +29,10 @@ spring:
             - Path=/shipping/**
           filters:
             - StripPrefix=1
+            - name: Hystrix
+                args:
+                  name: shippingHystrixFilter
+                  fallbackUri: forward:/fallback/shipping
   devtools:
     restart:
       enabled: true
